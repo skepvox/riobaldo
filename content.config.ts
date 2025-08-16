@@ -123,7 +123,9 @@ export default defineContentConfig({
     //   type: 'page',
     //   source: 'about.yml',
     //   schema: z.object({
-    //     content: z.object({}),
+    //     title: z.string(),
+    //     description: z.string(),
+    //     content: z.string(),
     //     images: z.array(createImageSchema())
     //   })
     // })
