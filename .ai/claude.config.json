@@ -1,0 +1,19 @@
+{
+  "version": "1.0.0",
+  "preferences": {
+    "code_style": "typescript",
+    "framework": "nuxt",
+    "testing": "vitest",
+    "styling": "tailwindcss"
+  },
+  "auto_actions": {
+    "format_on_save": true,
+    "lint_before_commit": true,
+    "test_before_push": true
+  },
+  "context_awareness": {
+    "remember_file_patterns": true,
+    "track_dependencies": true,
+    "maintain_code_consistency": true
+  }
+}

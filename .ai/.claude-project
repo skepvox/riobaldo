@@ -1,0 +1,58 @@
+{
+  "project": {
+    "name": "Riobaldo",
+    "description": "Web application supporting high school students in math and philosophy",
+    "type": "web-application",
+    "framework": "nuxt",
+    "language": "typescript"
+  },
+  "development": {
+    "main_branch": "main",
+    "development_branch": "develop",
+    "production_url": "https://riobaldo.vercel.app"
+  },
+  "branch_strategy": {
+    "hierarchy": {
+      "main": "production",
+      "develop": "integration",
+      "feature/*": "new features",
+      "fix/*": "bug fixes",
+      "chore/*": "maintenance",
+      "style/*": "UI/UX improvements",
+      "refactor/*": "code improvements",
+      "release/*": "release preparation",
+      "hotfix/*": "emergency fixes"
+    },
+    "naming_examples": [
+      "feature/add-question-component",
+      "feature/implement-ai-feedback",
+      "fix/timer-synchronization",
+      "style/improve-mobile-layout",
+      "chore/update-dependencies",
+      "refactor/optimize-api-calls",
+      "release/v1.0.0",
+      "hotfix/critical-auth-bug"
+    ]
+  },
+  "commit_conventions": {
+    "format": "<type>(<scope>): <subject>",
+    "types": {
+      "feat": "New feature",
+      "fix": "Bug fix",
+      "docs": "Documentation changes",
+      "style": "Code style changes (formatting, missing semicolons, etc)",
+      "refactor": "Code refactoring",
+      "perf": "Performance improvements",
+      "test": "Adding or updating tests",
+      "build": "Build system changes",
+      "ci": "CI configuration changes",
+      "chore": "Other changes (updating dependencies, etc)",
+      "revert": "Reverting a previous commit"
+    },
+    "example": "feat(auth): implement email authentication with Supabase"
+  },
+  "guidelines": {
+    "code_style": "Use TypeScript, follow Nuxt.js best practices",
+    "testing": "Test changes locally before committing"
+  }
+}
