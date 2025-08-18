@@ -30,7 +30,7 @@ export default defineAppConfig({
     links: [
       {
         'icon': 'i-simple-icons-instagram',
-        'to': 'https://instagram.com/thiago.skv',
+        'to': 'https://instagram.com/skepvox',
         'target': '_blank',
         'aria-label': 'Instagram'
       },
