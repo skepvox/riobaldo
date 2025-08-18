@@ -98,51 +98,26 @@ After running checks, provide this summary:
 ✅ Ready to start: [Yes/No]
 ```
 
-## Decision Tree
+## Branch Decision Tree
 
-### If on main branch:
-1. Check if changes need to be committed
-2. If clean, switch to develop: `git checkout develop`
-3. If develop doesn't exist: `git checkout -b develop`
+- **On main?** → Switch to develop: `git checkout develop`
+- **On develop?** → Check if up to date, create feature branch if needed
+- **On feature?** → Ensure based on develop, continue work
 
-### If on develop branch:
-1. Check if up to date with main: `git fetch origin && git status`
-2. If behind, consider merging: `git merge origin/main`
-3. Ready for new feature branch if needed
+*See `.ai/context/conventions.md` for full Git workflow guidelines*
 
-### If on feature branch:
-1. Check parent branch (should be develop)
-2. Check if up to date with develop
-3. Continue work or prepare to merge
+## Quick Commands
 
-## Common Startup Commands
-
-### Quick Setup (run in sequence)
 ```bash
-# 1. Ensure we're on the right branch
-git checkout develop
+# Quick start
+git checkout develop && git pull
+pnpm install && pnpm dev
 
-# 2. Update from remote
-git pull origin develop
-
-# 3. Install/update dependencies
-pnpm install
-
-# 4. Start dev server
-pnpm dev
+# New feature
+git checkout -b feature/[name]
 ```
 
-### Creating New Feature
-```bash
-# 1. Ensure develop is up to date
-git checkout develop
-git pull origin develop
-
-# 2. Create feature branch
-git checkout -b feature/[feature-name]
-
-# 3. Ready to work!
-```
+*See `.ai/context/architecture.md` for full development workflow*
 
 ## Automated Startup Script
 
@@ -214,14 +189,6 @@ echo "Ready to start development!"
 4. **Update documentation** - Keep .ai context files current
 5. **Follow branch naming** - feature/, fix/, chore/, style/, refactor/
 
-## Quick Reference
-
-- **Project Docs**: `.ai/context/architecture.md`
-- **Coding Standards**: `.ai/context/conventions.md`
-- **Design System**: `.ai/context/design-system.md`
-- **Component Guide**: `.ai/prompts/component.md`
-- **API Guide**: `.ai/prompts/api.md`
-
 ---
 
-*This checklist ensures consistent project setup and prevents common issues. Run through it at the start of each Claude Code session.*
+*Run this checklist at the start of each Claude Code session. Reference other `.ai/` docs for detailed guidelines.*

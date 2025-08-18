@@ -290,14 +290,7 @@ POST   /api/export/progress   # Export user progress
 ## Development Workflow
 
 ### Local Development
-```bash
-pnpm dev              # Start dev server
-pnpm build            # Build for production
-pnpm preview          # Preview production build
-pnpm test            # Run tests
-pnpm lint            # Lint code
-pnpm typecheck       # Type checking
-```
+See `CLAUDE.md` for common commands or run `pnpm run` to see all available scripts.
 
 ### Environment Variables
 ```env
@@ -308,13 +301,7 @@ AI_API_KEY=your-ai-api-key
 ```
 
 ### Branch Strategy
-- `main`: Production branch
-- `develop`: Integration branch
-- `feature/*`: New features
-- `fix/*`: Bug fixes
-- `chore/*`: Maintenance
-- `release/*`: Release preparation
-- `hotfix/*`: Emergency fixes
+See `.ai/context/conventions.md#git-workflow` for branch naming and workflow conventions.
 
 ## Future Enhancements
 
