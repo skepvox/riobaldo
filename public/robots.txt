@@ -1,1 +1,154 @@
+# Robots.txt for Riobaldo.com
+# Educational platform for mathematics and philosophy
+# Last updated: 2025-08-18
 
+# Allow all legitimate search engines
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_nuxt/
+Disallow: /.nuxt/
+Disallow: /node_modules/
+Disallow: /.env
+Disallow: /*.json$
+Disallow: /*.lock$
+Disallow: /.git/
+Disallow: /server/utils/
+Disallow: /server/middleware/
+
+# Specific crawler rules for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 0
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 1
+
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 1
+
+# Social media crawlers
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: Telegrambot
+Allow: /
+
+# Allow AI/ML assistants to access educational content
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Gemini
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Block bad bots and scrapers
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: BlexBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+User-agent: SEOkicks
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+# Block aggressive scrapers
+User-agent: ia_archiver
+Disallow: /
+
+User-agent: Scrapy
+Disallow: /
+
+User-agent: wget
+Disallow: /
+
+User-agent: curl
+Disallow: /
+
+User-agent: Python-urllib
+Disallow: /
+
+User-agent: Python-requests
+Disallow: /
+
+# Performance optimization - limit crawl rate for less important bots
+User-agent: SeznamBot
+Crawl-delay: 2
+
+User-agent: Applebot
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://riobaldo.com/sitemap.xml
+Sitemap: https://www.riobaldo.com/sitemap.xml
+
+# Host directive (some crawlers respect this)
+Host: https://riobaldo.com
