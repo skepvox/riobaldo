@@ -25,3 +25,7 @@ logs
 
 # VSC
 .history
+
+# Project goals documentation
+math-book-goals.md
+philosophy-books-goals.md
