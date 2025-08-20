@@ -5,7 +5,7 @@ This folder contains all documentation and guidelines for AI assistants working 
 ## 🗂 Directory Structure
 
 ```
-.ai/
+.claude/
 ├── README.md                # This file - Documentation index
 ├── startup-checklist.md     # ⚡ START HERE - Session startup procedure
 ├── context/                 # Project context and conventions
@@ -18,7 +18,7 @@ This folder contains all documentation and guidelines for AI assistants working 
 │   ├── refactor.md         # Code refactoring guidelines
 │   └── ui-patterns.md      # UI implementation patterns
 ├── .claude-project         # Claude-specific configuration
-└── claude.config.json      # Claude settings
+└── settings.local.json     # Local Claude settings
 
 ```
 

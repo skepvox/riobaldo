@@ -33,9 +33,9 @@ git log --oneline -5
 ### 4. .ai Folder Structure Verification
 Verify the following files exist:
 ```
-.ai/
+.claude/
 ├── .claude-project         ✓ Project configuration
-├── claude.config.json      ✓ Claude settings
+├── settings.local.json     ✓ Local Claude settings
 ├── startup-checklist.md    ✓ This file
 ├── prompts/
 │   ├── component.md        ✓ Component creation guide
@@ -104,7 +104,7 @@ After running checks, provide this summary:
 - **On develop?** → Check if up to date, create feature branch if needed
 - **On feature?** → Ensure based on develop, continue work
 
-*See `.ai/context/conventions.md` for full Git workflow guidelines*
+*See `.claude/context/conventions.md` for full Git workflow guidelines*
 
 ## Quick Commands
 
@@ -117,7 +117,7 @@ pnpm install && pnpm dev
 git checkout -b feature/[name]
 ```
 
-*See `.ai/context/architecture.md` for full development workflow*
+*See `.claude/context/architecture.md` for full development workflow*
 
 ## Automated Startup Script
 
@@ -191,4 +191,4 @@ echo "Ready to start development!"
 
 ---
 
-*Run this checklist at the start of each Claude Code session. Reference other `.ai/` docs for detailed guidelines.*
+*Run this checklist at the start of each Claude Code session. Reference other `.claude/` docs for detailed guidelines.*

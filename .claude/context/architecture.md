@@ -301,7 +301,7 @@ AI_API_KEY=your-ai-api-key
 ```
 
 ### Branch Strategy
-See `.ai/context/conventions.md#git-workflow` for branch naming and workflow conventions.
+See `.claude/context/conventions.md#git-workflow` for branch naming and workflow conventions.
 
 ## Future Enhancements
 

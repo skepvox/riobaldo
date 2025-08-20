@@ -2,37 +2,37 @@
 
 ## 🚀 Quick Start
 
-**IMPORTANT**: At session start, run the startup checks detailed in `.ai/startup-checklist.md`
+**IMPORTANT**: At session start, run the startup checks detailed in `.claude/startup-checklist.md`
 
 ## 📚 Project Context
 
 **Riobaldo** - Educational platform for high school mathematics and philosophy
 - **Tech Stack**: Nuxt 4, Vue 3, Nuxt UI Pro, Tailwind CSS v4, TypeScript, Supabase
-- **Architecture**: See `.ai/context/architecture.md` for full system design
+- **Architecture**: See `.claude/context/architecture.md` for full system design
 
 ## 📋 Key References
 
 ### Essential Documentation
-- **Startup Procedure**: `.ai/startup-checklist.md` - Run at every session start
-- **Code Conventions**: `.ai/context/conventions.md` - Coding standards and patterns
-- **System Architecture**: `.ai/context/architecture.md` - Technical stack and structure
-- **Design System**: `.ai/context/design-system.md` - UI/UX guidelines
+- **Startup Procedure**: `.claude/startup-checklist.md` - Run at every session start
+- **Code Conventions**: `.claude/context/conventions.md` - Coding standards and patterns
+- **System Architecture**: `.claude/context/architecture.md` - Technical stack and structure
+- **Design System**: `.claude/context/design-system.md` - UI/UX guidelines
 
 ### Development Guides
-- **Component Creation**: `.ai/prompts/component.md` - Nuxt UI Pro patterns
-- **API Development**: `.ai/prompts/api.md` - Backend endpoint patterns
-- **Refactoring**: `.ai/prompts/refactor.md` - Code improvement guidelines
-- **UI Patterns**: `.ai/prompts/ui-patterns.md` - Interface design patterns
+- **Component Creation**: `.claude/prompts/component.md` - Nuxt UI Pro patterns
+- **API Development**: `.claude/prompts/api.md` - Backend endpoint patterns
+- **Refactoring**: `.claude/prompts/refactor.md` - Code improvement guidelines
+- **UI Patterns**: `.claude/prompts/ui-patterns.md` - Interface design patterns
 
 ## ⚡ Quick Guidelines
 
 ### Branch Strategy
 - **NEVER** commit to main
 - **ALWAYS** work on develop or feature branches
-- See `.ai/context/conventions.md#git-workflow` for naming conventions
+- See `.claude/context/conventions.md#git-workflow` for naming conventions
 
 ### Before Starting Work
-1. Run startup checks (`.ai/startup-checklist.md`)
+1. Run startup checks (`.claude/startup-checklist.md`)
 2. Ensure correct branch (usually develop)
 3. Pull latest changes
 4. Check for conflicts
@@ -42,7 +42,7 @@ Before marking tasks complete:
 - [ ] Run `pnpm lint`
 - [ ] Run `pnpm typecheck`
 - [ ] Test functionality
-- [ ] Follow conventions in `.ai/context/conventions.md`
+- [ ] Follow conventions in `.claude/context/conventions.md`
 
 ## 🛠 Common Commands
 
@@ -87,4 +87,4 @@ git commit -m "type(scope): message"
 
 ---
 
-**Remember**: Always run `.ai/startup-checklist.md` at session start!
+**Remember**: Always run `.claude/startup-checklist.md` at session start!
