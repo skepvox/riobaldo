@@ -66,7 +66,6 @@ provide('navigation', navigation)
         :files="files"
         :navigation="navigation"
         shortcut="meta_k"
-        :links="navLinks"
         :fuse="{ resultLimit: 42 }"
       />
     </ClientOnly>

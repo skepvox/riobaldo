@@ -1,26 +1,66 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from '@nuxt/ui'
+import type { ContentNavigationItem } from '@nuxt/content'
 
-defineProps<{
-  links: NavigationMenuItem[]
-}>()
+const route = useRoute()
+const { headerLinks } = useHeaderLinks()
+
+const mobileNavigation = computed<ContentNavigationItem[]>(() => {
+  return headerLinks.value.map(link => ({
+    title: link.label || '',
+    path: link.to as string || '',
+    icon: link.icon,
+    children: link.children?.map(child => ({
+      title: child.label || '',
+      path: child.to as string || '',
+      icon: child.icon,
+      description: child.description
+    })) as ContentNavigationItem[]
+  }))
+})
+
+const defaultOpen = computed(() => {
+  const topLevelWithChildren = mobileNavigation.value.filter((link: any) => link.children?.length)
+  const currentPath = route.path
+
+  return topLevelWithChildren.some((link: any) => link.children?.some((child: any) => currentPath.startsWith(child.path as string)))
+})
 </script>
 
 <template>
-  <div class="fixed top-3 sm:top-4 mx-auto left-1/2 transform -translate-x-1/2 z-10">
+  <UHeader>
+    <template #left>
+      <NuxtLink
+        to="/"
+        class="flex gap-2 items-end"
+        aria-label="Back to home"
+      >
+        <span class="text-lg font-bold">Riobaldo</span>
+      </NuxtLink>
+    </template>
+
     <UNavigationMenu
-      :items="links"
+      :items="headerLinks"
       variant="link"
-      color="neutral"
-      class="bg-muted/80 backdrop-blur-sm rounded-full px-2 sm:px-4 border border-muted/50 shadow-lg shadow-neutral-950/5"
-      :ui="{
-        link: 'px-2 py-0',
-        linkLeadingIcon: 'hidden'
-      }"
-    >
-      <template #list-trailing>
-        <ColorModeButton />
-      </template>
-    </UNavigationMenu>
-  </div>
+      :ui="{ linkLeadingIcon: 'hidden' }"
+    />
+
+    <template #right>
+      <UTooltip
+        text="Search"
+        :kbds="['meta', 'K']"
+      >
+        <UContentSearchButton />
+      </UTooltip>
+
+      <UColorModeButton />
+    </template>
+
+    <template #body>
+      <UContentNavigation
+        :navigation="mobileNavigation"
+        :default-open="defaultOpen"
+        highlight
+      />
+    </template>
+  </UHeader>
 </template>

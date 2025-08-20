@@ -40,7 +40,7 @@ const [{ data: navigation }, { data: files }] = await Promise.all([
 
 <template>
   <div>
-    <AppHeader :links="navLinks" />
+    <AppHeader />
 
     <UMain>
       <UContainer>
@@ -57,7 +57,6 @@ const [{ data: navigation }, { data: files }] = await Promise.all([
         :files="files"
         shortcut="meta_k"
         :navigation="navigation"
-        :links="navLinks"
         :fuse="{ resultLimit: 42 }"
       />
     </ClientOnly>
