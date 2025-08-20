@@ -1,26 +1,22 @@
 <script setup lang="ts">
-import type { ParsedContent } from '@nuxt/content'
-
-interface MathModule extends ParsedContent {
-  title: string
-  description: string
-  _path: string
-}
-
-const { data: modules } = await useAsyncData('math-modules', () =>
-  queryContent('/matematica')
-    .where({ _extension: { $eq: 'md' } })
-    .only(['_path', 'title', 'description'])
-    .find()
+// Follow the reference project's blog pattern - query collection directly
+const { data: modules } = await useAsyncData('matematica-modules', () =>
+  queryCollection('matematica')
+    .order('path', 'ASC')
+    .all()
 )
 
 const moduleStructure = computed(() => {
+  if (!modules.value) return []
+  
   const structure = new Map()
   
-  modules.value?.forEach((item) => {
-    const pathParts = item._path.split('/')
+  modules.value.forEach((item) => {
+    const pathParts = item.path.split('/')
     const modulePath = pathParts[2] // e.g., "1.modulo-1"
     const chapterPath = pathParts[3] // e.g., "1.capitulo-1"
+    
+    if (!modulePath) return
     
     if (!structure.has(modulePath)) {
       structure.set(modulePath, {
@@ -40,8 +36,8 @@ const moduleStructure = computed(() => {
         })
       }
       module.chapters.get(chapterPath).lessons.push({
-        path: item._path,
-        title: item.title || pathParts[4].replace(/\.md$/, '').replace(/^\d+\./, '')
+        path: item.path,
+        title: item.title
       })
     }
   })

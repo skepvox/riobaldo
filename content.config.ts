@@ -105,6 +105,29 @@ export default defineContentConfig({
         links: z.array(createButtonSchema())
       })
     }),
+    matematica: defineCollection({
+      type: 'page',
+      source: 'matematica/**/*.md',
+      schema: z.object({
+        title: z.string(),
+        description: z.string().optional(),
+        order: z.number().optional(),
+        module: z.string().optional(),
+        chapter: z.string().optional()
+      })
+    }),
+    filosofia: defineCollection({
+      type: 'page',
+      source: 'filosofia/**/*.md',
+      schema: z.object({
+        title: z.string(),
+        description: z.string().optional(),
+        author: z.string().optional(),
+        book: z.string().optional(),
+        chapter: z.string().optional(),
+        order: z.number().optional()
+      })
+    }),
     // speaking: defineCollection({
     //   type: 'page',
     //   source: 'speaking.yml',

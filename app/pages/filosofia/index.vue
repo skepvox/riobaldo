@@ -1,33 +1,27 @@
 <script setup lang="ts">
-import type { ParsedContent } from '@nuxt/content'
-
-interface PhilosophyBook extends ParsedContent {
-  title: string
-  author: string
-  description: string
-  _path: string
-}
-
-const { data: books } = await useAsyncData('philosophy-books', () =>
-  queryContent('/filosofia')
-    .where({ _extension: { $eq: 'md' } })
-    .only(['_path', 'title', 'description'])
-    .find()
+// Follow the reference project's blog pattern - query collection directly
+const { data: books } = await useAsyncData('filosofia-books', () =>
+  queryCollection('filosofia')
+    .order('path', 'ASC')
+    .all()
 )
 
 const authorStructure = computed(() => {
+  if (!books.value) return []
+  
   const structure = new Map()
   
-  books.value?.forEach((item) => {
-    const pathParts = item._path.split('/')
+  books.value.forEach((item) => {
+    const pathParts = item.path.split('/')
     const authorPath = pathParts[2] // e.g., "1.louis-lavelle"
     const bookPath = pathParts[3] // e.g., "1.manuel-de-methodologie-dialectique"
+    const partPath = pathParts[4] // e.g., "1.livre-1"
     
     if (!authorPath) return
     
     const authorName = authorPath.replace(/^\d+\./, '').replace(/-/g, ' ')
       .split(' ')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ')
     
     if (!structure.has(authorPath)) {
@@ -43,27 +37,32 @@ const authorStructure = computed(() => {
       if (!author.books.has(bookPath)) {
         const bookName = bookPath.replace(/^\d+\./, '').replace(/-/g, ' ')
           .split(' ')
-          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+          .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
           .join(' ')
         
         author.books.set(bookPath, {
           path: `/filosofia/${authorPath}/${bookPath}`,
           title: bookName,
-          parts: []
+          parts: new Map()
         })
       }
       
-      const partPath = pathParts[4] // e.g., "1.livre-1"
       if (partPath) {
         const book = author.books.get(bookPath)
-        const partName = partPath.replace(/^\d+\./, '').replace(/-/g, ' ')
-        const partNum = partPath.match(/\d+/)?.[0]
-        
-        if (!book.parts.find(p => p.path === partPath)) {
-          book.parts.push({
+        if (!book.parts.has(partPath)) {
+          const partNum = partPath.match(/\d+/)?.[0]
+          book.parts.set(partPath, {
             path: partPath,
             title: partPath.includes('conclusion') ? 'Conclusão' : `Livro ${partNum}`,
             chapters: []
+          })
+        }
+        
+        if (pathParts[5]) {
+          const part = book.parts.get(partPath)
+          part.chapters.push({
+            path: item.path,
+            title: item.title
           })
         }
       }
@@ -72,7 +71,10 @@ const authorStructure = computed(() => {
   
   return Array.from(structure.values()).map(author => ({
     ...author,
-    books: Array.from(author.books.values())
+    books: Array.from(author.books.values()).map(book => ({
+      ...book,
+      parts: Array.from(book.parts.values())
+    }))
   }))
 })
 </script>
@@ -145,7 +147,7 @@ const authorStructure = computed(() => {
                     <NuxtLink
                       v-for="part in book.parts"
                       :key="part.path"
-                      :to="`${book.path}/${part.path}`"
+                      :to="part.chapters && part.chapters.length > 0 ? part.chapters[0].path : `${book.path}/${part.path}`"
                       class="group"
                     >
                       <UCard

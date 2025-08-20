@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const route = useRoute()
 const { data: page } = await useAsyncData(route.path, () =>
-  queryContent(route.path).findOne()
+  queryCollection('matematica').path(route.path).first()
 )
 
 if (!page.value) {
@@ -37,13 +37,11 @@ const breadcrumbs = computed(() => {
 
 // Navigation between lessons
 const { data: navigation } = await useAsyncData('math-navigation', async () => {
-  const allContent = await queryContent('/matematica')
-    .where({ _extension: 'md' })
-    .only(['_path', 'title'])
-    .sort({ _path: 1 })
-    .find()
+  const allContent = await queryCollection('matematica')
+    .order('path', 'ASC')
+    .all()
   
-  const currentIndex = allContent.findIndex(item => item._path === route.path)
+  const currentIndex = allContent.findIndex(item => item.path === route.path)
   
   return {
     prev: currentIndex > 0 ? allContent[currentIndex - 1] : null,
@@ -77,7 +75,7 @@ const { data: navigation } = await useAsyncData('math-navigation', async () => {
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <NuxtLink
               v-if="navigation?.prev"
-              :to="navigation.prev._path"
+              :to="navigation.prev.path"
               class="group flex items-center gap-3 p-4 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-blue-500 dark:hover:border-blue-400 transition-colors"
             >
               <UIcon 
@@ -96,7 +94,7 @@ const { data: navigation } = await useAsyncData('math-navigation', async () => {
             
             <NuxtLink
               v-if="navigation?.next"
-              :to="navigation.next._path"
+              :to="navigation.next.path"
               class="group flex items-center gap-3 p-4 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-blue-500 dark:hover:border-blue-400 transition-colors md:flex-row-reverse md:text-right"
             >
               <UIcon 

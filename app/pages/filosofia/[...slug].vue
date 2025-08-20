@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const route = useRoute()
 const { data: page } = await useAsyncData(route.path, () =>
-  queryContent(route.path).findOne()
+  queryCollection('filosofia').path(route.path).first()
 )
 
 if (!page.value) {
@@ -55,17 +55,17 @@ const { data: navigation } = await useAsyncData('philosophy-navigation', async (
   const pathParts = route.path.split('/')
   const bookPath = pathParts.slice(0, 4).join('/') // Get book path
   
-  const allContent = await queryContent(bookPath)
-    .where({ _extension: 'md' })
-    .only(['_path', 'title'])
-    .sort({ _path: 1 })
-    .find()
+  const allContent = await queryCollection('filosofia')
+    .order('path', 'ASC')
+    .all()
   
-  const currentIndex = allContent.findIndex(item => item._path === route.path)
+  // Filter to only content in the same book
+  const bookContent = allContent.filter(item => item.path.startsWith(bookPath))
+  const currentIndex = bookContent.findIndex(item => item.path === route.path)
   
   return {
-    prev: currentIndex > 0 ? allContent[currentIndex - 1] : null,
-    next: currentIndex < allContent.length - 1 ? allContent[currentIndex + 1] : null
+    prev: currentIndex > 0 ? bookContent[currentIndex - 1] : null,
+    next: currentIndex < bookContent.length - 1 ? bookContent[currentIndex + 1] : null
   }
 })
 
@@ -133,7 +133,7 @@ const isConclusion = computed(() => route.path.includes('conclusion'))
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <NuxtLink
               v-if="navigation?.prev"
-              :to="navigation.prev._path"
+              :to="navigation.prev.path"
               class="group flex items-center gap-3 p-4 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-purple-500 dark:hover:border-purple-400 transition-colors"
             >
               <UIcon 
@@ -152,7 +152,7 @@ const isConclusion = computed(() => route.path.includes('conclusion'))
             
             <NuxtLink
               v-if="navigation?.next"
-              :to="navigation.next._path"
+              :to="navigation.next.path"
               class="group flex items-center gap-3 p-4 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-purple-500 dark:hover:border-purple-400 transition-colors md:flex-row-reverse md:text-right"
             >
               <UIcon 

@@ -31,20 +31,26 @@ useSeoMeta({
 const [{ data: navigation }, { data: files }] = await Promise.all([
   useAsyncData('navigation', () => {
     return Promise.all([
-      queryCollectionNavigation('blog')
+      queryCollectionNavigation('blog'),
+      queryCollectionNavigation('matematica'),
+      queryCollectionNavigation('filosofia')
     ])
   }, {
     transform: data => data.flat()
   }),
   useLazyAsyncData('search', () => {
     return Promise.all([
-      queryCollectionSearchSections('blog')
+      queryCollectionSearchSections('blog'),
+      queryCollectionSearchSections('matematica'),
+      queryCollectionSearchSections('filosofia')
     ])
   }, {
     server: false,
     transform: data => data.flat()
   })
 ])
+
+provide('navigation', navigation)
 </script>
 
 <template>
