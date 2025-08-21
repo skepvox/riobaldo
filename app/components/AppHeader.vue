@@ -21,13 +21,27 @@ const headerLinks = computed(() => {
   navigation.value.forEach(section => {
     if (!section.title || !section.path) return
     
-    // Build children for dropdown
-    const children = section.children?.map(child => ({
-      label: child.title,
-      description: child.description,
-      icon: child.icon || 'i-lucide-file',
-      to: child.path,
-      active: route.path === child.path || route.path.startsWith(child.path || '')
+    // Build children for dropdown - only include items with actual content pages
+    const children = section.children?.flatMap(child => {
+      // If this child has its own children, get the actual content pages from deeper levels
+      if (child.children && child.children.length > 0) {
+        // Recursively find all leaf nodes (actual content pages)
+        const getLeafNodes = (item: any): any[] => {
+          if (!item.children || item.children.length === 0) {
+            return [item]
+          }
+          return item.children.flatMap((subChild: any) => getLeafNodes(subChild))
+        }
+        return getLeafNodes(child)
+      }
+      // If no children, this is a content page
+      return child.path ? [child] : []
+    }).map(item => ({
+      label: item.title,
+      description: item.description,
+      icon: item.icon || 'i-lucide-file',
+      to: item.path,
+      active: route.path === item.path || route.path.startsWith(item.path || '')
     })).filter(Boolean) || []
     
     links.push({
