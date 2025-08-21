@@ -88,3 +88,4 @@ git commit -m "type(scope): message"
 ---
 
 **Remember**: Always run `.claude/startup-checklist.md` at session start!
+- "Always check the reference before saying you know the issue"
