@@ -29,7 +29,8 @@ const { data: surround } = await useAsyncData(
 const breadcrumb = computed(() => {
   return mapContentNavigation(findPageBreadcrumb(navigation.value, path.value)).map(link => ({
     label: link.label,
-    to: link.to
+    // Only add 'to' for paths that have actual pages
+    ...(link.to === '/filosofia' ? { to: link.to } : {})
   }))
 })
 

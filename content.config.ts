@@ -107,10 +107,7 @@ export default defineContentConfig({
     }),
     matematica: defineCollection({
       type: 'page',
-      source: {
-        include: 'matematica/**/*.md',
-        exclude: ['**/index.md']
-      },
+      source: 'matematica/**/*.md',
       schema: z.object({
         title: z.string(),
         description: z.string().optional(),
@@ -121,10 +118,7 @@ export default defineContentConfig({
     }),
     filosofia: defineCollection({
       type: 'page',
-      source: {
-        include: 'filosofia/**/*.md',
-        exclude: ['**/index.md']
-      },
+      source: 'filosofia/**/*.md',
       schema: z.object({
         title: z.string(),
         description: z.string().optional(),

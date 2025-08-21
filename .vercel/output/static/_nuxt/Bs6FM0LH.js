@@ -1,0 +1,1 @@
+import{e as c,o as a,z as s,bz as r,q as l,s as p,bA as d,at as f}from"./DyaYJ4Tw.js";const m=(t,_)=>{const e=t.__vccOpts||t;for(const[o,n]of _)e[o]=n;return e},u={};function i(t,_){const e=r,o=d,n=f;return a(),c("div",null,[s(e),s(n,{class:"sm:border-x border-default"},{default:l(()=>[p(t.$slots,"default"),s(o)]),_:3})])}const b=m(u,[["render",i]]);export{b as default};

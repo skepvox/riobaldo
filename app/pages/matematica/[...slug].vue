@@ -19,16 +19,16 @@ const breadcrumbs = computed(() => {
   if (parts[1]) { // Module
     const moduleNum = parts[1].match(/\d+/)?.[0]
     crumbs.push({ 
-      label: `Módulo ${moduleNum}`, 
-      to: `/matematica/${parts[1]}` 
+      label: `Módulo ${moduleNum}`,
+      to: undefined as any // No actual navigation
     })
   }
   
   if (parts[2]) { // Chapter
     const chapterNum = parts[2].match(/\d+/)?.[0]
     crumbs.push({ 
-      label: `Capítulo ${chapterNum}`, 
-      to: `/matematica/${parts[1]}/${parts[2]}` 
+      label: `Capítulo ${chapterNum}`,
+      to: undefined as any // No actual navigation
     })
   }
   
