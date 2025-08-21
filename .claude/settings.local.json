@@ -1,4 +1,12 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(rm:*)",
+      "Bash(curl:*)",
+      "Bash(mv:*)",
+      "Bash(find:*)"
+    ]
+  },
   "version": "1.0.0",
   "preferences": {
     "code_style": "typescript",

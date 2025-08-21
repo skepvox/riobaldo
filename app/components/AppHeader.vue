@@ -1,28 +1,65 @@
 <script setup lang="ts">
 import type { ContentNavigationItem } from '@nuxt/content'
 
+const navigation = inject<Ref<ContentNavigationItem[]>>('navigation', ref([]))
 const route = useRoute()
-const { headerLinks } = useHeaderLinks()
 
+// Build header links directly from navigation
+const headerLinks = computed(() => {
+  const links = []
+  
+  // Home link
+  links.push({
+    label: 'Home',
+    icon: 'i-lucide-home',
+    to: '/',
+    search: false,
+    active: route.path === '/'
+  })
+  
+  // Add sections from navigation
+  navigation.value.forEach(section => {
+    if (!section.title || !section.path) return
+    
+    // Build children for dropdown
+    const children = section.children?.map(child => ({
+      label: child.title,
+      description: child.description,
+      icon: child.icon || 'i-lucide-file',
+      to: child.path,
+      active: route.path === child.path || route.path.startsWith(child.path || '')
+    })).filter(Boolean) || []
+    
+    links.push({
+      label: section.title,
+      icon: section.icon || 'i-lucide-folder',
+      to: section.path,
+      search: false,
+      active: route.path.startsWith(section.path || ''),
+      ...(children.length > 0 ? { children } : {})
+    })
+  })
+  
+  return links
+})
+
+// Mobile navigation - map to ContentNavigationItem format
 const mobileNavigation = computed<ContentNavigationItem[]>(() => {
-  return headerLinks.value.map(link => ({
-    title: link.label || '',
-    path: link.to as string || '',
-    icon: link.icon,
-    children: link.children?.map(child => ({
-      title: child.label || '',
-      path: child.to as string || '',
-      icon: child.icon,
-      description: child.description
-    })) as ContentNavigationItem[]
+  return navigation.value.map(section => ({
+    ...section,
+    title: section.title || '',
+    path: section.path || '',
+    icon: section.icon
   }))
 })
 
 const defaultOpen = computed(() => {
-  const topLevelWithChildren = mobileNavigation.value.filter((link: any) => link.children?.length)
+  const topLevelWithChildren = mobileNavigation.value.filter(link => link.children?.length)
   const currentPath = route.path
-
-  return topLevelWithChildren.some((link: any) => link.children?.some((child: any) => currentPath.startsWith(child.path as string)))
+  
+  return topLevelWithChildren.some(link => 
+    link.children?.some(child => currentPath.startsWith(child.path as string))
+  )
 })
 </script>
 
