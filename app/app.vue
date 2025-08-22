@@ -32,8 +32,8 @@ const [{ data: navigation }, { data: files }] = await Promise.all([
   useAsyncData('navigation', () => {
     return Promise.all([
       queryCollectionNavigation('blog'),
-      queryCollectionNavigation('matematica'),
-      queryCollectionNavigation('filosofia')
+      queryCollectionNavigation('arithmos'),
+      queryCollectionNavigation('ethos')
     ])
   }, {
     transform: data => data.flat()
@@ -41,8 +41,8 @@ const [{ data: navigation }, { data: files }] = await Promise.all([
   useLazyAsyncData('search', () => {
     return Promise.all([
       queryCollectionSearchSections('blog'),
-      queryCollectionSearchSections('matematica'),
-      queryCollectionSearchSections('filosofia')
+      queryCollectionSearchSections('arithmos'),
+      queryCollectionSearchSections('ethos')
     ])
   }, {
     server: false,

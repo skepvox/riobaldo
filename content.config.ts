@@ -105,9 +105,9 @@ export default defineContentConfig({
         links: z.array(createButtonSchema())
       })
     }),
-    matematica: defineCollection({
+    arithmos: defineCollection({
       type: 'page',
-      source: 'matematica/**/*.md',
+      source: 'arithmos/**/*.md',
       schema: z.object({
         title: z.string(),
         description: z.string().optional(),
@@ -116,9 +116,9 @@ export default defineContentConfig({
         chapter: z.string().optional()
       })
     }),
-    filosofia: defineCollection({
+    ethos: defineCollection({
       type: 'page',
-      source: 'filosofia/**/*.md',
+      source: 'ethos/**/*.md',
       schema: z.object({
         title: z.string(),
         description: z.string().optional(),

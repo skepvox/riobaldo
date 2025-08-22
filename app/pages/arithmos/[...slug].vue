@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const route = useRoute()
 const { data: page } = await useAsyncData(route.path, () =>
-  queryCollection('matematica').path(route.path).first()
+  queryCollection('arithmos').path(route.path).first()
 )
 
 if (!page.value) {
@@ -13,7 +13,7 @@ const breadcrumbs = computed(() => {
   const parts = route.path.split('/').filter(Boolean)
   const crumbs = [
     { label: 'Início', to: '/' },
-    { label: 'Matemática', to: '/matematica' }
+    { label: 'Arithmos', to: '/arithmos' }
   ]
 
   if (parts[1]) { // Module
@@ -37,7 +37,7 @@ const breadcrumbs = computed(() => {
 
 // Navigation between lessons
 const { data: navigation } = await useAsyncData('math-navigation', async () => {
-  const allContent = await queryCollection('matematica')
+  const allContent = await queryCollection('arithmos')
     .order('path', 'ASC')
     .all()
 

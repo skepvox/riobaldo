@@ -10,7 +10,7 @@ const path = computed(() => route.path.replace(/\/$/, ''))
 // Get the page content
 const { data: page } = await useAsyncData(
   path.value,
-  () => queryCollection('filosofia').path(path.value).first()
+  () => queryCollection('ethos').path(path.value).first()
 )
 
 if (!page.value) {
@@ -20,7 +20,7 @@ if (!page.value) {
 // Get surround pages for navigation
 const { data: surround } = await useAsyncData(
   `${path.value}-surround`,
-  () => queryCollectionItemSurroundings('filosofia', path.value, {
+  () => queryCollectionItemSurroundings('ethos', path.value, {
     fields: ['title', 'description']
   })
 )
@@ -30,15 +30,15 @@ const breadcrumb = computed(() => {
   return mapContentNavigation(findPageBreadcrumb(navigation.value, path.value)).map(link => ({
     label: link.label,
     // Only add 'to' for paths that have actual pages
-    ...(link.to === '/filosofia' ? { to: link.to } : {})
+    ...(link.to === '/ethos' ? { to: link.to } : {})
   }))
 })
 
 // Get sidebar navigation for current section
 const asideNavigation = computed(() => {
-  // For filosofia, we want to show all content under /filosofia
-  const filosofiaNav = navigation.value.find(item => item.path === '/filosofia')
-  return filosofiaNav?.children || []
+  // For ethos, we want to show all content under /ethos
+  const ethosNav = navigation.value.find(item => item.path === '/ethos')
+  return ethosNav?.children || []
 })
 
 // SEO

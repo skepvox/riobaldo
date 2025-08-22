@@ -7,14 +7,14 @@ export const navLinks: NavigationMenuItem[] = [
     to: '/'
   },
   {
-    label: 'Matemática',
+    label: 'Arithmos',
     icon: 'i-lucide-calculator',
-    to: '/matematica'
+    to: '/arithmos'
   },
   {
-    label: 'Filosofia',
+    label: 'Ethos',
     icon: 'i-lucide-book-open',
-    to: '/filosofia'
+    to: '/ethos'
   },
   {
     label: 'Blog',
