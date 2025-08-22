@@ -7,7 +7,7 @@ const route = useRoute()
 // Build header links directly from navigation
 const headerLinks = computed(() => {
   const links = []
-  
+
   // Home link
   links.push({
     label: 'Home',
@@ -16,13 +16,13 @@ const headerLinks = computed(() => {
     search: false,
     active: route.path === '/'
   })
-  
+
   // Add sections from navigation
-  navigation.value.forEach(section => {
+  navigation.value.forEach((section) => {
     if (!section.title || !section.path) return
-    
+
     // Build children for dropdown - only include items with actual content pages
-    const children = section.children?.flatMap(child => {
+    const children = section.children?.flatMap((child) => {
       // If this child has its own children, get the actual content pages from deeper levels
       if (child.children && child.children.length > 0) {
         // Recursively find all leaf nodes (actual content pages)
@@ -43,7 +43,7 @@ const headerLinks = computed(() => {
       to: item.path,
       active: route.path === item.path || route.path.startsWith(item.path || '')
     })).filter(Boolean) || []
-    
+
     links.push({
       label: section.title,
       icon: section.icon || 'i-lucide-folder',
@@ -53,7 +53,7 @@ const headerLinks = computed(() => {
       ...(children.length > 0 ? { children } : {})
     })
   })
-  
+
   return links
 })
 
@@ -70,8 +70,8 @@ const mobileNavigation = computed<ContentNavigationItem[]>(() => {
 const defaultOpen = computed(() => {
   const topLevelWithChildren = mobileNavigation.value.filter(link => link.children?.length)
   const currentPath = route.path
-  
-  return topLevelWithChildren.some(link => 
+
+  return topLevelWithChildren.some(link =>
     link.children?.some(child => currentPath.startsWith(child.path as string))
   )
 })
@@ -82,10 +82,15 @@ const defaultOpen = computed(() => {
     <template #left>
       <NuxtLink
         to="/"
-        class="flex gap-2 items-end"
+        class="flex gap-2 items-center"
         aria-label="Back to home"
       >
-        <span class="text-lg font-bold">Riobaldo</span>
+        <img
+          src="/favicon/favicon.png"
+          alt="Riobaldo logo"
+          class="w-8 h-8"
+        >
+        <span class="text-xl font-bold">Riobaldo</span>
       </NuxtLink>
     </template>
 
@@ -104,6 +109,18 @@ const defaultOpen = computed(() => {
       </UTooltip>
 
       <UColorModeButton />
+
+      <UTooltip text="Instagram">
+        <UButton
+          icon="i-simple-icons-instagram"
+          to="https://instagram.com/skepvox"
+          target="_blank"
+          variant="ghost"
+          color="neutral"
+        >
+          <span class="sr-only">Instagram</span>
+        </UButton>
+      </UTooltip>
     </template>
 
     <template #body>

@@ -2,6 +2,8 @@
 import type { ContentNavigationItem } from '@nuxt/content'
 import { findPageBreadcrumb, mapContentNavigation } from '#ui-pro/utils/content'
 
+import { formatDate } from '~/utils/date'
+
 const route = useRoute()
 
 const { data: page } = await useAsyncData(route.path, () =>
@@ -43,8 +45,6 @@ useSeoMeta({
 })
 
 const articleLink = computed(() => `${window?.location}`)
-
-import { formatDate } from '~/utils/date'
 </script>
 
 <template>

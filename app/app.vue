@@ -69,7 +69,7 @@ provide('navigation', navigation)
         :fuse="{ resultLimit: 42 }"
       />
     </ClientOnly>
-    
+
     <Analytics />
   </UApp>
 </template>

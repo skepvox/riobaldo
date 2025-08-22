@@ -127,7 +127,7 @@ export default defineContentConfig({
         chapter: z.string().optional(),
         order: z.number().optional()
       })
-    }),
+    })
     // speaking: defineCollection({
     //   type: 'page',
     //   source: 'speaking.yml',

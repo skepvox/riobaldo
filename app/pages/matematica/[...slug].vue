@@ -15,23 +15,23 @@ const breadcrumbs = computed(() => {
     { label: 'Início', to: '/' },
     { label: 'Matemática', to: '/matematica' }
   ]
-  
+
   if (parts[1]) { // Module
     const moduleNum = parts[1].match(/\d+/)?.[0]
-    crumbs.push({ 
+    crumbs.push({
       label: `Módulo ${moduleNum}`,
       to: undefined as any // No actual navigation
     })
   }
-  
+
   if (parts[2]) { // Chapter
     const chapterNum = parts[2].match(/\d+/)?.[0]
-    crumbs.push({ 
+    crumbs.push({
       label: `Capítulo ${chapterNum}`,
       to: undefined as any // No actual navigation
     })
   }
-  
+
   return crumbs
 })
 
@@ -40,9 +40,9 @@ const { data: navigation } = await useAsyncData('math-navigation', async () => {
   const allContent = await queryCollection('matematica')
     .order('path', 'ASC')
     .all()
-  
+
   const currentIndex = allContent.findIndex(item => item.path === route.path)
-  
+
   return {
     prev: currentIndex > 0 ? allContent[currentIndex - 1] : null,
     next: currentIndex < allContent.length - 1 ? allContent[currentIndex + 1] : null
@@ -78,8 +78,8 @@ const { data: navigation } = await useAsyncData('math-navigation', async () => {
               :to="navigation.prev.path"
               class="group flex items-center gap-3 p-4 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-blue-500 dark:hover:border-blue-400 transition-colors"
             >
-              <UIcon 
-                name="i-heroicons-arrow-left-20-solid" 
+              <UIcon
+                name="i-heroicons-arrow-left-20-solid"
                 class="w-5 h-5 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors flex-shrink-0"
               />
               <div class="text-left">
@@ -89,16 +89,16 @@ const { data: navigation } = await useAsyncData('math-navigation', async () => {
                 </p>
               </div>
             </NuxtLink>
-            
+
             <div v-else />
-            
+
             <NuxtLink
               v-if="navigation?.next"
               :to="navigation.next.path"
               class="group flex items-center gap-3 p-4 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-blue-500 dark:hover:border-blue-400 transition-colors md:flex-row-reverse md:text-right"
             >
-              <UIcon 
-                name="i-heroicons-arrow-right-20-solid" 
+              <UIcon
+                name="i-heroicons-arrow-right-20-solid"
                 class="w-5 h-5 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors flex-shrink-0"
               />
               <div>

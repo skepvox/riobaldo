@@ -76,45 +76,54 @@ useSeoMeta({
         </UPageHeader>
 
         <UPageBody>
-          <ContentRenderer v-if="page.body" :value="page" />
-          
+          <ContentRenderer
+            v-if="page.body"
+            :value="page"
+          />
+
           <USeparator class="mt-12" />
-          
+
           <UContentSurround :surround="surround" />
         </UPageBody>
 
         <template #right>
-          <UContentToc :links="page.body?.toc?.links" highlight>
+          <UContentToc
+            :links="page.body?.toc?.links"
+            highlight
+          >
             <template #bottom>
-              <USeparator v-if="page.body?.toc?.links?.length" type="dashed" />
-              
+              <USeparator
+                v-if="page.body?.toc?.links?.length"
+                type="dashed"
+              />
+
               <div class="space-y-6">
                 <div>
                   <h4 class="text-sm font-semibold text-gray-900 dark:text-white mb-3">
                     Ferramentas de Leitura
                   </h4>
                   <div class="space-y-2">
-                    <UButton 
-                      variant="ghost" 
-                      size="sm" 
+                    <UButton
+                      variant="ghost"
+                      size="sm"
                       block
                       icon="i-lucide-bookmark"
                       color="neutral"
                     >
                       Marcar página
                     </UButton>
-                    <UButton 
-                      variant="ghost" 
-                      size="sm" 
+                    <UButton
+                      variant="ghost"
+                      size="sm"
                       block
                       icon="i-lucide-file-text"
                       color="neutral"
                     >
                       Fazer anotações
                     </UButton>
-                    <UButton 
-                      variant="ghost" 
-                      size="sm" 
+                    <UButton
+                      variant="ghost"
+                      size="sm"
                       block
                       icon="i-lucide-highlighter"
                       color="neutral"

@@ -11,17 +11,6 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n'
   ],
 
-  i18n: {
-    defaultLocale: 'pt-BR',
-    locales: [
-      {
-        code: 'pt-BR',
-        name: 'Português (Brasil)'
-      }
-    ],
-    strategy: 'no_prefix'
-  },
-
   devtools: {
     enabled: true
   },
@@ -48,4 +37,15 @@ export default defineNuxtConfig({
       }
     }
   },
+
+  i18n: {
+    defaultLocale: 'pt-BR',
+    locales: [
+      {
+        code: 'pt-BR',
+        name: 'Português (Brasil)'
+      }
+    ],
+    strategy: 'no_prefix'
+  }
 })
