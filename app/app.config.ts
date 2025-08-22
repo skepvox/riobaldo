@@ -11,8 +11,9 @@ export default defineAppConfig({
   },
   ui: {
     colors: {
-      primary: 'blue',
-      neutral: 'neutral'
+      primary: 'green',
+      neutral: 'slate',
+      important: 'violet'
     }
   },
   uiPro: {
@@ -33,7 +34,7 @@ export default defineAppConfig({
         'to': 'https://instagram.com/skepvox',
         'target': '_blank',
         'aria-label': 'Instagram'
-      },
+      }
       // {
       //   'icon': 'i-simple-icons-x',
       //   'to': 'https://x.com/skepvox',
