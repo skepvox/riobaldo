@@ -101,26 +101,7 @@ const defaultOpen = computed(() => {
     />
 
     <template #right>
-      <UTooltip
-        text="Search"
-        :kbds="['meta', 'K']"
-      >
-        <UContentSearchButton />
-      </UTooltip>
-
       <UColorModeButton />
-
-      <UTooltip text="Instagram">
-        <UButton
-          icon="i-simple-icons-instagram"
-          to="https://instagram.com/skepvox"
-          target="_blank"
-          variant="ghost"
-          color="neutral"
-        >
-          <span class="sr-only">Instagram</span>
-        </UButton>
-      </UTooltip>
     </template>
 
     <template #body>
