@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { formatDate } from '~/utils/date'
 
+definePageMeta({
+  layout: 'home'
+})
+
 const { data: page } = await useAsyncData('blog-page', () => {
   return queryCollection('pages').path('/blog').first()
 })

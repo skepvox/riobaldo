@@ -1,4 +1,8 @@
 <script setup lang="ts">
+definePageMeta({
+  layout: 'home'
+})
+
 const { data: page } = await useAsyncData('index', () => {
   return queryCollection('index').first()
 })

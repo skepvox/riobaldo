@@ -4,6 +4,10 @@ import { findPageBreadcrumb, mapContentNavigation } from '#ui-pro/utils/content'
 
 import { formatDate } from '~/utils/date'
 
+definePageMeta({
+  layout: 'home'
+})
+
 const route = useRoute()
 
 const { data: page } = await useAsyncData(route.path, () =>
