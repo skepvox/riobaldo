@@ -32,7 +32,6 @@ const [{ data: navigation }, { data: files }] = await Promise.all([
   useAsyncData('navigation', () => {
     return Promise.all([
       queryCollectionNavigation('blog'),
-      queryCollectionNavigation('arithmos'),
       queryCollectionNavigation('ethos')
     ])
   }, {
@@ -41,7 +40,6 @@ const [{ data: navigation }, { data: files }] = await Promise.all([
   useLazyAsyncData('search', () => {
     return Promise.all([
       queryCollectionSearchSections('blog'),
-      queryCollectionSearchSections('arithmos'),
       queryCollectionSearchSections('ethos')
     ])
   }, {

@@ -105,17 +105,6 @@ export default defineContentConfig({
         links: z.array(createButtonSchema())
       })
     }),
-    arithmos: defineCollection({
-      type: 'page',
-      source: 'arithmos/**/*.md',
-      schema: z.object({
-        title: z.string(),
-        description: z.string().optional(),
-        order: z.number().optional(),
-        module: z.string().optional(),
-        chapter: z.string().optional()
-      })
-    }),
     ethos: defineCollection({
       type: 'page',
       source: 'ethos/**/*.md',

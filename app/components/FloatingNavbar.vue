@@ -8,11 +8,6 @@ const links: NavigationMenuItem[] = [
     icon: 'i-lucide-home'
   },
   {
-    label: 'Arithmos',
-    to: '/arithmos',
-    icon: 'i-lucide-calculator'
-  },
-  {
     label: 'Ethos',
     to: '/ethos',
     icon: 'i-lucide-book-open'

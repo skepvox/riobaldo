@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import type { ContentNavigationItem } from '@nuxt/content'
-import { findPageBreadcrumb } from '@nuxt/content/utils'
-import { mapContentNavigation } from '#ui-pro/utils'
 
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation', ref([]))
 const route = useRoute()
@@ -24,15 +22,6 @@ const { data: surround } = await useAsyncData(
     fields: ['title', 'description']
   })
 )
-
-// Build breadcrumb from navigation tree
-const breadcrumb = computed(() => {
-  return mapContentNavigation(findPageBreadcrumb(navigation.value, path.value)).map(link => ({
-    label: link.label,
-    // Only add 'to' for paths that have actual pages
-    ...(link.to === '/ethos' ? { to: link.to } : {})
-  }))
-})
 
 // Get sidebar navigation for current section
 const asideNavigation = computed(() => {
@@ -69,11 +58,7 @@ useSeoMeta({
       </template>
 
       <UPage>
-        <UPageHeader v-bind="page">
-          <template #headline>
-            <UBreadcrumb :items="breadcrumb" />
-          </template>
-        </UPageHeader>
+        <UPageHeader v-bind="page" />
 
         <UPageBody>
           <ContentRenderer
@@ -91,49 +76,6 @@ useSeoMeta({
             :links="page.body?.toc?.links"
             highlight
           >
-            <template #bottom>
-              <USeparator
-                v-if="page.body?.toc?.links?.length"
-                type="dashed"
-              />
-
-              <div class="space-y-6">
-                <div>
-                  <h4 class="text-sm font-semibold text-gray-900 dark:text-white mb-3">
-                    Ferramentas de Leitura
-                  </h4>
-                  <div class="space-y-2">
-                    <UButton
-                      variant="ghost"
-                      size="sm"
-                      block
-                      icon="i-lucide-bookmark"
-                      color="neutral"
-                    >
-                      Marcar página
-                    </UButton>
-                    <UButton
-                      variant="ghost"
-                      size="sm"
-                      block
-                      icon="i-lucide-file-text"
-                      color="neutral"
-                    >
-                      Fazer anotações
-                    </UButton>
-                    <UButton
-                      variant="ghost"
-                      size="sm"
-                      block
-                      icon="i-lucide-highlighter"
-                      color="neutral"
-                    >
-                      Destacar texto
-                    </UButton>
-                  </div>
-                </div>
-              </div>
-            </template>
           </UContentToc>
         </template>
       </UPage>
