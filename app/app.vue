@@ -1,73 +1,103 @@
 <script setup lang="ts">
-import { Analytics } from '@vercel/analytics/nuxt'
-
 const colorMode = useColorMode()
+const { version } = useDocsVersion()
+const { searchGroups, searchLinks, searchTerm } = useNavigation()
+const { fetchList } = useModules()
 
-const color = computed(() => colorMode.value === 'dark' ? '#020618' : 'white')
-
-useHead({
-  meta: [
-    { charset: 'utf-8' },
-    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-    { key: 'theme-color', name: 'theme-color', content: color }
-  ],
-  link: [
-    { rel: 'icon', type: 'image/png', href: 'favicon/favicon.png' }
-  ],
-  htmlAttrs: {
-    lang: 'pt-BR'
-  }
-})
-
-useSeoMeta({
-  ogImage: 'https://riobaldo.com/joao-guimaraes-rosa-banner.webp',
-  twitterImage: 'https://riobaldo.com/joao-guimaraes-rosa-banner.webp',
-  twitterCard: 'summary_large_image',
-  ogUrl: 'https://riobaldo.com',
-  twitterTitle: 'Riobaldo - Sertão Digital',
-  twitterDescription: 'Riobaldo nasce como espaço de reflexão e escrita lenta, onde o pensamento pode seguir seu próprio ritmo'
-})
+const color = computed(() => colorMode.value === 'dark' ? '#020420' : 'white')
 
 const [{ data: navigation }, { data: files }] = await Promise.all([
   useAsyncData('navigation', () => {
     return Promise.all([
+      queryCollectionNavigation('docsv3', ['titleTemplate']).then(data => data[0]?.children),
+      queryCollectionNavigation('docsv4', ['titleTemplate']).then(data => data[0]?.children),
       queryCollectionNavigation('blog'),
       queryCollectionNavigation('ethos')
     ])
   }, {
-    transform: data => data.flat()
+    transform: data => data.flat(),
+    watch: [version]
   }),
   useLazyAsyncData('search', () => {
     return Promise.all([
+      queryCollectionSearchSections('docsv3'),
+      queryCollectionSearchSections('docsv4'),
       queryCollectionSearchSections('blog'),
       queryCollectionSearchSections('ethos')
     ])
   }, {
     server: false,
-    transform: data => data.flat()
+    transform: data => data.flat(),
+    watch: [version]
   })
 ])
 
-provide('navigation', navigation)
+onNuxtReady(() => fetchList())
+
+useHead({
+  titleTemplate: title => title ? `${title} · Nuxt` : 'Nuxt: The Intuitive Web Framework',
+  meta: [
+    { key: 'theme-color', name: 'theme-color', content: color }
+  ]
+})
+
+if (import.meta.server) {
+  useHead({
+    meta: [
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' }
+    ],
+    link: [
+      { rel: 'icon', type: 'image/png', href: '/icon.png' }
+    ],
+    htmlAttrs: {
+      lang: 'en'
+    }
+  })
+  useSeoMeta({
+    ogSiteName: 'Nuxt',
+    ogType: 'website',
+    twitterCard: 'summary_large_image',
+    twitterSite: 'nuxt_js'
+  })
+}
+
+const versionNavigation = computed(() => navigation.value?.filter(item => item.path === version.value.path || item.path === '/blog' || item.path === '/ethos') ?? [])
+const versionFiles = computed(() => files.value?.filter((file) => {
+  return (version.value.path === '/docs/4.x' ? file.id.startsWith('/docs/4.x/') : !file.id.startsWith('/docs/4.x')) || file.id.startsWith('/blog/') || file.id.startsWith('/ethos/')
+}) ?? [])
+
+provide('navigation', versionNavigation)
+
+const appear = ref(false)
+const appeared = ref(false)
+
+onMounted(() => {
+  setTimeout(() => {
+    appear.value = true
+    setTimeout(() => {
+      appeared.value = true
+    }, 1000)
+  }, 0)
+})
 </script>
 
 <template>
   <UApp>
+    <NuxtLoadingIndicator color="var(--ui-primary)" />
+
     <NuxtLayout>
-      <UMain class="relative">
-        <NuxtPage />
-      </UMain>
+      <NuxtPage />
     </NuxtLayout>
 
     <ClientOnly>
       <LazyUContentSearch
-        :files="files"
-        :navigation="navigation"
-        shortcut="meta_k"
+        v-model:search-term="searchTerm"
+        :files="versionFiles"
+        :navigation="versionNavigation"
+        :groups="searchGroups"
+        :links="searchLinks"
         :fuse="{ resultLimit: 42 }"
       />
     </ClientOnly>
-
-    <Analytics />
   </UApp>
 </template>

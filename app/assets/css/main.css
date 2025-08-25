@@ -1,11 +1,12 @@
 @import "tailwindcss";
 @import "@nuxt/ui-pro";
+@import "./twoslash.css";
 
 @source "../../../content/**/*";
+@source "../../../node_modules/.c12";
 
 @theme static {
   --font-sans: 'Public Sans', sans-serif;
-  --font-serif: 'Instrument Serif', serif;
 
   --color-green-50: #EFFDF5;
   --color-green-100: #D9FBE8;
@@ -22,11 +23,6 @@
 
 :root {
   --ui-container: 90rem;
-
-  ::selection {
-    color: #282a30;
-    background-color: #c8c8c8;
-  }
 }
 
 .dark {
@@ -34,9 +30,4 @@
   --ui-bg-muted: var(--ui-color-neutral-900);
   --ui-bg-elevated: var(--ui-color-neutral-900);
   --ui-bg-accented: var(--ui-color-neutral-800);
-
-  ::selection {
-    color: #ffffff;
-    background-color: #474747;
-  }
 }
