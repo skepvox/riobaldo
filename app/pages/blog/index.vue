@@ -2,7 +2,7 @@
 import { formatDate } from '~/utils/date'
 
 definePageMeta({
-  layout: 'home'
+  layout: 'default'
 })
 
 const { data: page } = await useAsyncData('blog-page', () => {

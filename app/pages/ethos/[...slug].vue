@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import type { ContentNavigationItem } from '@nuxt/content'
-
-const navigation = inject<Ref<ContentNavigationItem[]>>('navigation', ref([]))
 const route = useRoute()
 const path = computed(() => route.path.replace(/\/$/, ''))
 
@@ -23,13 +20,6 @@ const { data: surround } = await useAsyncData(
   })
 )
 
-// Get sidebar navigation for current section
-const asideNavigation = computed(() => {
-  // For ethos, we want to show all content under /ethos
-  const ethosNav = navigation.value.find(item => item.path === '/ethos')
-  return ethosNav?.children || []
-})
-
 // SEO
 const title = computed(() => page.value?.title)
 const description = computed(() => page.value?.description)
@@ -45,40 +35,25 @@ useSeoMeta({
 <template>
   <UContainer v-if="page">
     <UPage>
-      <template #left>
-        <UPageAside>
-          <UContentNavigation
-            :navigation="asideNavigation"
-            default-open
-            trailing-icon="i-lucide-chevron-right"
-            :ui="{ linkTrailingIcon: 'group-data-[state=open]:rotate-90' }"
-            highlight
-          />
-        </UPageAside>
+      <UPageHeader v-bind="page" />
+
+      <UPageBody>
+        <ContentRenderer
+          v-if="page.body"
+          :value="page"
+        />
+
+        <USeparator class="mt-12" />
+
+        <UContentSurround :surround="surround" />
+      </UPageBody>
+
+      <template #right>
+        <UContentToc
+          :links="page.body?.toc?.links"
+          highlight
+        />
       </template>
-
-      <UPage>
-        <UPageHeader v-bind="page" />
-
-        <UPageBody>
-          <ContentRenderer
-            v-if="page.body"
-            :value="page"
-          />
-
-          <USeparator class="mt-12" />
-
-          <UContentSurround :surround="surround" />
-        </UPageBody>
-
-        <template #right>
-          <UContentToc
-            :links="page.body?.toc?.links"
-            highlight
-          >
-          </UContentToc>
-        </template>
-      </UPage>
     </UPage>
   </UContainer>
 </template>
