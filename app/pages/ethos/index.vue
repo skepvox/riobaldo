@@ -1,36 +1,4 @@
 <script setup lang="ts">
-import type { ContentNavigationItem } from '@nuxt/content'
-
-const navigation = inject<Ref<ContentNavigationItem[]>>('navigation', ref([]))
-
-// Get the Ethos section from navigation
-const ethosNavigation = computed(() => {
-  return navigation.value.find(item => item.path === '/ethos')
-})
-
-// Get first article for default display
-const firstArticle = computed(() => {
-  if (!ethosNavigation.value?.children?.length) return null
-  
-  const findFirstArticle = (items: ContentNavigationItem[]): ContentNavigationItem | null => {
-    for (const item of items) {
-      if (item.children?.length) {
-        const found = findFirstArticle(item.children)
-        if (found) return found
-      } else if (item.path && !item.path.endsWith('/')) {
-        return item
-      }
-    }
-    return null
-  }
-  
-  return findFirstArticle(ethosNavigation.value.children)
-})
-
-// Redirect to first article if available
-if (firstArticle.value?.path) {
-  await navigateTo(firstArticle.value.path)
-}
 
 useSeoMeta({
   title: 'Ethos - Filosofia',
@@ -53,7 +21,7 @@ useSeoMeta({
     
     <UPageSection>
       <div class="prose prose-lg dark:prose-invert max-w-none">
-        <p>Selecione um tópico no menu lateral para começar a explorar.</p>
+        <p>Explore os conteúdos filosóficos disponíveis.</p>
       </div>
     </UPageSection>
   </UPage>

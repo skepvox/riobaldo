@@ -40,7 +40,7 @@ const [{ data: navigation }, { data: files }] = await Promise.all([
 
 <template>
   <div>
-    <AppHeader />
+    <FloatingNavbar />
 
     <UMain>
       <UContainer>

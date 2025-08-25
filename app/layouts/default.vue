@@ -3,7 +3,7 @@
 
 <template>
   <div>
-    <AppHeader />
+    <FloatingNavbar />
     <UContainer class="sm:border-x border-default">
       <slot />
       <AppFooter />

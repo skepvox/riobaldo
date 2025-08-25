@@ -1,6 +1,6 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: 'home'
+  layout: 'default'
 })
 
 const { data: page } = await useAsyncData('index', () => {

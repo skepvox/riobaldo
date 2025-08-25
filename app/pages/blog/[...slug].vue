@@ -5,7 +5,7 @@ import { findPageBreadcrumb, mapContentNavigation } from '#ui-pro/utils/content'
 import { formatDate } from '~/utils/date'
 
 definePageMeta({
-  layout: 'home'
+  layout: 'default'
 })
 
 const route = useRoute()
