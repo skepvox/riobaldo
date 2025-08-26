@@ -7,15 +7,8 @@ const route = useRoute()
 const { copy } = useClipboard()
 const { headerLinks } = useHeaderLinks()
 
-
 const mobileNavigation = computed<ContentNavigationItem[]>(() => {
-  // Show Migration and Bridge on mobile only when user is reading them
   const docsLink = navigation.value.find(link => link.path === '/docs')
-  if (docsLink && !route.path.startsWith('/docs/bridge') && !route.path.startsWith('/docs/migration')) {
-    docsLink.children = docsLink.children?.filter(link => !['/docs/bridge', '/docs/migration'].includes(link.path as string)) || []
-  }
-
-  // Get ethos navigation from content
   const ethosLink = navigation.value.find(link => link.path === '/ethos')
 
   return [
@@ -30,12 +23,7 @@ const mobileNavigation = computed<ContentNavigationItem[]>(() => {
         title: child.label,
         path: child.to
       }))
-    } as ContentNavigationItem)),
-    {
-      title: 'Design Kit',
-      icon: 'i-lucide-palette',
-      path: '/design-kit'
-    }
+    } as ContentNavigationItem))
   ].filter((item): item is ContentNavigationItem => Boolean(item))
 })
 
@@ -60,11 +48,6 @@ const logoContextMenuItems = [
         })
       }
     }
-  }],
-  [{
-    label: 'Browse design kit',
-    icon: 'i-lucide-shapes',
-    to: '/design-kit'
   }]
 ]
 </script>

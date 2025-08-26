@@ -33,3 +33,6 @@ philosophy-books-goals.md
 
 # Reference projects
 .reference/
+
+# Vercel build error logs
+vercel-build-error.md

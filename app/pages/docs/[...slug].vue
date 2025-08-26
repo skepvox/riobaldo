@@ -20,12 +20,12 @@ const path = computed(() => route.path.replace(/\/$/, ''))
 const asideNavigation = computed(() => {
   const docsPath = '/docs'
   const currentSection = route.params.slug?.[0] // e.g., 'getting-started'
-  
+
   if (currentSection) {
     const fullPath = `${docsPath}/${currentSection}`
     return navPageFromPath(fullPath, navigation.value)?.children || []
   }
-  
+
   return navPageFromPath(docsPath, navigation.value)?.children || []
 })
 

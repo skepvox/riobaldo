@@ -157,7 +157,6 @@ export default defineContentConfig({
         modules: PageSection,
         testimonial: Testimonial,
         deploy: PageSection,
-        contributors: PageSection,
         stats: PageSection.extend({
           community: BaseSection,
           x: z.number(),
@@ -383,24 +382,6 @@ export default defineContentConfig({
           removeElements: z.array(z.string()).optional()
         }).optional(),
         sponsor: z.boolean().optional()
-      })
-    }),
-    designKit: defineCollection({
-      type: 'page',
-      source: 'design-kit.md',
-      schema: PageHero
-    }),
-    team: defineCollection({
-      type: 'page',
-      source: 'team.yml',
-      schema: PageHero.extend({
-        users: z.array(z.object({
-          name: z.string(),
-          location: z.string(),
-          sponsor: z.string().url(),
-          avatar: Image,
-          links: z.array(Link)
-        }))
       })
     })
   }

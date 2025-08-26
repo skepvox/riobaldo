@@ -106,7 +106,6 @@ onMounted(() => {
         wrapper: 'lg:min-h-[540px]'
       }"
     >
-
       <template #title>
         The Progressive<br><span class="text-primary">Web Framework</span>
       </template>
@@ -503,18 +502,6 @@ onMounted(() => {
           }"
         />
       </UPageCard>
-    </UPageSection>
-    <UPageSection
-      :title="page.contributors.title"
-      :description="page.contributors.description"
-      :links="page.contributors.links"
-      orientation="horizontal"
-      reverse
-      :ui="{
-        root: 'bg-gradient-to-b border-t border-default from-muted dark:from-muted/40 to-default'
-      }"
-    >
-      <HomeSectionContributors />
     </UPageSection>
 
     <UPageSection

@@ -1,13 +1,13 @@
 export default defineAppConfig({
   ui: {
     colors: {
-      primary: 'indigo',     // Deep wisdom, knowledge
-      secondary: 'amber',    // Enlightenment, golden ratio
-      neutral: 'stone',      // Ancient texts, parchment
-      important: 'purple',   // Royal, philosophical tradition
-      success: 'emerald',    // Growth, understanding
-      warning: 'amber',      // Caution in reasoning
-      error: 'rose'         // Logical fallacies
+      primary: 'indigo', // Deep wisdom, knowledge
+      secondary: 'amber', // Enlightenment, golden ratio
+      neutral: 'stone', // Ancient texts, parchment
+      important: 'purple', // Royal, philosophical tradition
+      success: 'emerald', // Growth, understanding
+      warning: 'amber', // Caution in reasoning
+      error: 'rose' // Logical fallacies
     }
   },
   uiPro: {

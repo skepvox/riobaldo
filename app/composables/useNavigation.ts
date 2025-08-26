@@ -24,41 +24,6 @@ function _useHeaderLinks() {
         icon: 'i-lucide-book-open',
         to: `${to}/guide`,
         active: route.path.startsWith(`${to}/guide`)
-      }, {
-        label: 'API',
-        description: 'Explore the Riobaldo components, composables, utilities and more.',
-        icon: 'i-lucide-code-xml',
-        to: `${to}/api`,
-        active: route.path.startsWith(`${to}/api`)
-      }, {
-        label: 'Examples',
-        description: 'Discover and explore official and community examples.',
-        icon: 'i-lucide-app-window-mac',
-        to: `${to}/examples`,
-        active: route.path.startsWith(`${to}/examples`)
-      }, {
-        label: 'Community',
-        description: 'Find answers and support from the community.',
-        icon: 'i-lucide-messages-square',
-        to: `${to}/community`,
-        active: route.path.startsWith(`${to}/community`)
-      }]
-    }, {
-      label: 'Integrations',
-      to: '/modules',
-      icon: 'i-lucide-unplug',
-      search: false,
-      active: route.path.startsWith('/modules') || route.path.startsWith('/deploy'),
-      children: [{
-        label: 'Modules',
-        description: 'Supercharge your Riobaldo project with modules.',
-        icon: 'i-lucide-puzzle',
-        to: '/modules'
-      }, {
-        label: 'Hosting',
-        description: 'Deploy your Riobaldo project anywhere.',
-        icon: 'i-lucide-rocket',
-        to: '/deploy'
       }]
     }, {
       label: 'Resources',
@@ -112,27 +77,6 @@ function _useHeaderLinks() {
         target: '_blank'
       }]
     }, {
-      label: 'Enterprise',
-      icon: 'i-lucide-building-2',
-      to: '/enterprise',
-      search: false,
-      children: [{
-        label: 'Support',
-        to: '/enterprise/support',
-        description: 'Professional support by Nuxt experts.',
-        icon: 'i-lucide-life-buoy'
-      }, {
-        label: 'Agencies',
-        to: '/enterprise/agencies',
-        description: 'Agencies specialized in Nuxt development.',
-        icon: 'i-lucide-handshake'
-      }, {
-        label: 'Sponsors',
-        to: '/enterprise/sponsors',
-        description: 'Help us sustain Nuxt development.',
-        icon: 'i-lucide-hand-heart'
-      }]
-    }, {
       label: 'Blog',
       icon: 'i-lucide-newspaper',
       to: '/blog'
@@ -146,7 +90,7 @@ function _useHeaderLinks() {
         label: 'Louis Lavelle',
         description: 'Obras filosóficas e textos de Louis Lavelle',
         icon: 'i-lucide-user-circle',
-        to: '/ethos/louis-lavelle',
+        to: '/ethos/louis-lavelle/manual-de-metodologia-dialetica/livro-1/reflexao-e-metodo',
         active: route.path.startsWith('/ethos/louis-lavelle')
       }]
     }]
@@ -163,9 +107,6 @@ const footerLinks = [{
     label: 'Nuxters',
     to: 'https://nuxters.nuxt.com',
     target: '_blank'
-  }, {
-    label: 'Team',
-    to: '/team'
   }, {
     label: 'Design Kit',
     to: '/design-kit'
@@ -184,18 +125,6 @@ const footerLinks = [{
     label: 'NuxtHub',
     to: 'https://hub.nuxt.com/?utm_source=nuxt-website&utm_medium=footer',
     target: '_blank'
-  }]
-}, {
-  label: 'Enterprise',
-  children: [{
-    label: 'Support',
-    to: '/enterprise/support'
-  }, {
-    label: 'Agencies',
-    to: '/enterprise/agencies'
-  }, {
-    label: 'Sponsors',
-    to: '/enterprise/sponsors'
   }]
 }]
 
@@ -216,7 +145,7 @@ const _useNavigation = () => {
       onSelect: () => nuxtApp.$kapa?.openModal()
     },
     ...headerLinks.value.map((link) => {
-      // Remove `/docs` and `/enterprise` links from command palette
+      // Remove `/docs` links from command palette
       if (link.search === false) {
         return {
           label: link.label,
@@ -226,14 +155,6 @@ const _useNavigation = () => {
       }
       return link
     }).filter((link): link is NonNullable<typeof link> => Boolean(link)), {
-      label: 'Team',
-      icon: 'i-lucide-users',
-      to: '/team'
-    }, {
-      label: 'Design Kit',
-      icon: 'i-lucide-palette',
-      to: '/design-kit'
-    }, {
       label: 'Ethos',
       icon: 'i-lucide-book-open',
       to: '/ethos'

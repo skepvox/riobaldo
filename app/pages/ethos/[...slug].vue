@@ -20,12 +20,12 @@ const path = computed(() => route.path.replace(/\/$/, ''))
 const asideNavigation = computed(() => {
   const ethosPath = '/ethos'
   const currentSection = route.params.slug?.[0] // e.g., 'louis-lavelle'
-  
+
   if (currentSection) {
     const fullPath = `${ethosPath}/${currentSection}`
     return navPageFromPath(fullPath, navigation.value)?.children || []
   }
-  
+
   return navPageFromPath(ethosPath, navigation.value)?.children || []
 })
 

@@ -36,7 +36,6 @@
     "@nuxtjs/plausible": "^1.2.0",
     "eslint": "^9.31.0",
     "motion-v": "^1.5.0",
-    "nuxt-auth-utils": "^0.5.23",
     "nuxt-charts": "^0.2.3",
     "nuxt-content-twoslash": "^0.1.2",
     "nuxt-llms": "^0.1.3",

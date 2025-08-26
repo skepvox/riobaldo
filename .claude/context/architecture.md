@@ -68,8 +68,7 @@ riobaldo/
 │   ├── app.vue           # Root component
 │   └── error.vue         # Error page
 ├── content/              # Content management
-│   ├── blog/            # Blog posts
-│   └── projects/        # Project descriptions
+│   └── blog/            # Blog posts
 ├── server/               # Backend application (future)
 │   ├── api/             # API endpoints
 │   ├── middleware/      # Server middleware

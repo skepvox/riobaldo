@@ -17,8 +17,7 @@ export default defineNuxtConfig({
     'nuxt-og-image',
     'motion-v/nuxt',
     'nuxt-llms',
-    'nuxt-charts',
-    'nuxt-auth-utils'
+    'nuxt-charts'
   ],
   $development: {
     site: {
@@ -72,27 +71,16 @@ export default defineNuxtConfig({
     '/docs/guide/directory-structure': { redirect: '/docs/guide/directory-structure/app', prerender: false },
     '/docs/guide/going-further': { redirect: '/docs/guide/going-further/experimental-features', prerender: false },
     '/docs/guide/going-further/edge-release-channel': { redirect: '/docs/guide/going-further/nightly-release-channel', prerender: false },
-    '/docs/bridge': { redirect: '/docs/bridge/overview', prerender: false },
-    '/docs/migration': { redirect: '/docs/migration/overview', prerender: false },
-    '/docs/api/components': { redirect: '/docs/api/components/client-only', prerender: false },
-    '/docs/api/composables': { redirect: '/docs/api/composables/use-app-config', prerender: false },
-    '/docs/api/utils': { redirect: '/docs/api/utils/dollarfetch', prerender: false },
-    '/docs/api/kit': { redirect: '/docs/api/kit/modules', prerender: false },
-    '/docs/api/commands': { redirect: '/docs/api/commands/dev', prerender: false },
-    '/docs/api/advanced': { redirect: '/docs/api/advanced/hooks', prerender: false },
-    '/docs/api/configuration/nuxt-config': { redirect: '/docs/api/nuxt-config', prerender: false },
-    '/docs/examples': { redirect: '/docs/examples/hello-world', prerender: false },
-    '/docs/examples/features': { redirect: '/docs/examples/features/auto-imports', prerender: false },
-    '/docs/examples/routing': { redirect: '/docs/examples/routing/middleware', prerender: false },
-    '/docs/examples/advanced': { redirect: '/docs/examples/advanced/config-extends', prerender: false },
-    '/docs/examples/experimental': { redirect: '/docs/examples/experimental/wasm', prerender: false },
-    '/docs/community': { redirect: '/docs/community/getting-help', prerender: false },
-    '/docs/community/nuxt-community': { redirect: '/docs/community/getting-help', prerender: false },
     '/docs/guide/recipes': { redirect: '/docs/guide/recipes/custom-routing', prerender: false },
     '/docs/guide/best-practices': { redirect: '/docs/guide/best-practices/performance', prerender: false },
     '/docs/guide/going-further/custom-routing': { redirect: '/docs/guide/recipes/custom-routing', prerender: false },
-    '/enterprise': { redirect: '/enterprise/support', prerender: false },
-    '/support/us': { redirect: '/enterprise/sponsors', prerender: false }
+    // Ethos redirects
+    '/ethos': { redirect: '/ethos/louis-lavelle/manual-de-metodologia-dialetica/livro-1/reflexao-e-metodo', prerender: false },
+    '/ethos/louis-lavelle': { redirect: '/ethos/louis-lavelle/manual-de-metodologia-dialetica/livro-1/reflexao-e-metodo', prerender: false },
+    '/ethos/louis-lavelle/manual-de-metodologia-dialetica': { redirect: '/ethos/louis-lavelle/manual-de-metodologia-dialetica/livro-1/reflexao-e-metodo', prerender: false },
+    '/ethos/louis-lavelle/manual-de-metodologia-dialetica/livro-1': { redirect: '/ethos/louis-lavelle/manual-de-metodologia-dialetica/livro-1/reflexao-e-metodo', prerender: false },
+    '/ethos/louis-lavelle/manuel-de-methodologie-dialectique': { redirect: '/ethos/louis-lavelle/manuel-de-methodologie-dialectique/livre-1/reflexion-et-methode', prerender: false },
+    '/ethos/louis-lavelle/manuel-de-methodologie-dialectique/livre-1': { redirect: '/ethos/louis-lavelle/manuel-de-methodologie-dialectique/livre-1/reflexion-et-methode', prerender: false }
   },
   sourcemap: true,
   compatibilityDate: '2025-07-17',

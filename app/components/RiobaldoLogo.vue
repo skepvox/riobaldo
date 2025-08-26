@@ -1,10 +1,10 @@
 <template>
   <div class="riobaldo-logo-container">
-    <img 
-      src="/favicon/favicon.png" 
-      alt="Riobaldo" 
+    <img
+      src="/favicon/favicon.png"
+      alt="Riobaldo"
       class="riobaldo-logo-image"
-    />
+    >
     <span class="riobaldo-logo-text">Riobaldo</span>
   </div>
 </template>
