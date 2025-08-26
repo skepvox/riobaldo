@@ -20,7 +20,7 @@ useSeoMeta({
 })
 
 defineOgImage({
-  url: '/assets/enterprise/support/social-card.png'
+  url: '/riobaldo-banner.webp'
 })
 </script>
 
@@ -124,14 +124,5 @@ defineOgImage({
       </div>
     </UPageSection>
 
-    <UPageSection
-      :title="page.form.title"
-      :description="page.form.description"
-      :ui="{ container: 'gap-y-0 sm:gap-y-0' }"
-    >
-      <div class="pt-8 w-full flex justify-center">
-        <EnterpriseSupportFormSection :form="page.form" />
-      </div>
-    </UPageSection>
   </UPage>
 </template>

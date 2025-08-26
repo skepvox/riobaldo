@@ -4,18 +4,9 @@ import type { ContentNavigationItem } from '@nuxt/content'
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation', ref([]))
 const logo = useTemplateRef('logo')
 const route = useRoute()
-const stats = useStats()
 const { copy } = useClipboard()
 const { headerLinks } = useHeaderLinks()
 
-const latestVersion = computed(() => {
-  const versionMatch = stats.value?.version?.match(/\d+\.\d+/)
-  return versionMatch ? versionMatch[0] : undefined
-})
-
-const mobileDocsVersion = computed(() =>
-  route.path.startsWith('/docs') ? 'v4' : undefined
-)
 
 const mobileNavigation = computed<ContentNavigationItem[]>(() => {
   // Show Migration and Bridge on mobile only when user is reading them
@@ -24,13 +15,13 @@ const mobileNavigation = computed<ContentNavigationItem[]>(() => {
     docsLink.children = docsLink.children?.filter(link => !['/docs/bridge', '/docs/migration'].includes(link.path as string)) || []
   }
 
-  // Get ethos navigation
+  // Get ethos navigation from content
   const ethosLink = navigation.value.find(link => link.path === '/ethos')
 
   return [
     docsLink,
     ethosLink,
-    ...headerLinks.value.slice(1).filter(link => link.label !== 'Ethos').map(link => ({
+    ...headerLinks.value.slice(1).filter(link => !['Docs', 'Ethos'].includes(link.label)).map(link => ({
       ...link,
       title: link.label,
       path: link.to,
@@ -62,7 +53,7 @@ const logoContextMenuItems = [
     onSelect() {
       if (logo.value) {
         copy(logo.value.$el.outerHTML, {
-          title: 'Nuxt logo copied as SVG',
+          title: 'Riobaldo logo copied as SVG',
           description: 'You can now paste it into your project',
           icon: 'i-lucide-circle-check',
           color: 'success'
@@ -83,17 +74,7 @@ const logoContextMenuItems = [
     <template #left>
       <UContextMenu :items="logoContextMenuItems" size="xs">
         <NuxtLink to="/" class="flex gap-2 items-end" aria-label="Back to home">
-          <NuxtLogo ref="logo" class="block w-auto h-6" />
-
-          <UTooltip v-if="latestVersion" :text="`Latest release: v${stats?.version || 3}`" class="hidden md:block">
-            <UBadge variant="subtle" size="sm" class="-mb-[2px] rounded font-semibold text-[12px]/3" color="primary">
-              v{{ latestVersion }}
-            </UBadge>
-          </UTooltip>
-
-          <UBadge v-if="mobileDocsVersion" variant="subtle" size="sm" class="block md:hidden -mb-[2px] rounded font-semibold text-[12px]/3" color="info">
-            {{ mobileDocsVersion }}
-          </UBadge>
+          <RiobaldoLogo ref="logo" class="block w-auto h-6" />
         </NuxtLink>
       </UContextMenu>
     </template>
@@ -106,39 +87,9 @@ const logoContextMenuItems = [
       </UTooltip>
 
       <UColorModeButton />
-
-      <UTooltip text="GitHub Stars">
-        <UButton
-          icon="i-simple-icons-github"
-          to="https://go.nuxt.com/github"
-          target="_blank"
-          variant="ghost"
-          color="neutral"
-          :label="stats ? formatNumber(stats.stars) : '...'"
-          :ui="{
-            label: 'hidden sm:inline-flex'
-          }"
-        >
-          <span class="sr-only">Nuxt on GitHub</span>
-        </UButton>
-      </UTooltip>
     </template>
 
     <template #body>
-      <template v-if="route.path.startsWith('/docs')">
-        <VersionSelect />
-
-        <USeparator type="dashed" class="my-6" />
-      </template>
-
-      <template v-if="route.path.startsWith('/ethos')">
-        <div class="px-4 py-2 text-sm font-semibold text-gray-900 dark:text-white">
-          Ethos - Filosofia
-        </div>
-
-        <USeparator type="dashed" class="my-6" />
-      </template>
-
       <UContentNavigation :navigation="mobileNavigation" :default-open="defaultOpen" highlight />
     </template>
   </UHeader>

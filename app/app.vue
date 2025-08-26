@@ -30,7 +30,7 @@ const [{ data: navigation }, { data: files }] = await Promise.all([
 onNuxtReady(() => fetchList())
 
 useHead({
-  titleTemplate: title => title ? `${title} · Nuxt` : 'Nuxt: The Intuitive Web Framework',
+  titleTemplate: title => title ? `${title} · Riobaldo` : 'Riobaldo: Platform for Philosophical and Algebraic Studies',
   meta: [
     { key: 'theme-color', name: 'theme-color', content: color }
   ]
@@ -42,17 +42,17 @@ if (import.meta.server) {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' }
     ],
     link: [
-      { rel: 'icon', type: 'image/png', href: '/icon.png' }
+      { rel: 'icon', type: 'image/png', href: '/favicon/favicon.png' }
     ],
     htmlAttrs: {
       lang: 'en'
     }
   })
   useSeoMeta({
-    ogSiteName: 'Nuxt',
+    ogSiteName: 'Riobaldo',
     ogType: 'website',
     twitterCard: 'summary_large_image',
-    twitterSite: 'nuxt_js'
+    twitterSite: 'skepvox'
   })
 }
 

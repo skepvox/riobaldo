@@ -1,10 +1,10 @@
-title: The Nuxt Newsletter
-head.title: Nuxt Newsletter
-description: 'Get the latest releases and news about Nuxt and its ecosystem with our newsletter.'
+title: The Riobaldo Newsletter
+head.title: Riobaldo Newsletter
+description: 'Get the latest releases and news about Riobaldo and its ecosystem with our newsletter.'
 navigation: false
 cta:
   headline: Getting Started
-  title: Start your Nuxt Journey
+  title: Start your Riobaldo Journey
   description: Learn everything you need to know, from beginner to master.
   links:
     - label: 'Get started'

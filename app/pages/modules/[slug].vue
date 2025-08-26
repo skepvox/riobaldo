@@ -71,11 +71,11 @@ const publishedAgo = useTimeAgo(module.value.stats.publishedAt)
 const createdAgo = useTimeAgo(module.value.stats.createdAt)
 
 useSeoMeta({
-  titleTemplate: '%s · Nuxt Modules',
+  titleTemplate: '%s · Riobaldo Modules',
   title,
   description,
   ogDescription: description,
-  ogTitle: `${title} · Nuxt Modules`
+  ogTitle: `${title} · Riobaldo Modules`
 })
 
 defineOgImageComponent('Module', {

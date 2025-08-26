@@ -25,20 +25,20 @@ const stats = useStats()
 const videoModalOpen = ref(false)
 
 const site = useSiteConfig()
-const title = 'Nuxt: The Progressive Web Framework'
+const title = 'Riobaldo: Platform for Philosophical and Algebraic Studies'
 useSeoMeta({
   title,
   titleTemplate: '%s'
 })
 
 if (import.meta.server) {
-  const description = 'Create high-quality web applications with Nuxt, the open source framework that makes full-stack development with Vue.js intuitive.'
+  const description = 'Riobaldo is a comprehensive educational platform offering advanced resources for philosophical inquiry and algebraic studies, designed for high school students and educators.'
   useSeoMeta({
     ogTitle: title,
     description: description,
     ogDescription: description,
-    ogImage: joinURL(site.url, '/new-social.jpg'),
-    twitterImage: joinURL(site.url, '/new-social.jpg')
+    ogImage: joinURL(site.url, '/riobaldo-banner.webp'),
+    twitterImage: joinURL(site.url, '/riobaldo-banner.webp')
   })
 }
 
@@ -106,18 +106,6 @@ onMounted(() => {
         wrapper: 'lg:min-h-[540px]'
       }"
     >
-      <template #headline>
-        <NuxtLink :to="page.hero.cta.to">
-          <UBadge variant="subtle" size="lg" class="px-3 relative rounded-full font-semibold dark:hover:bg-primary-400/15 dark:hover:ring-primary-700">
-            {{ page?.hero.cta.label }}
-            <UIcon
-              v-if="page?.hero.cta.icon"
-              :name="page?.hero.cta.icon"
-              class="size-4 pointer-events-none"
-            />
-          </UBadge>
-        </NuxtLink>
-      </template>
 
       <template #title>
         The Progressive<br><span class="text-primary">Web Framework</span>

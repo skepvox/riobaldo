@@ -23,11 +23,11 @@ const title = provider.value?.title
 const description = provider.value?.description
 
 useSeoMeta({
-  titleTemplate: 'Deploy Nuxt to %s',
+  titleTemplate: 'Deploy Riobaldo to %s',
   title,
   description,
   ogDescription: description,
-  ogTitle: `Deploy Nuxt to ${title}`
+  ogTitle: `Deploy Riobaldo to ${title}`
 })
 
 defineOgImageComponent('Docs', {

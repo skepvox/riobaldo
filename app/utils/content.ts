@@ -15,35 +15,18 @@ export function navPageFromPath(path: string, tree: ContentNavigationItem[]): Co
   }
 }
 
-function cleanV4Path(path: string): string {
-  return path.replace(/\/\d\.x(?=\/|$)/, '')
-}
-
-function cleanNavigationPaths(navigation: ContentNavigationItem[], isV4: boolean): ContentNavigationItem[] {
-  return navigation.map(item => ({
-    ...item,
-    path: item.path ? cleanV4Path(item.path) : item.path,
-    children: item.children ? cleanNavigationPaths(item.children, isV4) : undefined
-  }))
-}
-
 export function findTitleTemplate(page: Ref<Docsv3CollectionItem | Docsv4CollectionItem>, navigation: Ref<ContentNavigationItem[]>): string {
   if (!page.value?.path) {
-    return '%s · Nuxt'
+    return '%s · Riobaldo'
   }
 
   if (page.value.titleTemplate) {
     return page.value.titleTemplate
   }
 
-  const { version } = useDocsVersion()
-  const isV4 = version.value.path === '/docs/4.x'
-  const searchPath = cleanV4Path(page.value.path)
-  const cleanNavigation = cleanNavigationPaths(navigation.value, isV4)
-
-  const parts = searchPath.split('/')
+  const parts = page.value.path.split('/')
   const items = []
-  let current = cleanNavigation
+  let current = navigation.value
 
   for (let index = 1; index < parts.length; index += 1) {
     const prefix = parts.slice(0, index + 1).join('/')
@@ -55,5 +38,5 @@ export function findTitleTemplate(page: Ref<Docsv3CollectionItem | Docsv4Collect
     items.unshift(node)
   }
 
-  return items.find(item => typeof item.titleTemplate === 'string')?.titleTemplate || '%s · Nuxt'
+  return items.find(item => typeof item.titleTemplate === 'string')?.titleTemplate || '%s · Riobaldo'
 }

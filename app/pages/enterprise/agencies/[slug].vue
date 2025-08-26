@@ -28,15 +28,15 @@ const links = computed(() => agency.value
 const title = agency.value.title
 const description = agency.value.description
 useSeoMeta({
-  titleTemplate: '%s · Nuxt Agencies',
+  titleTemplate: '%s · Riobaldo Agencies',
   title,
   description,
   ogDescription: description,
-  ogTitle: `${title} · Nuxt Agencies`
+  ogTitle: `${title} · Riobaldo Agencies`
 })
 
 defineOgImageComponent('Docs', {
-  headline: 'Nuxt Agencies',
+  headline: 'Riobaldo Agencies',
   title,
   description
 })

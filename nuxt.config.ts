@@ -3,7 +3,7 @@ import { parseMdc } from './helpers/mdc-parser.mjs'
 
 const { resolve } = createResolver(import.meta.url)
 
-// https://nuxt.com/docs/api/configuration/nuxt-config
+// Riobaldo configuration
 export default defineNuxtConfig({
   modules: [
     '@nuxt/ui-pro',
@@ -13,7 +13,6 @@ export default defineNuxtConfig({
     '@nuxtjs/plausible',
     '@nuxt/eslint',
     '@nuxt/scripts',
-    '@nuxtjs/turnstile',
     '@vueuse/nuxt',
     'nuxt-og-image',
     'motion-v/nuxt',
@@ -48,9 +47,6 @@ export default defineNuxtConfig({
           langs: ['sql', 'diff', 'ini']
         }
       }
-    },
-    preview: {
-      api: 'https://api.nuxt.studio'
     }
   },
   mdc: {
@@ -146,16 +142,13 @@ export default defineNuxtConfig({
     provider: 'vercel'
   },
   llms: {
-    domain: 'https://nuxt.com',
-    title: 'Nuxt Docs',
-    description: 'Nuxt is an open source framework that makes web development intuitive and powerful. Create performant and production-grade full-stack web apps and websites with confidence.',
+    domain: 'https://riobaldo.com',
+    title: 'Riobaldo',
+    description: 'Riobaldo is a platform for philosophical and algebraic studies, offering comprehensive educational content and resources for advanced learning.',
     full: {
-      title: 'Nuxt Docs',
-      description: 'The complete Nuxt documentation and blog posts written in Markdown (MDC syntax).'
+      title: 'Riobaldo',
+      description: 'Platform for philosophical and algebraic studies with complete documentation and educational content.'
     }
-  },
-  turnstile: {
-    siteKey: '0x4AAAAAAAP2vNBsTBT3ucZi'
   },
   twoslash: {
     floatingVueOptions: {

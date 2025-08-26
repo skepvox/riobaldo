@@ -14,7 +14,7 @@ function _useHeaderLinks() {
       active: route.path.startsWith(to),
       children: [{
         label: 'Get Started',
-        description: 'Learn how to get started with Nuxt to build your first app.',
+        description: 'Learn how to get started with Riobaldo to explore philosophical and algebraic concepts.',
         icon: 'i-lucide-rocket',
         to: `${to}/getting-started`,
         active: route.path.startsWith(`${to}/getting-started`)
@@ -26,7 +26,7 @@ function _useHeaderLinks() {
         active: route.path.startsWith(`${to}/guide`)
       }, {
         label: 'API',
-        description: 'Explore the Nuxt components, composables, utilities and more.',
+        description: 'Explore the Riobaldo components, composables, utilities and more.',
         icon: 'i-lucide-code-xml',
         to: `${to}/api`,
         active: route.path.startsWith(`${to}/api`)
@@ -51,12 +51,12 @@ function _useHeaderLinks() {
       active: route.path.startsWith('/modules') || route.path.startsWith('/deploy'),
       children: [{
         label: 'Modules',
-        description: 'Supercharge your Nuxt project with modules.',
+        description: 'Supercharge your Riobaldo project with modules.',
         icon: 'i-lucide-puzzle',
         to: '/modules'
       }, {
         label: 'Hosting',
-        description: 'Deploy your Nuxt project anywhere.',
+        description: 'Deploy your Riobaldo project anywhere.',
         icon: 'i-lucide-rocket',
         to: '/deploy'
       }]
@@ -69,20 +69,20 @@ function _useHeaderLinks() {
       children: [{
         label: 'Templates',
         icon: 'i-lucide-app-window',
-        description: 'Start your next project with a Nuxt template.',
+        description: 'Start your next project with a Riobaldo template.',
         to: '/templates'
       }, {
         label: 'Video Courses',
-        description: 'Learn Nuxt by watching video courses.',
+        description: 'Learn Riobaldo by watching video courses.',
         icon: 'i-lucide-graduation-cap',
         to: '/video-courses'
       }, {
         label: 'Showcase',
-        description: 'Discover and explore projects built with Nuxt.',
+        description: 'Discover and explore projects built with Riobaldo.',
         icon: 'i-lucide-presentation',
         to: '/showcase'
       }, {
-        label: 'Nuxt Certification',
+        label: 'Riobaldo Certification',
         description: 'Obtain your Certification of Competence.',
         icon: 'i-lucide-medal',
         to: 'https://certification.nuxt.com',
@@ -93,9 +93,9 @@ function _useHeaderLinks() {
       icon: 'i-lucide-sparkle',
       search: false,
       children: [{
-        label: 'Nuxt UI Pro',
+        label: 'Riobaldo UI Pro',
         to: 'https://ui.nuxt.com/pro?utm_source=nuxt-website&utm_medium=header',
-        description: 'Build faster with premium components for Vue or Nuxt.',
+        description: 'Build faster with premium components for Vue or Riobaldo.',
         icon: 'i-lucide-panels-top-left',
         target: '_blank'
       }, {

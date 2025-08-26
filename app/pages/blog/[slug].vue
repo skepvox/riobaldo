@@ -25,11 +25,11 @@ const title = article.value.seo?.title || article.value.title
 const description = article.value.seo?.description || article.value.description
 
 useSeoMeta({
-  titleTemplate: '%s · Nuxt Blog',
+  titleTemplate: '%s · Riobaldo Blog',
   title,
   description,
   ogDescription: description,
-  ogTitle: `${title} · Nuxt Blog`
+  ogTitle: `${title} · Riobaldo Blog`
 })
 
 if (article.value.image) {
@@ -45,7 +45,7 @@ if (article.value.image) {
 function formatSocialIntentQueryText(handle: string | undefined): string {
   const credit = handle ? ` by @${handle}` : ''
   const body = article.value.title + credit
-  const link = `https://nuxt.com${article.value.path}`
+  const link = `https://riobaldo.com${article.value.path}`
   return encodeURIComponent(`${body}\n\n${link}`)
 }
 
@@ -61,7 +61,7 @@ const socialLinks = computed(() =>
         {
           label: 'LinkedIn',
           icon: 'i-simple-icons-linkedin',
-          to: `https://www.linkedin.com/sharing/share-offsite/?url=https://nuxt.com${article.value.path}`
+          to: `https://www.linkedin.com/sharing/share-offsite/?url=https://riobaldo.com${article.value.path}`
         },
         {
           label: 'Bluesky',
@@ -77,14 +77,14 @@ const socialLinks = computed(() =>
 )
 
 function copyLink() {
-  copy(`https://nuxt.com${article.value?.path || '/'}`, { title: 'Link copied to clipboard', icon: 'i-lucide-copy-check' })
+  copy(`https://riobaldo.com${article.value?.path || '/'}`, { title: 'Link copied to clipboard', icon: 'i-lucide-copy-check' })
 }
 
 const links = [
   {
     icon: 'i-lucide-pen',
     label: 'Edit this article',
-    to: `https://github.com/nuxt/nuxt.com/edit/main/content/${article.value.stem}.md`,
+    to: `https://github.com/riobaldo/riobaldo.com/edit/main/content/${article.value.stem}.md`,
     target: '_blank'
   }, {
     icon: 'i-lucide-star',
