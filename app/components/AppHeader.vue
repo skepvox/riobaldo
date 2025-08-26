@@ -7,9 +7,6 @@ const route = useRoute()
 const stats = useStats()
 const { copy } = useClipboard()
 const { headerLinks } = useHeaderLinks()
-const { version } = useDocsVersion()
-
-const { tags } = useDocsTags()
 
 const latestVersion = computed(() => {
   const versionMatch = stats.value?.version?.match(/\d+\.\d+/)
@@ -17,18 +14,14 @@ const latestVersion = computed(() => {
 })
 
 const mobileDocsVersion = computed(() =>
-  route.path.startsWith('/docs')
-    ? version.value.shortTag !== 'v4'
-      ? `${version.value.shortTag} (${tags[version.value.shortTag]})`
-      : version.value.shortTag
-    : undefined
+  route.path.startsWith('/docs') ? 'v4' : undefined
 )
 
 const mobileNavigation = computed<ContentNavigationItem[]>(() => {
   // Show Migration and Bridge on mobile only when user is reading them
-  const docsLink = navigation.value.find(link => link.path === version.value.path)
-  if (docsLink && !route.path.startsWith(`${version.value.path}/bridge`) && !route.path.startsWith(`${version.value.path}/migration`)) {
-    docsLink.children = docsLink.children?.filter(link => ![`${version.value.path}/bridge`, `${version.value.path}/migration`].includes(link.path as string)) || []
+  const docsLink = navigation.value.find(link => link.path === '/docs')
+  if (docsLink && !route.path.startsWith('/docs/bridge') && !route.path.startsWith('/docs/migration')) {
+    docsLink.children = docsLink.children?.filter(link => !['/docs/bridge', '/docs/migration'].includes(link.path as string)) || []
   }
 
   // Get ethos navigation
@@ -98,7 +91,7 @@ const logoContextMenuItems = [
             </UBadge>
           </UTooltip>
 
-          <UBadge v-if="mobileDocsVersion" variant="subtle" size="sm" class="block md:hidden -mb-[2px] rounded font-semibold text-[12px]/3" :color="version.tagColor">
+          <UBadge v-if="mobileDocsVersion" variant="subtle" size="sm" class="block md:hidden -mb-[2px] rounded font-semibold text-[12px]/3" color="info">
             {{ mobileDocsVersion }}
           </UBadge>
         </NuxtLink>

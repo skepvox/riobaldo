@@ -8,39 +8,34 @@ useSeoMeta({
 
 defineProps<{ error: NuxtError }>()
 
-const { version } = useDocsVersion()
 const { searchGroups, searchLinks, searchTerm } = useNavigation()
 const { fetchList } = useModules()
 
 const [{ data: navigation }, { data: files }] = await Promise.all([
   useAsyncData('navigation', () => {
     return Promise.all([
-      queryCollectionNavigation('docsv3', ['titleTemplate']),
-      queryCollectionNavigation('docsv4', ['titleTemplate']).then(data => data[0]?.children),
+      queryCollectionNavigation('docs'),
       queryCollectionNavigation('blog')
     ])
   }, {
-    transform: data => data.flat(),
-    watch: [version]
+    transform: data => data.flat()
   }),
   useLazyAsyncData('search', () => {
     return Promise.all([
-      queryCollectionSearchSections('docsv3'),
-      queryCollectionSearchSections('docsv4'),
+      queryCollectionSearchSections('docs'),
       queryCollectionSearchSections('blog')
     ])
   }, {
     server: false,
-    transform: data => data.flat(),
-    watch: [version]
+    transform: data => data.flat()
   })
 ])
 
 onNuxtReady(() => fetchList())
 
-const versionNavigation = computed(() => navigation.value?.filter(item => item.path === version.value.path || item.path === '/blog') ?? [])
+const versionNavigation = computed(() => navigation.value?.filter(item => item.path === '/docs' || item.path === '/blog') ?? [])
 const versionFiles = computed(() => files.value?.filter((file) => {
-  return (version.value.path === '/docs/4.x' ? file.id.startsWith('/docs/4.x/') : !file.id.startsWith('/docs/4.x')) || file.id.startsWith('/blog/')
+  return file.id.startsWith('/docs/') || file.id.startsWith('/blog/')
 }) ?? [])
 
 provide('navigation', versionNavigation)

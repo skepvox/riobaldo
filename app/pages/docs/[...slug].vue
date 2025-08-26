@@ -13,18 +13,24 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation', ref([]))
 
 const route = useRoute()
 const nuxtApp = useNuxtApp()
-const { version } = useDocsVersion()
 
 const path = computed(() => route.path.replace(/\/$/, ''))
 
+// Get docs navigation - simplified version without versioning
 const asideNavigation = computed(() => {
-  const path = [version.value.path, route.params.slug?.[version.value.path.split('/').length - 2]].filter(Boolean).join('/')
-
-  return navPageFromPath(path, navigation.value)?.children || []
+  const docsPath = '/docs'
+  const currentSection = route.params.slug?.[0] // e.g., 'getting-started'
+  
+  if (currentSection) {
+    const fullPath = `${docsPath}/${currentSection}`
+    return navPageFromPath(fullPath, navigation.value)?.children || []
+  }
+  
+  return navPageFromPath(docsPath, navigation.value)?.children || []
 })
 
 const { headerLinks } = useHeaderLinks()
-const links = computed(() => headerLinks.value.find(link => link.to === version.value.path)?.children ?? [])
+const links = computed(() => headerLinks.value.find(link => link.to === '/docs')?.children ?? [])
 
 function paintResponse() {
   if (import.meta.server) {
@@ -37,10 +43,10 @@ function paintResponse() {
 }
 
 const [{ data: page, status }, { data: surround }] = await Promise.all([
-  useAsyncData(kebabCase(path.value), () => paintResponse().then(() => nuxtApp.static[kebabCase(path.value)] ?? queryCollection(version.value.collection).path(path.value).first()), {
+  useAsyncData(kebabCase(path.value), () => paintResponse().then(() => nuxtApp.static[kebabCase(path.value)] ?? queryCollection('docs').path(path.value).first()), {
     watch: [path]
   }),
-  useAsyncData(`${kebabCase(path.value)}-surround`, () => paintResponse().then(() => nuxtApp.static[`${kebabCase(path.value)}-surround`] ?? queryCollectionItemSurroundings(version.value.collection, path.value, {
+  useAsyncData(`${kebabCase(path.value)}-surround`, () => paintResponse().then(() => nuxtApp.static[`${kebabCase(path.value)}-surround`] ?? queryCollectionItemSurroundings('docs', path.value, {
     fields: ['description']
   })), { watch: [path] })
 ])
@@ -65,17 +71,10 @@ const breadcrumb = computed(() => {
     to: link.to
   }))
 
-  if (path.value.startsWith(`${version.value.path}/bridge`) || path.value.startsWith(`${version.value.path}/migration`)) {
-    links.splice(1, 0, {
-      label: 'Upgrade Guide',
-      to: `${version.value.path}/getting-started/upgrade`
-    })
-  }
-
   return links
 })
 
-const editLink = computed(() => `https://github.com/nuxt/nuxt/edit/${version.value.branch}/${page?.value?.stem?.replace(/docs\/\d\.x/, 'docs')}.${page?.value?.extension}`)
+const editLink = computed(() => `https://github.com/skepvox/riobaldo/edit/main/content${page?.value?.path}.md`)
 
 const communityLinks = [{
   icon: 'i-lucide-heart',
@@ -95,7 +94,7 @@ const communityLinks = [{
 }]
 
 const title = computed(() => page.value?.seo?.title || page.value?.title)
-const titleTemplate = computed(() => `${findTitleTemplate(page, navigation)} ${version.value.shortTag}`)
+const titleTemplate = computed(() => page.value?.titleTemplate || '%s · Docs')
 
 useSeoMeta({
   titleTemplate,
@@ -123,8 +122,6 @@ if (import.meta.server) {
     <UPage>
       <template #left>
         <UPageAside>
-          <VersionSelect />
-          <USeparator type="dashed" class="my-6" />
           <UPageAnchors :links="links" />
           <USeparator type="dashed" class="my-6" />
           <UContentNavigation
@@ -162,10 +159,9 @@ if (import.meta.server) {
         <UPageBody>
           <ContentRenderer v-if="page.body" :value="page" />
           <div>
-            <Feedback :page="page" />
             <USeparator class="mt-6 mb-10">
               <div class="flex items-center gap-2 text-sm text-muted">
-                <UButton size="sm" variant="link" color="neutral" to="https://github.com/nuxt/nuxt/issues/new/choose" target="_blank">
+                <UButton size="sm" variant="link" color="neutral" to="https://github.com/skepvox/riobaldo/issues/new/choose" target="_blank">
                   Report an issue
                 </UButton>
                 or

@@ -1,33 +1,9 @@
 import { defineContentConfig, defineCollection, z } from '@nuxt/content'
 
-const docsV3Source = {
-  cwd: process.env.NUXT_PATH ?? undefined,
-  repository: !process.env.NUXT_PATH ? 'https://github.com/nuxt/nuxt/tree/3.x' : undefined,
+// Simplified docs source - using local content only
+const docsSource = {
   include: 'docs/**/*',
-  exclude: ['docs/**/*.json'],
-  prefix: '/docs/3.x'
-}
-
-const docsV4Source = {
-  cwd: process.env.NUXT_V4_PATH ?? undefined,
-  repository: !process.env.NUXT_V4_PATH ? 'https://github.com/nuxt/nuxt/tree/main' : undefined,
-  include: 'docs/**/*',
-  exclude: ['docs/**/*.json'],
-  prefix: '/docs/4.x'
-}
-
-const examplesV3Source = {
-  cwd: process.env.NUXT_EXAMPLES_PATH ?? undefined,
-  repository: !process.env.NUXT_EXAMPLES_PATH ? 'https://github.com/nuxt/examples' : undefined,
-  include: '.docs/**/*',
-  prefix: '/docs/3.x/4.examples'
-}
-
-const examplesV4Source = {
-  cwd: process.env.NUXT_EXAMPLES_PATH ?? undefined,
-  repository: !process.env.NUXT_EXAMPLES_PATH ? 'https://github.com/nuxt/examples' : undefined,
-  include: '.docs/**/*',
-  prefix: '/docs/4.x/4.examples'
+  exclude: ['docs/**/*.json']
 }
 
 const Image = z.object({
@@ -196,20 +172,14 @@ export default defineContentConfig({
         })
       })
     }),
-    docsv3: defineCollection({
+    docs: defineCollection({
       type: 'page',
-      source: [docsV3Source, examplesV3Source],
+      source: docsSource,
       schema: z.object({
         titleTemplate: z.string().optional(),
-        links: z.array(Button)
-      })
-    }),
-    docsv4: defineCollection({
-      type: 'page',
-      source: [docsV4Source, examplesV4Source],
-      schema: z.object({
-        titleTemplate: z.string().optional(),
-        links: z.array(Button)
+        links: z.array(Button).optional(),
+        title: z.string(),
+        description: z.string().optional()
       })
     }),
     blog: defineCollection({

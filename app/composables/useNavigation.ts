@@ -2,10 +2,9 @@ import { createSharedComposable } from '@vueuse/core'
 
 function _useHeaderLinks() {
   const route = useRoute()
-  const { version } = useDocsVersion()
 
   const headerLinks = computed(() => {
-    const to = version.value.path
+    const to = '/docs'
 
     return [{
       label: 'Docs',
