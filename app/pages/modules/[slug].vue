@@ -46,7 +46,7 @@ const contributors = computed(() => {
     label: contributor.username,
     to: `https://github.com/${contributor.username}`,
     avatar: {
-      provider: 'ipx',
+      provider: 'vercel',
       src: `https://ipx.nuxt.com/f_auto,s_20x20/gh_avatar/${contributor.username}`,
       srcset: `https://ipx.nuxt.com/f_auto,s_40x40/gh_avatar/${contributor.username} 2x`,
       alt: contributor.username
@@ -155,7 +155,7 @@ defineOgImageComponent('Module', {
 
         <div v-for="(maintainer, index) in module.maintainers" :key="maintainer.github" class="flex items-center gap-3">
           <NuxtLink :to="`https://github.com/${maintainer.github}`" target="_blank" class="flex items-center gap-1.5 hover:text-primary">
-            <UAvatar provider="ipx" :src="`https://ipx.nuxt.com/f_auto,s_20x20/gh_avatar/${maintainer.github}`" :srcset="`https://ipx.nuxt.com/f_auto,s_40x40/gh_avatar/${maintainer.github} 2x`" :alt="maintainer.github" size="xs" />
+            <UAvatar provider="vercel" :src="`https://ipx.nuxt.com/f_auto,s_20x20/gh_avatar/${maintainer.github}`" :srcset="`https://ipx.nuxt.com/f_auto,s_40x40/gh_avatar/${maintainer.github} 2x`" :alt="maintainer.github" size="xs" />
             <span class="text-sm font-medium">{{ maintainer.github }}</span>
           </NuxtLink>
 
@@ -199,7 +199,7 @@ defineOgImageComponent('Module', {
                 </template>
 
                 <template #link-leading="{ link }">
-                  <UAvatar v-if="!(link as any).noAvatar" provider="ipx" :src="`https://ipx.nuxt.com/f_auto,s_20x20/gh_avatar/${link.label}`" :srcset="`https://ipx.nuxt.com/f_auto,s_40x40/gh_avatar/${link.label} 2x`" class="size-5" />
+                  <UAvatar v-if="!(link as any).noAvatar" provider="vercel" :src="`https://ipx.nuxt.com/f_auto,s_20x20/gh_avatar/${link.label}`" :srcset="`https://ipx.nuxt.com/f_auto,s_40x40/gh_avatar/${link.label} 2x`" class="size-5" />
                 </template>
               </UPageLinks>
               <USeparator type="dashed" />

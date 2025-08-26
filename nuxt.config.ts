@@ -65,13 +65,11 @@ export default defineNuxtConfig({
   },
   routeRules: {
     // Pre-render
-    '/': { prerender: false }, // Temporarily disabled due to image provider issues
+    '/': { prerender: true }, // Enable prerender for homepage
     // '/blog/rss.xml': { prerender: true }, // Commented out - route doesn't exist
     '/404.html': { prerender: true },
     '/docs/getting-started/introduction': { prerender: true },
     // Redirects
-    '/ethos': { redirect: '/ethos/louis-lavelle/manuel-de-methodologie-dialectique/livre-1/reflexion-et-methode', prerender: false },
-    '/ethos/louis-lavelle': { redirect: '/ethos/louis-lavelle/manuel-de-methodologie-dialectique/livre-1/reflexion-et-methode', prerender: false },
     '/docs': { redirect: '/docs/getting-started/introduction', prerender: false },
     '/docs/getting-started': { redirect: '/docs/getting-started/introduction', prerender: false },
     '/docs/guide/concepts': { redirect: '/docs/guide/concepts/auto-imports', prerender: false },
@@ -105,8 +103,8 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'vercel',
     prerender: {
-      crawlLinks: false,
-      routes: [], // Temporarily disabled prerendering the home page due to image provider issues
+      crawlLinks: true,
+      routes: ['/'], // Enable prerendering for homepage
       autoSubfolderIndex: false
     }
   },

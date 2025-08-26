@@ -83,7 +83,7 @@ const icons = {
               variant="subtle"
             >
               <template #leading>
-                <UAvatar provider="ipx" :src="`https://ipx.nuxt.com/f_auto,s_80x80/gh_avatar/${user.login}`" :srcset="`https://ipx.nuxt.com/f_auto,s_160x160/gh_avatar/${user.login} 2x`" size="3xl" class="mx-auto" />
+                <UAvatar provider="vercel" :src="`https://ipx.nuxt.com/f_auto,s_80x80/gh_avatar/${user.login}`" :srcset="`https://ipx.nuxt.com/f_auto,s_160x160/gh_avatar/${user.login} 2x`" size="3xl" class="mx-auto" />
               </template>
 
               <div class="flex items-center justify-center gap-1">
