@@ -15,4 +15,4 @@ cta:
       size: 'lg'
       color: 'neutral'
       variant: 'subtle'
-      to: '/docs/examples'
+      to: '#'

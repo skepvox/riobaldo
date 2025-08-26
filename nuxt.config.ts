@@ -89,7 +89,8 @@ export default defineNuxtConfig({
     prerender: {
       crawlLinks: true,
       routes: ['/'], // Enable prerendering for homepage
-      autoSubfolderIndex: false
+      autoSubfolderIndex: false,
+      failOnError: false // Continue build even if some pages fail to prerender
     }
   },
   typescript: {

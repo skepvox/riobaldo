@@ -391,7 +391,7 @@ deploy:
   description: One-command deployments and zero-configuration options make it easy to get your Riobaldo platform live. Choose your platform, and let Riobaldo handle the rest, allowing you to focus on creating great educational content rather than managing complex deployments.
   links:
     - label: Learn how to deploy now
-      to: /deploy
+      to: /docs/getting-started/installation
       icon: i-lucide-arrow-right
       color: neutral
       trailing: true
