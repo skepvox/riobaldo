@@ -76,6 +76,7 @@ export default defineNuxtConfig({
     '/docs/guide/going-further/custom-routing': { redirect: '/docs/guide/recipes/custom-routing', prerender: false },
     // Ethos redirects
     '/ethos': { redirect: '/ethos/louis-lavelle/manual-de-metodologia-dialetica/livro-1/reflexao-e-metodo', prerender: false },
+    '/ethos/manuel-de-methodologie-dialectique': { redirect: '/ethos/manual-de-metodologia-dialetica/reflexao-e-metodo', prerender: false },
     '/ethos/louis-lavelle': { redirect: '/ethos/louis-lavelle/manual-de-metodologia-dialetica/livro-1/reflexao-e-metodo', prerender: false },
     '/ethos/louis-lavelle/manual-de-metodologia-dialetica': { redirect: '/ethos/louis-lavelle/manual-de-metodologia-dialetica/livro-1/reflexao-e-metodo', prerender: false },
     '/ethos/louis-lavelle/manual-de-metodologia-dialetica/livro-1': { redirect: '/ethos/louis-lavelle/manual-de-metodologia-dialetica/livro-1/reflexao-e-metodo', prerender: false },

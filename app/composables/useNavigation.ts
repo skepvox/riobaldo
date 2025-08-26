@@ -87,7 +87,7 @@ function _useHeaderLinks() {
       search: false,
       active: route.path.startsWith('/ethos'),
       children: [{
-        label: 'Louis Lavelle',
+        label: 'Lavelle',
         description: 'Obras filosóficas e textos de Louis Lavelle',
         icon: 'i-lucide-user-circle',
         to: '/ethos/louis-lavelle/manual-de-metodologia-dialetica/livro-1/reflexao-e-metodo',
@@ -257,11 +257,11 @@ const _useNavigation = () => {
           icon: hosting.logoIcon,
           avatar: hosting.logoSrc
             ? {
-                src: hosting.logoSrc,
-                ui: {
-                  root: 'rounded-none bg-transparent'
-                }
+              src: hosting.logoSrc,
+              ui: {
+                root: 'rounded-none bg-transparent'
               }
+            }
             : undefined,
           to: hosting.path
         }))
