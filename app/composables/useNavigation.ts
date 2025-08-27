@@ -87,11 +87,17 @@ function _useHeaderLinks() {
       search: false,
       active: route.path.startsWith('/ethos'),
       children: [{
-        label: 'Lavelle',
+        label: 'Louis Lavelle',
         description: 'Obras filosóficas e textos de Louis Lavelle',
-        icon: 'i-lucide-user-circle',
-        to: '/ethos/louis-lavelle/manual-de-metodologia-dialetica/livro-1/reflexao-e-metodo',
+        icon: 'i-lucide-shell',
+        to: '/ethos/louis-lavelle/manuel-de-methodologie-dialectique/reflexion-et-methode',
         active: route.path.startsWith('/ethos/louis-lavelle')
+      }, {
+        label: 'Μᾶρκος Αὐρήλιος',
+        description: 'Obras filosóficas e textos de Louis Lavelle',
+        icon: 'i-lucide-anchor',
+        to: '/ethos/marcus-aurelius/ta-eis-heauton/biblio-alpha',
+        active: route.path.startsWith('/ethos/marcus-aurelius')
       }]
     }]
   })
