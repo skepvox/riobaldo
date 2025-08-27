@@ -81,7 +81,11 @@ export default defineNuxtConfig({
     '/ethos/louis-lavelle/manual-de-metodologia-dialetica': { redirect: '/ethos/louis-lavelle/manual-de-metodologia-dialetica/livro-1/reflexao-e-metodo', prerender: false },
     '/ethos/louis-lavelle/manual-de-metodologia-dialetica/livro-1': { redirect: '/ethos/louis-lavelle/manual-de-metodologia-dialetica/livro-1/reflexao-e-metodo', prerender: false },
     '/ethos/louis-lavelle/manuel-de-methodologie-dialectique': { redirect: '/ethos/louis-lavelle/manuel-de-methodologie-dialectique/livre-1/reflexion-et-methode', prerender: false },
-    '/ethos/louis-lavelle/manuel-de-methodologie-dialectique/livre-1': { redirect: '/ethos/louis-lavelle/manuel-de-methodologie-dialectique/livre-1/reflexion-et-methode', prerender: false }
+    '/ethos/louis-lavelle/manuel-de-methodologie-dialectique/livre-1': { redirect: '/ethos/louis-lavelle/manuel-de-methodologie-dialectique/livre-1/reflexion-et-methode', prerender: false },
+    // Marcus Aurelius redirects
+    '/ethos/marcus-aurelius': { redirect: '/ethos/marcus-aurelius/para-si-mesmo/livro-01', prerender: false },
+    '/ethos/marcus-aurelius/para-si-mesmo': { redirect: '/ethos/marcus-aurelius/para-si-mesmo/livro-01', prerender: false },
+    '/ethos/marcus-aurelius/ta-eis-heauton': { redirect: '/ethos/marcus-aurelius/ta-eis-heauton/biblio-alpha', prerender: false }
   },
   sourcemap: true,
   compatibilityDate: '2025-07-17',
