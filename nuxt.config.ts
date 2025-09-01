@@ -74,18 +74,24 @@ export default defineNuxtConfig({
     '/docs/guide/recipes': { redirect: '/docs/guide/recipes/custom-routing', prerender: false },
     '/docs/guide/best-practices': { redirect: '/docs/guide/best-practices/performance', prerender: false },
     '/docs/guide/going-further/custom-routing': { redirect: '/docs/guide/recipes/custom-routing', prerender: false },
-    // Ethos redirects
-    '/ethos': { redirect: '/ethos/louis-lavelle/manual-de-metodologia-dialetica/livro-1/reflexao-e-metodo', prerender: false },
-    '/ethos/manuel-de-methodologie-dialectique': { redirect: '/ethos/manual-de-metodologia-dialetica/reflexao-e-metodo', prerender: false },
-    '/ethos/louis-lavelle': { redirect: '/ethos/louis-lavelle/manual-de-metodologia-dialetica/livro-1/reflexao-e-metodo', prerender: false },
-    '/ethos/louis-lavelle/manual-de-metodologia-dialetica': { redirect: '/ethos/louis-lavelle/manual-de-metodologia-dialetica/livro-1/reflexao-e-metodo', prerender: false },
-    '/ethos/louis-lavelle/manual-de-metodologia-dialetica/livro-1': { redirect: '/ethos/louis-lavelle/manual-de-metodologia-dialetica/livro-1/reflexao-e-metodo', prerender: false },
-    '/ethos/louis-lavelle/manuel-de-methodologie-dialectique': { redirect: '/ethos/louis-lavelle/manuel-de-methodologie-dialectique/livre-1/reflexion-et-methode', prerender: false },
-    '/ethos/louis-lavelle/manuel-de-methodologie-dialectique/livre-1': { redirect: '/ethos/louis-lavelle/manuel-de-methodologie-dialectique/livre-1/reflexion-et-methode', prerender: false },
+    // Louis Lavelle redirects
+    '/louis-lavelle': { redirect: '/louis-lavelle/manual-de-metodologia-dialetica/livro-01/reflexao-e-metodo', prerender: false },
+    '/louis-lavelle/manual-de-metodologia-dialetica': { redirect: '/louis-lavelle/manual-de-metodologia-dialetica/livro-01/reflexao-e-metodo', prerender: false },
+    '/louis-lavelle/manual-de-metodologia-dialetica/livro-01': { redirect: '/louis-lavelle/manual-de-metodologia-dialetica/livro-01/reflexao-e-metodo', prerender: false },
+    '/louis-lavelle/manual-de-metodologia-dialetica/livro-02': { redirect: '/louis-lavelle/manual-de-metodologia-dialetica/livro-02/a-dialetica-da-consciencia', prerender: false },
+    '/louis-lavelle/manual-de-metodologia-dialetica/livro-03': { redirect: '/louis-lavelle/manual-de-metodologia-dialetica/livro-03/descoberta-e-significacao', prerender: false },
+    '/louis-lavelle/manuel-de-methodologie-dialectique': { redirect: '/louis-lavelle/manuel-de-methodologie-dialectique/livre-01/reflexion-et-methode', prerender: false },
+    '/louis-lavelle/manuel-de-methodologie-dialectique/livre-01': { redirect: '/louis-lavelle/manuel-de-methodologie-dialectique/livre-01/reflexion-et-methode', prerender: false },
+    '/louis-lavelle/manuel-de-methodologie-dialectique/livre-02': { redirect: '/louis-lavelle/manuel-de-methodologie-dialectique/livre-02/la-dialectique-de-la-conscience', prerender: false },
+    '/louis-lavelle/manuel-de-methodologie-dialectique/livre-03': { redirect: '/louis-lavelle/manuel-de-methodologie-dialectique/livre-03/decouverte-et-signification', prerender: false },
     // Marcus Aurelius redirects
-    '/ethos/marcus-aurelius': { redirect: '/ethos/marcus-aurelius/para-si-mesmo/livro-01', prerender: false },
-    '/ethos/marcus-aurelius/para-si-mesmo': { redirect: '/ethos/marcus-aurelius/para-si-mesmo/livro-01', prerender: false },
-    '/ethos/marcus-aurelius/ta-eis-heauton': { redirect: '/ethos/marcus-aurelius/ta-eis-heauton/biblio-alpha', prerender: false }
+    '/marcus-aurelius': { redirect: '/marcus-aurelius/para-si-mesmo/livro-01', prerender: false },
+    '/marcus-aurelius/para-si-mesmo': { redirect: '/marcus-aurelius/para-si-mesmo/livro-01', prerender: false },
+    '/marcus-aurelius/ta-eis-heauton': { redirect: '/marcus-aurelius/ta-eis-heauton/biblio-alpha', prerender: false },
+    // Legacy ethos redirects
+    '/ethos': { redirect: '/louis-lavelle', prerender: false },
+    '/ethos/louis-lavelle': { redirect: '/louis-lavelle', prerender: false },
+    '/ethos/marcus-aurelius': { redirect: '/marcus-aurelius', prerender: false }
   },
   sourcemap: true,
   compatibilityDate: '2025-07-17',

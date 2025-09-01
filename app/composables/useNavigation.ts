@@ -7,6 +7,54 @@ function _useHeaderLinks() {
     const to = '/docs'
 
     return [{
+      label: 'Home',
+      icon: 'i-lucide-home',
+      to: '/',
+      search: false,
+      active: route.path === '/'
+    }, {
+      label: 'Louis Lavelle',
+      icon: 'i-lucide-user',
+      to: '/louis-lavelle',
+      search: false,
+      active: route.path.startsWith('/louis-lavelle'),
+      children: [{
+        label: 'Manuel de Méthodologie Dialectique',
+        description: 'Obra filosófica em francês',
+        icon: 'i-lucide-book-marked',
+        to: '/louis-lavelle/manuel-de-methodologie-dialectique/livre-01/reflexion-et-methode',
+        active: route.path.includes('/manuel-de-methodologie-dialectique')
+      }, {
+        label: 'Manual de Metodologia Dialética',
+        description: 'Tradução para o português',
+        icon: 'i-lucide-book-open',
+        to: '/louis-lavelle/manual-de-metodologia-dialetica/livro-01/reflexao-e-metodo',
+        active: route.path.includes('/manual-de-metodologia-dialetica')
+      }]
+    }, {
+      label: 'Μᾶρκος Αὐρήλιος',
+      icon: 'i-lucide-user',
+      to: '/marcus-aurelius',
+      search: false,
+      active: route.path.startsWith('/marcus-aurelius'),
+      children: [{
+        label: 'Τὰ εἰς ἑαυτόν',
+        description: 'Texto original em grego',
+        icon: 'i-lucide-scroll',
+        to: '/marcus-aurelius/ta-eis-heauton/biblio-alpha',
+        active: route.path.includes('/ta-eis-heauton')
+      }, {
+        label: 'Para Si Mesmo',
+        description: 'Tradução para o português',
+        icon: 'i-lucide-book-open',
+        to: '/marcus-aurelius/para-si-mesmo/livro-01',
+        active: route.path.includes('/para-si-mesmo')
+      }]
+    }, {
+      label: 'Blog',
+      icon: 'i-lucide-newspaper',
+      to: '/blog'
+    }, {
       label: 'Docs',
       icon: 'i-lucide-book-marked',
       to,
@@ -76,29 +124,6 @@ function _useHeaderLinks() {
         icon: 'i-lucide-rocket',
         target: '_blank'
       }]
-    }, {
-      label: 'Blog',
-      icon: 'i-lucide-newspaper',
-      to: '/blog'
-    }, {
-      label: 'Ethos',
-      icon: 'i-lucide-book-open',
-      to: '/ethos',
-      search: false,
-      active: route.path.startsWith('/ethos'),
-      children: [{
-        label: 'Louis Lavelle',
-        description: 'Obras filosóficas e textos de Louis Lavelle',
-        icon: 'i-lucide-shell',
-        to: '/ethos/louis-lavelle/manuel-de-methodologie-dialectique/reflexion-et-methode',
-        active: route.path.startsWith('/ethos/louis-lavelle')
-      }, {
-        label: 'Μᾶρκος Αὐρήλιος',
-        description: 'Obras filosóficas e textos de Louis Lavelle',
-        icon: 'i-lucide-anchor',
-        to: '/ethos/marcus-aurelius/ta-eis-heauton/biblio-alpha',
-        active: route.path.startsWith('/ethos/marcus-aurelius')
-      }]
     }]
   })
 
@@ -161,9 +186,17 @@ const _useNavigation = () => {
       }
       return link
     }).filter((link): link is NonNullable<typeof link> => Boolean(link)), {
-      label: 'Ethos',
-      icon: 'i-lucide-book-open',
-      to: '/ethos'
+      label: 'Home',
+      icon: 'i-lucide-home',
+      to: '/'
+    }, {
+      label: 'Louis Lavelle',
+      icon: 'i-lucide-user',
+      to: '/louis-lavelle'
+    }, {
+      label: 'Marcus Aurelius',
+      icon: 'i-lucide-user',
+      to: '/marcus-aurelius'
     }, {
       label: 'Newsletter',
       icon: 'i-lucide-mail',
@@ -263,11 +296,11 @@ const _useNavigation = () => {
           icon: hosting.logoIcon,
           avatar: hosting.logoSrc
             ? {
-              src: hosting.logoSrc,
-              ui: {
-                root: 'rounded-none bg-transparent'
+                src: hosting.logoSrc,
+                ui: {
+                  root: 'rounded-none bg-transparent'
+                }
               }
-            }
             : undefined,
           to: hosting.path
         }))

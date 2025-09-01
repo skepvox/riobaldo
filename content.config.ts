@@ -318,9 +318,20 @@ export default defineContentConfig({
         })
       })
     }),
-    ethos: defineCollection({
+    louisLavelle: defineCollection({
       type: 'page',
-      source: 'ethos/**/*',
+      source: '1.louis-lavelle/**/*',
+      schema: z.object({
+        title: z.string(),
+        description: z.string().optional(),
+        author: z.string().optional(),
+        date: z.string().date().optional(),
+        tags: z.array(z.string()).optional()
+      })
+    }),
+    marcusAurelius: defineCollection({
+      type: 'page',
+      source: '2.marcus-aurelius/**/*',
       schema: z.object({
         title: z.string(),
         description: z.string().optional(),

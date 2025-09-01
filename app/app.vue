@@ -10,7 +10,8 @@ const [{ data: navigation }, { data: files }] = await Promise.all([
     return Promise.all([
       queryCollectionNavigation('docs'),
       queryCollectionNavigation('blog'),
-      queryCollectionNavigation('ethos')
+      queryCollectionNavigation('louisLavelle'),
+      queryCollectionNavigation('marcusAurelius')
     ])
   }, {
     transform: data => data.flat()
@@ -19,7 +20,8 @@ const [{ data: navigation }, { data: files }] = await Promise.all([
     return Promise.all([
       queryCollectionSearchSections('docs'),
       queryCollectionSearchSections('blog'),
-      queryCollectionSearchSections('ethos')
+      queryCollectionSearchSections('louisLavelle'),
+      queryCollectionSearchSections('marcusAurelius')
     ])
   }, {
     server: false,
@@ -56,9 +58,9 @@ if (import.meta.server) {
   })
 }
 
-const versionNavigation = computed(() => navigation.value?.filter(item => item.path === '/docs' || item.path === '/blog' || item.path === '/ethos') ?? [])
+const versionNavigation = computed(() => navigation.value?.filter(item => item.path === '/docs' || item.path === '/blog' || item.path === '/louis-lavelle' || item.path === '/marcus-aurelius') ?? [])
 const versionFiles = computed(() => files.value?.filter((file) => {
-  return file.id.startsWith('/docs/') || file.id.startsWith('/blog/') || file.id.startsWith('/ethos/')
+  return file.id.startsWith('/docs/') || file.id.startsWith('/blog/') || file.id.startsWith('/louis-lavelle/') || file.id.startsWith('/marcus-aurelius/')
 }) ?? [])
 
 provide('navigation', versionNavigation)

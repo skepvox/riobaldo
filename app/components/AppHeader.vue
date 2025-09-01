@@ -8,22 +8,48 @@ const { copy } = useClipboard()
 const { headerLinks } = useHeaderLinks()
 
 const mobileNavigation = computed<ContentNavigationItem[]>(() => {
+  const louisLavelleLink = navigation.value.find(link => link.path === '/louis-lavelle')
+  const marcusAureliusLink = navigation.value.find(link => link.path === '/marcus-aurelius')
   const docsLink = navigation.value.find(link => link.path === '/docs')
-  const ethosLink = navigation.value.find(link => link.path === '/ethos')
+
+  // Get Resources and Products from headerLinks
+  const resourcesLink = headerLinks.value.find(link => link.label === 'Resources')
+  const productsLink = headerLinks.value.find(link => link.label === 'Products')
 
   return [
+    {
+      title: 'Home',
+      path: '/',
+      icon: 'i-lucide-home'
+    } as ContentNavigationItem,
+    louisLavelleLink,
+    marcusAureliusLink,
+    {
+      title: 'Blog',
+      path: '/blog',
+      icon: 'i-lucide-newspaper'
+    } as ContentNavigationItem,
     docsLink,
-    ethosLink,
-    ...headerLinks.value.slice(1).filter(link => !['Docs', 'Ethos'].includes(link.label)).map(link => ({
-      ...link,
-      title: link.label,
-      path: link.to,
-      children: link.children?.map(child => ({
+    resourcesLink && {
+      ...resourcesLink,
+      title: resourcesLink.label,
+      path: resourcesLink.to,
+      children: resourcesLink.children?.map((child: any) => ({
         ...child,
         title: child.label,
         path: child.to
       }))
-    } as ContentNavigationItem))
+    } as ContentNavigationItem,
+    productsLink && {
+      ...productsLink,
+      title: productsLink.label,
+      path: productsLink.to,
+      children: productsLink.children?.map((child: any) => ({
+        ...child,
+        title: child.label,
+        path: child.to
+      }))
+    } as ContentNavigationItem
   ].filter((item): item is ContentNavigationItem => Boolean(item))
 })
 
