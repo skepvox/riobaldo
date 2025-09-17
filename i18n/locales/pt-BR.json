@@ -1,0 +1,222 @@
+{
+  "app": {
+    "siteName": "Riobaldo",
+    "tagline": "Filosofia e Matemática",
+    "defaultSeoTitle": "Riobaldo: Plataforma para Estudos Filosóficos e Algébricos",
+    "defaultSeoDescription": "Explore filosofia e álgebra com Riobaldo, a plataforma educacional completa para estudantes e educadores do ensino médio."
+  },
+  "layout": {
+    "banner": {
+      "title": "Faça o curso oficial de Nuxt 4 e economize US$ 50 com o código NUXT4RDY",
+      "cta": "Resgatar desconto"
+    }
+  },
+  "header": {
+    "contextMenu": {
+      "copyLogo": "Copiar logo como SVG",
+      "copiedTitle": "Logotipo Riobaldo copiado como SVG",
+      "copiedDescription": "Você já pode colá-lo no seu projeto"
+    },
+    "aria": {
+      "backToHome": "Voltar para a página inicial"
+    },
+    "tooltip": {
+      "search": "Pesquisar",
+      "locale": "Alterar idioma"
+    }
+  },
+  "navigation": {
+    "home": {
+      "label": "Início"
+    },
+    "louisLavelle": {
+      "label": "Louis Lavelle",
+      "children": {
+        "manuel": {
+          "label": "Manuel de Méthodologie Dialectique",
+          "description": "Obra filosófica em francês"
+        },
+        "manual": {
+          "label": "Manual de Metodologia Dialética",
+          "description": "Tradução para o português"
+        }
+      }
+    },
+    "marcusAurelius": {
+      "label": "Marco Aurélio",
+      "children": {
+        "original": {
+          "label": "Τὰ εἰς ἑαυτόν",
+          "description": "Texto original em grego"
+        },
+        "translation": {
+          "label": "Para Si Mesmo",
+          "description": "Tradução para o português"
+        }
+      }
+    },
+    "blog": {
+      "label": "Blog"
+    },
+    "docs": {
+      "label": "Documentação",
+      "children": {
+        "gettingStarted": {
+          "label": "Primeiros Passos",
+          "description": "Aprenda como começar com o Riobaldo para explorar conceitos filosóficos e algébricos."
+        },
+        "guide": {
+          "label": "Guia",
+          "description": "Conheça os conceitos-chave, a estrutura de diretórios e as melhores práticas."
+        }
+      }
+    },
+    "resources": {
+      "label": "Recursos",
+      "children": {
+        "templates": {
+          "label": "Templates",
+          "description": "Inicie seu próximo projeto com um template do Riobaldo."
+        },
+        "videoCourses": {
+          "label": "Cursos em Vídeo",
+          "description": "Aprenda Riobaldo assistindo a cursos em vídeo."
+        },
+        "showcase": {
+          "label": "Showcase",
+          "description": "Descubra projetos construídos com Riobaldo."
+        },
+        "certification": {
+          "label": "Certificação Riobaldo",
+          "description": "Obtenha sua Certificação de Competência."
+        }
+      }
+    },
+    "products": {
+      "label": "Produtos",
+      "children": {
+        "uiPro": {
+          "label": "Riobaldo UI Pro",
+          "description": "Construa mais rápido com componentes premium para Vue ou Riobaldo."
+        },
+        "studio": {
+          "label": "Nuxt Studio",
+          "description": "Edite seu site Nuxt Content com um editor visual."
+        },
+        "hub": {
+          "label": "NuxtHub",
+          "description": "Implemente e gerencie apps Nuxt full-stack que escalam."
+        }
+      }
+    },
+    "newsletter": {
+      "label": "Newsletter"
+    },
+    "search": {
+      "askAiLabel": "Perguntar à IA",
+      "askAiPrompt": "Pergunte à IA sobre \"{query}\"",
+      "groups": {
+        "ai": "IA",
+        "modules": "Módulos",
+        "hosting": "Hospedagem"
+      }
+    },
+    "designKit": {
+      "title": "Kit de Design",
+      "description": "Recursos de design para o Riobaldo estão a caminho.",
+      "placeholder": "Estamos preparando recursos de design para o Riobaldo. Volte em breve!"
+    },
+    "footer": {
+      "community": {
+        "label": "Comunidade",
+        "links": {
+          "nuxters": "Nuxters",
+          "designKit": "Design Kit"
+        }
+      },
+      "products": {
+        "label": "Produtos",
+        "links": {
+          "uiPro": "Nuxt UI Pro",
+          "studio": "Nuxt Studio",
+          "hub": "NuxtHub"
+        }
+      }
+    }
+  },
+  "home": {
+    "meta": {
+      "title": "Riobaldo - Filosofia e Matemática",
+      "description": "Plataforma educacional para o estudo da filosofia e da matemática no ensino médio."
+    },
+    "hero": {
+      "description": "Explore as obras completas de Louis Lavelle e aprofunde seus conhecimentos em filosofia e álgebra. Uma plataforma educacional pensada para estudantes e professores do ensino médio.",
+      "ctaLavelle": "Explorar Lavelle",
+      "ctaAlgebra": "Estudar Álgebra"
+    },
+    "featured": {
+      "title": "Obras Disponíveis",
+      "description": "Comece sua exploração com estes textos fundamentais de Louis Lavelle, totalmente transcritos e anotados.",
+      "readWork": "Ler a obra"
+    },
+    "stats": {
+      "totalLabel": "Obras de Lavelle",
+      "availableLabel": "Disponíveis",
+      "pendingLabel": "Em transcrição",
+      "categoriesLabel": "Categorias"
+    },
+    "bibliography": {
+      "title": "Bibliografia de Louis Lavelle",
+      "description": "Descubra a evolução cronológica da obra filosófica de Louis Lavelle, das primeiras teses às publicações póstumas.",
+      "cta": "Explorar todas as obras"
+    },
+    "features": {
+      "title": "Por que Riobaldo?",
+      "description": "Uma plataforma pensada para enriquecer o aprendizado de filosofia e matemática.",
+      "items": {
+        "education": {
+          "title": "Recursos Pedagógicos",
+          "description": "Acesso completo às obras filosóficas e exercícios de matemática alinhados ao currículo do ensino médio."
+        },
+        "originalTexts": {
+          "title": "Textos Originais",
+          "description": "Transcrições fiéis das obras de Louis Lavelle com anotações e contextualizações."
+        },
+        "structuredProgress": {
+          "title": "Progressão Estruturada",
+          "description": "Percursos progressivos em álgebra com exercícios resolvidos e demonstrações."
+        },
+        "advancedSearch": {
+          "title": "Busca Avançada",
+          "description": "Encontre rapidamente conceitos filosóficos e teoremas matemáticos."
+        },
+        "community": {
+          "title": "Comunidade Educativa",
+          "description": "Conecte-se com estudantes e professores apaixonados por filosofia e matemática."
+        },
+        "mobileAccess": {
+          "title": "Acesso Mobile",
+          "description": "Consulte os recursos de qualquer dispositivo, a qualquer momento."
+        }
+      }
+    },
+    "cta": {
+      "title": "Comece sua exploração filosófica",
+      "description": "Junte-se a milhares de estudantes e professores que usam o Riobaldo para aprofundar seus estudos de filosofia e matemática.",
+      "primary": "Descobrir Lavelle",
+      "secondary": "Explorar Álgebra"
+    }
+  },
+  "footer": {
+    "copyright": "Direitos autorais © {start}-{year} {site}",
+    "license": "Licença MIT",
+    "social": {
+      "instagram": "Skepvox no Instagram",
+      "x": "Skepvox no X",
+      "bluesky": "Skepvox no BlueSky",
+      "linkedin": "Skepvox no LinkedIn",
+      "discord": "Skepvox no Discord",
+      "github": "Skepvox no GitHub"
+    }
+  }
+}

@@ -3,18 +3,20 @@ definePageMeta({
   heroBackground: '-z-10'
 })
 
-const title = 'Riobaldo - Philosophie et Mathématiques'
-const description = 'Plateforme éducative pour l\'étude de la philosophie et des mathématiques au lycée'
+const { t } = useI18n()
+
+const seoTitle = computed(() => t('home.meta.title'))
+const seoDescription = computed(() => t('home.meta.description'))
 
 useSeoMeta({
-  title,
-  description,
-  ogTitle: title,
-  ogDescription: description
+  title: () => seoTitle.value,
+  description: () => seoDescription.value,
+  ogTitle: () => seoTitle.value,
+  ogDescription: () => seoDescription.value
 })
 
 // Import the bibliography data directly
-import bibliographyData from '../../content/1.louis-lavelle/bibliography.json'
+import bibliographyData from '../../content/louis-lavelle/bibliography.json'
 
 // Create a ref for the bibliography data
 const bibliography = ref(bibliographyData)
@@ -72,25 +74,24 @@ const featuredWorks = computed(() => {
       }"
     >
       <template #title>
-        Riobaldo<br>
-        <span class="text-primary">Philosophie & Mathématiques</span>
+        {{ t('app.siteName') }}<br>
+        <span class="text-primary">{{ t('app.tagline') }}</span>
       </template>
 
       <template #description>
         <p class="text-lg">
-          Explorez les œuvres complètes de Louis Lavelle et approfondissez vos connaissances
-          en philosophie et en algèbre. Une plateforme éducative conçue pour les lycéens et les enseignants.
+          {{ t('home.hero.description') }}
         </p>
       </template>
 
       <template #links>
         <div class="flex flex-col gap-4">
           <div class="flex items-center flex-wrap gap-2">
-            <UButton to="/1.louis-lavelle" size="xl">
-              Explorer Lavelle
+            <UButton to="/louis-lavelle" size="xl">
+              {{ t('home.hero.ctaLavelle') }}
             </UButton>
-            <UButton to="/2.algebre" size="xl" color="neutral" variant="subtle">
-              Étudier l'Algèbre
+            <UButton to="/modules" size="xl" color="neutral" variant="subtle">
+              {{ t('home.hero.ctaAlgebra') }}
             </UButton>
           </div>
         </div>
@@ -103,7 +104,7 @@ const featuredWorks = computed(() => {
             {{ lavelleStats.total }}
           </div>
           <div class="text-sm text-gray-600 dark:text-gray-400">
-            Œuvres de Lavelle
+            {{ t('home.stats.totalLabel') }}
           </div>
         </UCard>
         <UCard class="text-center">
@@ -111,7 +112,7 @@ const featuredWorks = computed(() => {
             {{ lavelleStats.available }}
           </div>
           <div class="text-sm text-gray-600 dark:text-gray-400">
-            Disponibles
+            {{ t('home.stats.availableLabel') }}
           </div>
         </UCard>
         <UCard class="text-center">
@@ -119,7 +120,7 @@ const featuredWorks = computed(() => {
             {{ lavelleStats.pending }}
           </div>
           <div class="text-sm text-gray-600 dark:text-gray-400">
-            En transcription
+            {{ t('home.stats.pendingLabel') }}
           </div>
         </UCard>
         <UCard class="text-center">
@@ -127,7 +128,7 @@ const featuredWorks = computed(() => {
             {{ lavelleStats.categories }}
           </div>
           <div class="text-sm text-gray-600 dark:text-gray-400">
-            Catégories
+            {{ t('home.stats.categoriesLabel') }}
           </div>
         </UCard>
       </div>
@@ -135,8 +136,8 @@ const featuredWorks = computed(() => {
 
     <!-- Lavelle Timeline Section -->
     <UPageSection
-      title="Bibliographie de Louis Lavelle"
-      description="Découvrez l'évolution chronologique de l'œuvre philosophique de Louis Lavelle, de ses premières thèses à ses publications posthumes."
+      :title="t('home.bibliography.title')"
+      :description="t('home.bibliography.description')"
       :ui="{
         root: 'bg-gradient-to-b border-t border-default from-muted dark:from-muted/40 to-default',
         container: 'py-12 sm:py-16 lg:py-20'
@@ -147,11 +148,11 @@ const featuredWorks = computed(() => {
 
         <div class="mt-8 text-center">
           <UButton
-            to="/1.louis-lavelle"
+            to="/louis-lavelle"
             size="lg"
             trailing-icon="i-heroicons-arrow-right"
           >
-            Explorer toutes les œuvres
+            {{ t('home.bibliography.cta') }}
           </UButton>
         </div>
       </div>
@@ -159,8 +160,8 @@ const featuredWorks = computed(() => {
 
     <!-- Featured Works -->
     <UPageSection
-      title="Œuvres Disponibles"
-      description="Commencez votre exploration avec ces textes fondamentaux de Louis Lavelle, entièrement transcrits et annotés."
+      :title="t('home.featured.title')"
+      :description="t('home.featured.description')"
       :ui="{
         root: 'bg-gradient-to-b border-t border-default from-muted dark:from-muted/40 to-default'
       }"
@@ -205,7 +206,7 @@ const featuredWorks = computed(() => {
               icon="i-heroicons-book-open"
               class="w-full"
             >
-              Lire l'œuvre
+              {{ t('home.featured.readWork') }}
             </UButton>
           </template>
         </UCard>
@@ -214,8 +215,8 @@ const featuredWorks = computed(() => {
 
     <!-- Features Section -->
     <UPageSection
-      title="Pourquoi Riobaldo ?"
-      description="Une plateforme conçue pour enrichir l'apprentissage de la philosophie et des mathématiques"
+      :title="t('home.features.title')"
+      :description="t('home.features.description')"
       :ui="{
         root: 'bg-gradient-to-b border-t border-default from-muted dark:from-muted/40 to-default',
         features: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'
@@ -224,38 +225,38 @@ const featuredWorks = computed(() => {
       <template #features>
         <UPageFeature
           icon="i-heroicons-academic-cap"
-          title="Ressources Pédagogiques"
-          description="Accès complet aux œuvres philosophiques et exercices mathématiques adaptés au programme lycée."
+          :title="t('home.features.items.education.title')"
+          :description="t('home.features.items.education.description')"
           orientation="vertical"
         />
         <UPageFeature
           icon="i-heroicons-book-open"
-          title="Textes Originaux"
-          description="Transcriptions fidèles des œuvres de Louis Lavelle avec annotations et contextualisations."
+          :title="t('home.features.items.originalTexts.title')"
+          :description="t('home.features.items.originalTexts.description')"
           orientation="vertical"
         />
         <UPageFeature
           icon="i-heroicons-chart-bar"
-          title="Progression Structurée"
-          description="Parcours d'apprentissage progressif en algèbre avec exercices corrigés et démonstrations."
+          :title="t('home.features.items.structuredProgress.title')"
+          :description="t('home.features.items.structuredProgress.description')"
           orientation="vertical"
         />
         <UPageFeature
           icon="i-heroicons-magnifying-glass"
-          title="Recherche Avancée"
-          description="Trouvez rapidement les concepts philosophiques et théorèmes mathématiques."
+          :title="t('home.features.items.advancedSearch.title')"
+          :description="t('home.features.items.advancedSearch.description')"
           orientation="vertical"
         />
         <UPageFeature
           icon="i-heroicons-users"
-          title="Communauté Éducative"
-          description="Échangez avec d'autres étudiants et enseignants passionnés de philosophie et mathématiques."
+          :title="t('home.features.items.community.title')"
+          :description="t('home.features.items.community.description')"
           orientation="vertical"
         />
         <UPageFeature
           icon="i-heroicons-device-phone-mobile"
-          title="Accès Mobile"
-          description="Consultez les ressources depuis n'importe quel appareil, à tout moment."
+          :title="t('home.features.items.mobileAccess.title')"
+          :description="t('home.features.items.mobileAccess.description')"
           orientation="vertical"
         />
       </template>
@@ -270,18 +271,17 @@ const featuredWorks = computed(() => {
     >
       <div class="max-w-2xl mx-auto">
         <h2 class="text-3xl font-bold mb-4">
-          Commencez votre exploration philosophique
+          {{ t('home.cta.title') }}
         </h2>
         <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">
-          Rejoignez des milliers d'étudiants et enseignants qui utilisent Riobaldo
-          pour approfondir leur compréhension de la philosophie et des mathématiques.
+          {{ t('home.cta.description') }}
         </p>
         <div class="flex justify-center gap-4">
-          <UButton to="/1.louis-lavelle" size="lg">
-            Découvrir Lavelle
+          <UButton to="/louis-lavelle" size="lg">
+            {{ t('home.cta.primary') }}
           </UButton>
-          <UButton to="/2.algebre" size="lg" variant="outline">
-            Explorer l'Algèbre
+          <UButton to="/modules" size="lg" variant="outline">
+            {{ t('home.cta.secondary') }}
           </UButton>
         </div>
       </div>

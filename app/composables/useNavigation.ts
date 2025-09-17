@@ -2,127 +2,178 @@ import { createSharedComposable } from '@vueuse/core'
 
 function _useHeaderLinks() {
   const route = useRoute()
+  const { t } = useI18n()
+  const localePath = useLocalePath()
+
+  const stripNumericSegments = (value: string) => value.replace(/\/(\d+)\.([^/]+)/g, '/$2')
+
+  const localizePath = (path: string) => {
+    if (!path || /^(?:https?:|mailto:|tel:|javascript:)/.test(path)) {
+      return path
+    }
+
+    const sanitized = stripNumericSegments(path)
+    return localePath({ path: sanitized })
+  }
 
   const headerLinks = computed(() => {
-    const to = '/docs'
+    const docsPath = '/docs'
+    const louisLavellePath = '/louis-lavelle'
+    const marcusAureliusPath = '/marcus-aurelius'
+    const blogPath = '/blog'
+    const templatesPath = '/templates'
+    const videoCoursesPath = '/video-courses'
+    const showcasePath = '/showcase'
+    const homePath = localizePath('/')
+    const docsRootPath = localizePath(docsPath)
+    const louisRootPath = localizePath(louisLavellePath)
+    const marcusRootPath = localizePath(marcusAureliusPath)
+    const blogRootPath = localizePath(blogPath)
 
     return [{
-      label: 'Home',
+      id: 'home',
+      label: t('navigation.home.label'),
       icon: 'i-lucide-home',
-      to: '/',
+      to: homePath,
       search: false,
-      active: route.path === '/'
+      active: route.path === homePath
     }, {
-      label: 'Louis Lavelle',
+      id: 'louis-lavelle',
+      label: t('navigation.louisLavelle.label'),
       icon: 'i-lucide-user',
-      to: '/louis-lavelle',
+      to: louisRootPath,
       search: false,
-      active: route.path.startsWith('/louis-lavelle'),
+      active: route.path.startsWith(louisRootPath),
       children: [{
-        label: 'Manuel de Méthodologie Dialectique',
-        description: 'Obra filosófica em francês',
+        id: 'louis-lavelle-manuel',
+        label: t('navigation.louisLavelle.children.manuel.label'),
+        description: t('navigation.louisLavelle.children.manuel.description'),
         icon: 'i-lucide-book-marked',
-        to: '/louis-lavelle/manuel-de-methodologie-dialectique/livre-01/reflexion-et-methode',
+        to: localizePath('/louis-lavelle/manuel-de-methodologie-dialectique/livre-01/reflexion-et-methode'),
         active: route.path.includes('/manuel-de-methodologie-dialectique')
       }, {
-        label: 'Manual de Metodologia Dialética',
-        description: 'Tradução para o português',
+        id: 'louis-lavelle-manual',
+        label: t('navigation.louisLavelle.children.manual.label'),
+        description: t('navigation.louisLavelle.children.manual.description'),
         icon: 'i-lucide-book-open',
-        to: '/louis-lavelle/manual-de-metodologia-dialetica/livro-01/reflexao-e-metodo',
+        to: localizePath('/louis-lavelle/manual-de-metodologia-dialetica/livro-01/reflexao-e-metodo'),
         active: route.path.includes('/manual-de-metodologia-dialetica')
       }]
     }, {
-      label: 'Μᾶρκος Αὐρήλιος',
+      id: 'marcus-aurelius',
+      label: t('navigation.marcusAurelius.label'),
       icon: 'i-lucide-user',
-      to: '/marcus-aurelius',
+      to: marcusRootPath,
       search: false,
-      active: route.path.startsWith('/marcus-aurelius'),
+      active: route.path.startsWith(marcusRootPath),
       children: [{
-        label: 'Τὰ εἰς ἑαυτόν',
-        description: 'Texto original em grego',
+        id: 'marcus-aurelius-original',
+        label: t('navigation.marcusAurelius.children.original.label'),
+        description: t('navigation.marcusAurelius.children.original.description'),
         icon: 'i-lucide-scroll',
-        to: '/marcus-aurelius/ta-eis-heauton/biblio-alpha',
+        to: localizePath('/marcus-aurelius/ta-eis-heauton/biblio-alpha'),
         active: route.path.includes('/ta-eis-heauton')
       }, {
-        label: 'Para Si Mesmo',
-        description: 'Tradução para o português',
+        id: 'marcus-aurelius-translation',
+        label: t('navigation.marcusAurelius.children.translation.label'),
+        description: t('navigation.marcusAurelius.children.translation.description'),
         icon: 'i-lucide-book-open',
-        to: '/marcus-aurelius/para-si-mesmo/livro-01',
+        to: localizePath('/marcus-aurelius/para-si-mesmo/livro-01'),
         active: route.path.includes('/para-si-mesmo')
       }]
     }, {
-      label: 'Blog',
+      id: 'blog',
+      label: t('navigation.blog.label'),
       icon: 'i-lucide-newspaper',
-      to: '/blog'
+      to: blogRootPath
     }, {
-      label: 'Docs',
+      id: 'docs',
+      label: t('navigation.docs.label'),
       icon: 'i-lucide-book-marked',
-      to,
+      to: docsRootPath,
       search: false,
-      active: route.path.startsWith(to),
+      active: route.path.startsWith(docsRootPath),
       children: [{
-        label: 'Get Started',
-        description: 'Learn how to get started with Riobaldo to explore philosophical and algebraic concepts.',
+        id: 'docs-getting-started',
+        label: t('navigation.docs.children.gettingStarted.label'),
+        description: t('navigation.docs.children.gettingStarted.description'),
         icon: 'i-lucide-rocket',
-        to: `${to}/getting-started`,
-        active: route.path.startsWith(`${to}/getting-started`)
+        to: localizePath(`${docsPath}/getting-started`),
+        active: route.path.startsWith(`${docsRootPath}/getting-started`)
       }, {
-        label: 'Guide',
-        description: 'Get the key concepts, directory structure and best practices.',
+        id: 'docs-guide',
+        label: t('navigation.docs.children.guide.label'),
+        description: t('navigation.docs.children.guide.description'),
         icon: 'i-lucide-book-open',
-        to: `${to}/guide`,
-        active: route.path.startsWith(`${to}/guide`)
+        to: localizePath(`${docsPath}/guide`),
+        active: route.path.startsWith(`${docsRootPath}/guide`)
       }]
     }, {
-      label: 'Resources',
+      id: 'resources',
+      label: t('navigation.resources.label'),
       icon: 'i-lucide-library',
-      to: '/templates',
+      to: localizePath(templatesPath),
       search: false,
-      active: route.path.startsWith('/templates') || route.path.startsWith('/video-courses') || route.path.startsWith('/showcase'),
+      active: route.path.startsWith(localizePath(templatesPath)) || route.path.startsWith(localizePath(videoCoursesPath)) || route.path.startsWith(localizePath(showcasePath)),
       children: [{
-        label: 'Templates',
+        id: 'resources-templates',
+        label: t('navigation.resources.children.templates.label'),
+        description: t('navigation.resources.children.templates.description'),
         icon: 'i-lucide-app-window',
-        description: 'Start your next project with a Riobaldo template.',
-        to: '/templates'
+        to: localizePath(templatesPath),
+        active: route.path.startsWith(localizePath(templatesPath))
       }, {
-        label: 'Video Courses',
-        description: 'Learn Riobaldo by watching video courses.',
+        id: 'resources-video-courses',
+        label: t('navigation.resources.children.videoCourses.label'),
+        description: t('navigation.resources.children.videoCourses.description'),
         icon: 'i-lucide-graduation-cap',
-        to: '/video-courses'
+        to: localizePath(videoCoursesPath),
+        active: route.path.startsWith(localizePath(videoCoursesPath))
       }, {
-        label: 'Showcase',
-        description: 'Discover and explore projects built with Riobaldo.',
+        id: 'resources-showcase',
+        label: t('navigation.resources.children.showcase.label'),
+        description: t('navigation.resources.children.showcase.description'),
         icon: 'i-lucide-presentation',
-        to: '/showcase'
+        to: localizePath(showcasePath),
+        active: route.path.startsWith(localizePath(showcasePath))
       }, {
-        label: 'Riobaldo Certification',
-        description: 'Obtain your Certification of Competence.',
+        id: 'resources-certification',
+        label: t('navigation.resources.children.certification.label'),
+        description: t('navigation.resources.children.certification.description'),
         icon: 'i-lucide-medal',
         to: 'https://certification.nuxt.com',
-        target: '_blank'
+        target: '_blank',
+        active: false
       }]
     }, {
-      label: 'Products',
+      id: 'products',
+      label: t('navigation.products.label'),
       icon: 'i-lucide-sparkle',
       search: false,
       children: [{
-        label: 'Riobaldo UI Pro',
-        to: 'https://ui.nuxt.com/pro?utm_source=nuxt-website&utm_medium=header',
-        description: 'Build faster with premium components for Vue or Riobaldo.',
+        id: 'products-ui-pro',
+        label: t('navigation.products.children.uiPro.label'),
+        description: t('navigation.products.children.uiPro.description'),
         icon: 'i-lucide-panels-top-left',
-        target: '_blank'
+        to: 'https://ui.nuxt.com/pro?utm_source=nuxt-website&utm_medium=header',
+        target: '_blank',
+        active: false
       }, {
-        label: 'Nuxt Studio',
-        to: 'https://content.nuxt.com/studio/?utm_source=nuxt-website&utm_medium=header',
-        description: 'Edit your Nuxt Content website with a visual editor.',
+        id: 'products-studio',
+        label: t('navigation.products.children.studio.label'),
+        description: t('navigation.products.children.studio.description'),
         icon: 'i-lucide-pen',
-        target: '_blank'
+        to: 'https://content.nuxt.com/studio/?utm_source=nuxt-website&utm_medium=header',
+        target: '_blank',
+        active: false
       }, {
-        label: 'NuxtHub',
-        to: 'https://hub.nuxt.com/?utm_source=nuxt-website&utm_medium=header',
-        description: 'Deploy & manage full-stack Nuxt apps that scale.',
+        id: 'products-hub',
+        label: t('navigation.products.children.hub.label'),
+        description: t('navigation.products.children.hub.description'),
         icon: 'i-lucide-rocket',
-        target: '_blank'
+        to: 'https://hub.nuxt.com/?utm_source=nuxt-website&utm_medium=header',
+        target: '_blank',
+        active: false
       }]
     }]
   })
@@ -132,45 +183,61 @@ function _useHeaderLinks() {
 
 export const useHeaderLinks = import.meta.client ? createSharedComposable(_useHeaderLinks) : _useHeaderLinks
 
-const footerLinks = [{
-  label: 'Community',
-  children: [{
-    label: 'Nuxters',
-    to: 'https://nuxters.nuxt.com',
-    target: '_blank'
-  }, {
-    label: 'Design Kit',
-    to: '/design-kit'
-  }]
-}, {
-  label: 'Products',
-  children: [{
-    label: 'Nuxt UI Pro',
-    to: 'https://ui.nuxt.com/pro?utm_source=nuxt-website&utm_medium=footer',
-    target: '_blank'
-  }, {
-    label: 'Nuxt Studio',
-    to: 'https://content.nuxt.com/studio/?utm_source=nuxt-website&utm_medium=footer',
-    target: '_blank'
-  }, {
-    label: 'NuxtHub',
-    to: 'https://hub.nuxt.com/?utm_source=nuxt-website&utm_medium=footer',
-    target: '_blank'
-  }]
-}]
+export const useFooterLinks = () => {
+  const { t } = useI18n()
 
-export const useFooterLinks = () => ({ footerLinks })
+  const footerLinks = computed(() => [{
+    label: t('navigation.footer.community.label'),
+    children: [{
+      label: t('navigation.footer.community.links.nuxters'),
+      to: 'https://nuxters.nuxt.com',
+      target: '_blank'
+    }, {
+      label: t('navigation.footer.community.links.designKit'),
+      to: '/design-kit'
+    }]
+  }, {
+    label: t('navigation.footer.products.label'),
+    children: [{
+      label: t('navigation.footer.products.links.uiPro'),
+      to: 'https://ui.nuxt.com/pro?utm_source=nuxt-website&utm_medium=footer',
+      target: '_blank'
+    }, {
+      label: t('navigation.footer.products.links.studio'),
+      to: 'https://content.nuxt.com/studio/?utm_source=nuxt-website&utm_medium=footer',
+      target: '_blank'
+    }, {
+      label: t('navigation.footer.products.links.hub'),
+      to: 'https://hub.nuxt.com/?utm_source=nuxt-website&utm_medium=footer',
+      target: '_blank'
+    }]
+  }])
+
+  return { footerLinks }
+}
 
 const _useNavigation = () => {
   const nuxtApp = useNuxtApp()
   const searchTerm = ref<string>('')
+  const { t } = useI18n()
+  const localePath = useLocalePath()
+
+  const localizePath = (path: string) => {
+    if (!path || /^(?:https?:|mailto:|tel:|javascript:)/.test(path)) {
+      return path
+    }
+
+    return localePath({ path })
+  }
+
+  const newsletterPath = '/newsletter'
 
   const { headerLinks } = useHeaderLinks()
   const { footerLinks } = useFooterLinks()
 
   const searchLinks = computed(() => [
     {
-      label: 'Ask AI',
+      label: t('navigation.search.askAiLabel'),
       icon: 'i-lucide-wand',
       to: 'javascript:void(0);',
       onSelect: () => nuxtApp.$kapa?.openModal()
@@ -186,21 +253,21 @@ const _useNavigation = () => {
       }
       return link
     }).filter((link): link is NonNullable<typeof link> => Boolean(link)), {
-      label: 'Home',
+      label: t('navigation.home.label'),
       icon: 'i-lucide-home',
-      to: '/'
+      to: localizePath('/')
     }, {
-      label: 'Louis Lavelle',
+      label: t('navigation.louisLavelle.label'),
       icon: 'i-lucide-user',
-      to: '/louis-lavelle'
+      to: localizePath('/louis-lavelle')
     }, {
-      label: 'Marcus Aurelius',
+      label: t('navigation.marcusAurelius.label'),
       icon: 'i-lucide-user',
-      to: '/marcus-aurelius'
+      to: localizePath('/marcus-aurelius')
     }, {
-      label: 'Newsletter',
+      label: t('navigation.newsletter.label'),
       icon: 'i-lucide-mail',
-      to: '/newsletter'
+      to: localizePath(newsletterPath)
     }])
 
   type SearchGroup = {
@@ -226,20 +293,20 @@ const _useNavigation = () => {
   const searchGroups = computed<SearchGroup[]>(() => {
     const aiGroup: SearchGroup = {
       id: 'ask-ai-search',
-      label: 'AI',
+      label: t('navigation.search.groups.ai'),
       icon: 'i-lucide-wand',
       items: []
     }
 
     const modulesGroup: SearchGroup = {
       id: 'modules-search',
-      label: 'Modules',
+      label: t('navigation.search.groups.modules'),
       items: []
     }
 
     const hostingGroup: SearchGroup = {
       id: 'hosting-search',
-      label: 'Hosting',
+      label: t('navigation.search.groups.hosting'),
       items: []
     }
 
@@ -251,7 +318,7 @@ const _useNavigation = () => {
 
     aiGroup.items = [{
       id: `ask-ai-${searchTerm.value}`,
-      label: `Ask AI about "${searchTerm.value}"`,
+      label: t('navigation.search.askAiPrompt', { query: searchTerm.value }),
       icon: 'i-lucide-wand',
       to: 'javascript:void(0);',
       onSelect() {
@@ -277,7 +344,7 @@ const _useNavigation = () => {
               root: 'rounded-none bg-transparent'
             }
           },
-          to: `/modules/${module.name}`
+          to: localizePath(`/modules/${module.name}`)
         }))
     }
 
@@ -302,7 +369,7 @@ const _useNavigation = () => {
                 }
               }
             : undefined,
-          to: hosting.path
+          to: localizePath(hosting.path)
         }))
     }
 

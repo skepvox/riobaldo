@@ -4,6 +4,7 @@ import { kebabCase } from 'scule'
 definePageMeta({
   heroBackground: 'opacity-30 -z-10'
 })
+defineI18nRoute(false)
 
 const route = useRoute()
 const { copy } = useClipboard()

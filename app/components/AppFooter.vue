@@ -1,5 +1,15 @@
 <script setup lang="ts">
 const { footerLinks } = useFooterLinks()
+const { t } = useI18n()
+
+const siteName = computed(() => t('app.siteName'))
+const currentYear = computed(() => new Date().getFullYear())
+const copyrightLabel = computed(() => t('footer.copyright', {
+  start: 2024,
+  year: currentYear.value,
+  site: siteName.value
+}))
+const licenseLabel = computed(() => t('footer.license'))
 </script>
 
 <template>
@@ -18,8 +28,8 @@ const { footerLinks } = useFooterLinks()
 
     <template #left>
       <p class="text-muted text-sm">
-        Copyright © 2024-{{ new Date().getFullYear() }} Riobaldo - <NuxtLink class="hover:underline" to="https://github.com/skepvox/riobaldo/blob/main/LICENSE" target="_blank">
-          MIT License
+        {{ copyrightLabel }} - <NuxtLink class="hover:underline" to="https://github.com/skepvox/riobaldo/blob/main/LICENSE" target="_blank">
+          {{ licenseLabel }}
         </NuxtLink>
       </p>
     </template>
@@ -32,7 +42,7 @@ const { footerLinks } = useFooterLinks()
         target="_blank"
         icon="i-simple-icons-instagram"
       >
-        <span class="sr-only">Skepvox on Instagram</span>
+        <span class="sr-only">{{ t('footer.social.instagram') }}</span>
       </UButton>
       <UButton
         color="neutral"
@@ -41,7 +51,7 @@ const { footerLinks } = useFooterLinks()
         target="_blank"
         icon="i-simple-icons-x"
       >
-        <span class="sr-only">Skepvox on X</span>
+        <span class="sr-only">{{ t('footer.social.x') }}</span>
       </UButton>
       <UButton
         color="neutral"
@@ -50,7 +60,7 @@ const { footerLinks } = useFooterLinks()
         target="_blank"
         icon="i-simple-icons-bluesky"
       >
-        <span class="sr-only">Skepvox on BlueSky</span>
+        <span class="sr-only">{{ t('footer.social.bluesky') }}</span>
       </UButton>
       <UButton
         color="neutral"
@@ -59,7 +69,7 @@ const { footerLinks } = useFooterLinks()
         target="_blank"
         icon="i-simple-icons-linkedin"
       >
-        <span class="sr-only">Skepvox on LinkedIn</span>
+        <span class="sr-only">{{ t('footer.social.linkedin') }}</span>
       </UButton>
       <UButton
         color="neutral"
@@ -68,7 +78,7 @@ const { footerLinks } = useFooterLinks()
         target="_blank"
         icon="i-simple-icons-discord"
       >
-        <span class="sr-only">Skepvox on Discord</span>
+        <span class="sr-only">{{ t('footer.social.discord') }}</span>
       </UButton>
       <UButton
         color="neutral"
@@ -77,7 +87,7 @@ const { footerLinks } = useFooterLinks()
         target="_blank"
         icon="i-simple-icons-github"
       >
-        <span class="sr-only">Skepvox on GitHub</span>
+        <span class="sr-only">{{ t('footer.social.github') }}</span>
       </UButton>
     </template>
   </UFooter>

@@ -1,0 +1,5 @@
+title: Key Concepts
+titleTemplate: '%s · Nuxt Concepts'
+icon: i-lucide-medal
+navigation:
+  order: 1

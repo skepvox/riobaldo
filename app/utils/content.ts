@@ -1,4 +1,10 @@
-import type { ContentNavigationItem, Docsv3CollectionItem, Docsv4CollectionItem } from '@nuxt/content'
+import type { ContentNavigationItem, ParsedContentv2 } from '@nuxt/content'
+import type { Ref } from 'vue'
+
+type DocumentPage = (ParsedContentv2 & {
+  titleTemplate?: string
+  path?: string
+}) | null | undefined
 
 export function navPageFromPath(path: string, tree: ContentNavigationItem[]): ContentNavigationItem | undefined {
   for (const file of tree) {
@@ -15,7 +21,7 @@ export function navPageFromPath(path: string, tree: ContentNavigationItem[]): Co
   }
 }
 
-export function findTitleTemplate(page: Ref<Docsv3CollectionItem | Docsv4CollectionItem>, navigation: Ref<ContentNavigationItem[]>): string {
+export function findTitleTemplate(page: Ref<DocumentPage>, navigation: Ref<ContentNavigationItem[]>): string {
   if (!page.value?.path) {
     return '%s · Riobaldo'
   }

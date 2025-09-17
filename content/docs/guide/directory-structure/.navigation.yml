@@ -1,0 +1,5 @@
+title: Directory Structure
+titleTemplate: '%s · Nuxt Directory Structure'
+icon: i-lucide-folders
+navigation:
+  order: 2

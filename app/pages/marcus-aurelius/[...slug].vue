@@ -17,13 +17,11 @@ const nuxtApp = useNuxtApp()
 const path = computed(() => route.path.replace(/\/$/, ''))
 
 // Get Marcus Aurelius navigation
-const asideNavigation = computed(() => {
-  const marcusPath = '/marcus-aurelius'
-  return navPageFromPath(marcusPath, navigation.value)?.children || []
-})
-
 const { headerLinks } = useHeaderLinks()
-const links = computed(() => headerLinks.value.find(link => link.to === '/marcus-aurelius')?.children ?? [])
+const localePath = useLocalePath()
+const marcusPath = computed(() => localePath({ path: '/marcus-aurelius' }))
+const asideNavigation = computed(() => navPageFromPath(marcusPath.value, navigation.value)?.children || [])
+const links = computed(() => headerLinks.value.find(link => link.to === marcusPath.value)?.children ?? [])
 
 function paintResponse() {
   if (import.meta.server) {

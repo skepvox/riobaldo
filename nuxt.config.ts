@@ -17,7 +17,8 @@ export default defineNuxtConfig({
     'nuxt-og-image',
     'motion-v/nuxt',
     'nuxt-llms',
-    'nuxt-charts'
+    'nuxt-charts',
+    '@nuxtjs/i18n'
   ],
   $development: {
     site: {
@@ -125,6 +126,26 @@ export default defineNuxtConfig({
         commaDangle: 'never'
       }
     }
+  },
+  i18n: {
+    defaultLocale: 'pt-BR',
+    strategy: 'prefix_except_default',
+    langDir: 'locales',
+    locales: [
+      { code: 'pt-BR', iso: 'pt-BR', name: 'Português (Brasil)', file: 'pt-BR.json' },
+      { code: 'en', iso: 'en-US', name: 'English', file: 'en.json' },
+      { code: 'fr', iso: 'fr-FR', name: 'Français', file: 'fr.json' }
+    ],
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root',
+      alwaysRedirect: false
+    },
+    compilation: {
+      strictMessage: true
+    },
+    baseUrl: 'https://riobaldo.com'
   },
   icon: {
     customCollections: [{

@@ -1,0 +1,5 @@
+title: Get Started
+titleTemplate: '%s · Get Started with Nuxt'
+icon: i-lucide-rocket
+navigation:
+  order: 1

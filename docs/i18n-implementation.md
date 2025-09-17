@@ -2,9 +2,17 @@
 
 This guide describes a safe, incremental, and production‑ready way to implement internationalization for three locales in this project:
 
-- pt-BR — Portuguese (Brazil)
+- pt-BR — Portuguese (Brazil) — current default
+- en — English
 - fr — French
-- en — English (recommended as default)
+
+## Current Implementation Snapshot
+
+- `@nuxtjs/i18n` v10 with `prefix_except_default` and JSON messages stored under `i18n/locales` (default `restructureDir` is already `i18n`).
+- Default locale `pt-BR`; `/en` and `/fr` receive prefixed routes, while `/blog` stays unprefixed via route opt-out plus `defineI18nRoute(false)`.
+- Core UI strings (layout, navigation, footer, homepage) now use `$t`/`useI18n`; add new keys in the locale JSON before referencing them in components.
+- Locale switcher lives in `AppHeader.vue` and relies on the locale metadata (`code`, `name`) defined in `nuxt.config.ts`.
+- Head/meta handling centralised in `app/app.vue` with `useLocaleHead` for HTML attributes and `useSeoMeta` fallbacks.
 
 It covers routing strategy, UI translations, SEO, content localization with `@nuxt/content`, and migration tactics to avoid breaking existing pages or builds. Follow the phases in order for a smooth rollout.
 
@@ -53,7 +61,7 @@ export default defineNuxtConfig({
     defaultLocale: 'en',
     strategy: 'prefix_except_default',
     lazy: true,
-    langDir: 'app/locales',
+    langDir: 'locales',
     locales: [
       { code: 'en', iso: 'en-US', name: 'English', file: 'en.json' },
       { code: 'fr', iso: 'fr-FR', name: 'Français', file: 'fr.json' },
@@ -80,12 +88,12 @@ Notes:
 
 ### 2. Create translation files
 
-Create `app/locales/en.json`, `app/locales/fr.json`, `app/locales/pt-BR.json` with at least the UI strings used on the homepage, header, footer, and banners.
+Create `i18n/locales/en.json`, `i18n/locales/fr.json`, `i18n/locales/pt-BR.json` with at least the UI strings used on the homepage, header, footer, and banners.
 
 Example seeds (expand as needed):
 
 ```json
-// app/locales/en.json
+// i18n/locales/en.json
 {
   "app": {
     "siteName": "Riobaldo",
@@ -105,7 +113,7 @@ Example seeds (expand as needed):
 ```
 
 ```json
-// app/locales/fr.json
+// i18n/locales/fr.json
 {
   "app": {
     "siteName": "Riobaldo",
@@ -125,7 +133,7 @@ Example seeds (expand as needed):
 ```
 
 ```json
-// app/locales/pt-BR.json
+// i18n/locales/pt-BR.json
 {
   "app": {
     "siteName": "Riobaldo",
@@ -181,8 +189,8 @@ Homepage in `app/pages/index.vue` (replace static FR strings):
       <p class="text-lg">{{ $t('home.description') }}</p>
     </template>
     <template #links>
-      <UButton to="/1.louis-lavelle" size="xl">{{ $t('home.exploreLavelle') }}</UButton>
-      <UButton to="/2.algebre" size="xl" color="neutral" variant="subtle">{{ $t('home.studyAlgebra') }}</UButton>
+      <UButton to="/louis-lavelle" size="xl">{{ $t('home.exploreLavelle') }}</UButton>
+      <UButton to="/modules" size="xl" color="neutral" variant="subtle">{{ $t('home.studyAlgebra') }}</UButton>
     </template>
   </UPageHero>
 </template>
@@ -259,9 +267,9 @@ This project uses collections via `content.config.ts`. The suffix pattern is a s
 For every localized page, create parallel files with locale suffixes, e.g.:
 
 ```
-content/docs/1.getting-started/01.introduction.en.md
-content/docs/1.getting-started/01.introduction.fr.md
-content/docs/1.getting-started/01.introduction.pt-BR.md
+content/docs/getting-started/introduction.en.md
+content/docs/getting-started/introduction.fr.md
+content/docs/getting-started/introduction.pt-BR.md
 ```
 
 Keep the same frontmatter schema. You can add an explicit `lang` or `seo` fields if needed; `@nuxt/content` will set `_locale` automatically from filename suffix.
@@ -366,7 +374,7 @@ If you use Plausible, configure goals/filters per locale prefix in the Plausible
 ## Rollback Plan
 
 - Disable i18n by removing `@nuxtjs/i18n` from `modules` and the `i18n` config block in `nuxt.config.ts`.
-- Keep `app/locales/*.json` in the repo (harmless) or remove them later.
+- Keep `i18n/locales/*.json` in the repo (harmless) or remove them later.
 - Revert UI strings to the previous hardcoded text only if necessary (but prefer keeping translation hooks for future work).
 
 --------------------------------------------------------------------------------
@@ -382,7 +390,7 @@ If you use Plausible, configure goals/filters per locale prefix in the Plausible
 ## Reference: Files to Touch
 
 - `nuxt.config.ts` — enable `@nuxtjs/i18n` and add `i18n` block.
-- `app/locales/en.json`, `app/locales/fr.json`, `app/locales/pt-BR.json` — add UI translations.
+- `i18n/locales/en.json`, `i18n/locales/fr.json`, `i18n/locales/pt-BR.json` — add UI translations.
 - `app/app.vue`, `app/layouts/default.vue`, `app/pages/index.vue` — replace hardcoded text with `$t()` and add `useLocaleHead`.
 - `app/pages/docs/[...slug].vue` — verify content queries pick the current locale; add `_locale` filters if required.
 - `content/**` — add localized file variants using the suffix pattern (`.en.md`, `.fr.md`, `.pt-BR.md`).
@@ -448,4 +456,3 @@ If you use Plausible, configure goals/filters per locale prefix in the Plausible
 ```
 
 That’s it for a safe baseline. Expand translations gradually and verify prerender output in Vercel previews.
-

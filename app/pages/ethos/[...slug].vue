@@ -43,12 +43,16 @@ function paintResponse() {
 }
 
 const [{ data: page, status }, { data: surround }] = await Promise.all([
-  useAsyncData(kebabCase(path.value), () => paintResponse().then(() => nuxtApp.static[kebabCase(path.value)] ?? queryCollection('ethos').path(path.value).first()), {
+  useAsyncData(kebabCase(path.value), () => paintResponse().then(() => nuxtApp.static[kebabCase(path.value)]
+    // @ts-expect-error TODO: add `ethos` collection types to content.config
+    ?? queryCollection('ethos').path(path.value).first()), {
     watch: [path]
   }),
-  useAsyncData(`${kebabCase(path.value)}-surround`, () => paintResponse().then(() => nuxtApp.static[`${kebabCase(path.value)}-surround`] ?? queryCollectionItemSurroundings('ethos', path.value, {
-    fields: ['description']
-  })), { watch: [path] })
+  useAsyncData(`${kebabCase(path.value)}-surround`, () => paintResponse().then(() => nuxtApp.static[`${kebabCase(path.value)}-surround`]
+    // @ts-expect-error TODO: add `ethos` collection types to content.config
+    ?? queryCollectionItemSurroundings('ethos', path.value, {
+      fields: ['description']
+    })), { watch: [path] })
 ])
 
 watch(status, (status) => {

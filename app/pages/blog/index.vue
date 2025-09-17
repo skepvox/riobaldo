@@ -6,6 +6,7 @@ if (!page.value) {
 definePageMeta({
   heroBackground: 'opacity-70 -z-10'
 })
+defineI18nRoute(false)
 const { fetchList, articles } = useBlog()
 
 useHead({

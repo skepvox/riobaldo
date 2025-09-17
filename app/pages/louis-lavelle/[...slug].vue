@@ -18,12 +18,13 @@ const path = computed(() => route.path.replace(/\/$/, ''))
 
 // Get Louis Lavelle navigation
 const asideNavigation = computed(() => {
-  const lavellelPath = '/louis-lavelle'
-  return navPageFromPath(lavellelPath, navigation.value)?.children || []
+  return navPageFromPath(louisLavelleRoot.value, navigation.value)?.children || []
 })
 
 const { headerLinks } = useHeaderLinks()
-const links = computed(() => headerLinks.value.find(link => link.to === '/louis-lavelle')?.children ?? [])
+const localePath = useLocalePath()
+const louisLavelleRoot = computed(() => localePath({ path: '/louis-lavelle' }))
+const links = computed(() => headerLinks.value.find(link => link.to === louisLavelleRoot.value)?.children ?? [])
 
 function paintResponse() {
   if (import.meta.server) {

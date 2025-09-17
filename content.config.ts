@@ -320,7 +320,7 @@ export default defineContentConfig({
     }),
     louisLavelle: defineCollection({
       type: 'page',
-      source: '1.louis-lavelle/**/*',
+      source: 'louis-lavelle/**/*',
       schema: z.object({
         title: z.string(),
         description: z.string().optional(),
@@ -331,7 +331,7 @@ export default defineContentConfig({
     }),
     marcusAurelius: defineCollection({
       type: 'page',
-      source: '2.marcus-aurelius/**/*',
+      source: 'marcus-aurelius/**/*',
       schema: z.object({
         title: z.string(),
         description: z.string().optional(),
