@@ -163,12 +163,52 @@
       "totalLabel": "Œuvres de Lavelle",
       "availableLabel": "Disponibles",
       "pendingLabel": "En transcription",
-      "categoriesLabel": "Catégories"
+      "categoriesLabel": "Catégories",
+      "details": {
+        "total": "Œuvres répertoriées",
+        "available": "Prêtes à être lues ({percent} %)",
+        "pending": "En attente de transcription",
+        "categories": "Champs d'étude distincts"
+      }
     },
     "bibliography": {
       "title": "Bibliographie de Louis Lavelle",
       "description": "Découvrez l'évolution chronologique de l'œuvre philosophique de Louis Lavelle, de ses premières thèses à ses publications posthumes.",
       "cta": "Explorer toutes les œuvres"
+    },
+    "timeline": {
+      "loading": "Chargement de la bibliographie…",
+      "filters": {
+        "categoryPlaceholder": "Toutes les catégories",
+        "categoryAll": "Toutes les catégories",
+        "status": {
+          "all": "Toutes",
+          "available": "Disponibles",
+          "pending": "En cours"
+        }
+      },
+      "decade": {
+        "label": "Décennie",
+        "title": "Années {start} – {end}",
+        "count": "0 œuvre|1 œuvre|{count} œuvres"
+      },
+      "work": {
+        "types": {
+          "posthumous": "Posthume",
+          "thesis": "Thèse"
+        },
+        "pages": "0 page|1 page|{count} pages",
+        "reissues": "Rééditions",
+        "actions": {
+          "read": "Lire",
+          "inProgress": "Transcription en cours",
+          "soon": "Bientôt"
+        }
+      },
+      "availability": {
+        "title": "Avancement des transcriptions",
+        "description": "{available} œuvres transcrites sur {total}, {pending} encore en préparation."
+      }
     },
     "features": {
       "title": "Pourquoi Riobaldo ?",

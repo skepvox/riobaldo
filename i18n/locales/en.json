@@ -163,12 +163,52 @@
       "totalLabel": "Lavelle works",
       "availableLabel": "Available",
       "pendingLabel": "In transcription",
-      "categoriesLabel": "Categories"
+      "categoriesLabel": "Categories",
+      "details": {
+        "total": "Catalogued works",
+        "available": "Ready to read ({percent}%)",
+        "pending": "Awaiting transcription",
+        "categories": "Distinct study themes"
+      }
     },
     "bibliography": {
       "title": "Louis Lavelle Bibliography",
       "description": "Discover the chronological evolution of Louis Lavelle's philosophical work, from his early theses to posthumous publications.",
       "cta": "Explore all works"
+    },
+    "timeline": {
+      "loading": "Loading bibliography…",
+      "filters": {
+        "categoryPlaceholder": "All categories",
+        "categoryAll": "All categories",
+        "status": {
+          "all": "All",
+          "available": "Available",
+          "pending": "In progress"
+        }
+      },
+      "decade": {
+        "label": "Decade",
+        "title": "{start} – {end}",
+        "count": "{count} works"
+      },
+      "work": {
+        "types": {
+          "posthumous": "Posthumous",
+          "thesis": "Thesis"
+        },
+        "pages": "{count} pages",
+        "reissues": "Reissues",
+        "actions": {
+          "read": "Read",
+          "inProgress": "Transcription underway",
+          "soon": "Coming soon"
+        }
+      },
+      "availability": {
+        "title": "Publication progress",
+        "description": "{available} of {total} works are transcribed, {pending} still in progress."
+      }
     },
     "features": {
       "title": "Why Riobaldo?",

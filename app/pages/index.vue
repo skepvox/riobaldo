@@ -38,19 +38,6 @@ interface BibliographyData {
   categories: string[]
 }
 
-// Calculate statistics
-const lavelleStats = computed(() => {
-  if (!bibliography.value) return { total: 0, available: 0, pending: 0, categories: 0 }
-  const data = bibliography.value as any as BibliographyData
-  const works = data.works || []
-  return {
-    total: works.length,
-    available: works.filter(w => w.status === 'available').length,
-    pending: works.filter(w => w.status === 'pending').length,
-    categories: [...new Set(works.map(w => w.category))].length
-  }
-})
-
 // Featured works (those that are available)
 const featuredWorks = computed(() => {
   if (!bibliography.value) return []
@@ -96,42 +83,6 @@ const featuredWorks = computed(() => {
           </div>
         </div>
       </template>
-
-      <!-- Stats Cards -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-12">
-        <UCard class="text-center">
-          <div class="text-3xl font-bold text-primary-500">
-            {{ lavelleStats.total }}
-          </div>
-          <div class="text-sm text-gray-600 dark:text-gray-400">
-            {{ t('home.stats.totalLabel') }}
-          </div>
-        </UCard>
-        <UCard class="text-center">
-          <div class="text-3xl font-bold text-green-500">
-            {{ lavelleStats.available }}
-          </div>
-          <div class="text-sm text-gray-600 dark:text-gray-400">
-            {{ t('home.stats.availableLabel') }}
-          </div>
-        </UCard>
-        <UCard class="text-center">
-          <div class="text-3xl font-bold text-amber-500">
-            {{ lavelleStats.pending }}
-          </div>
-          <div class="text-sm text-gray-600 dark:text-gray-400">
-            {{ t('home.stats.pendingLabel') }}
-          </div>
-        </UCard>
-        <UCard class="text-center">
-          <div class="text-3xl font-bold text-purple-500">
-            {{ lavelleStats.categories }}
-          </div>
-          <div class="text-sm text-gray-600 dark:text-gray-400">
-            {{ t('home.stats.categoriesLabel') }}
-          </div>
-        </UCard>
-      </div>
     </UPageHero>
 
     <!-- Lavelle Timeline Section -->

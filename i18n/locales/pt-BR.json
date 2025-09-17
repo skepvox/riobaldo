@@ -163,12 +163,52 @@
       "totalLabel": "Obras de Lavelle",
       "availableLabel": "Disponíveis",
       "pendingLabel": "Em transcrição",
-      "categoriesLabel": "Categorias"
+      "categoriesLabel": "Categorias",
+      "details": {
+        "total": "Obras catalogadas",
+        "available": "Prontas para leitura ({percent}%)",
+        "pending": "Aguardando transcrição",
+        "categories": "Áreas temáticas distintas"
+      }
     },
     "bibliography": {
       "title": "Bibliografia de Louis Lavelle",
       "description": "Descubra a evolução cronológica da obra filosófica de Louis Lavelle, das primeiras teses às publicações póstumas.",
       "cta": "Explorar todas as obras"
+    },
+    "timeline": {
+      "loading": "Carregando bibliografia…",
+      "filters": {
+        "categoryPlaceholder": "Todas as categorias",
+        "categoryAll": "Todas as categorias",
+        "status": {
+          "all": "Todas",
+          "available": "Disponíveis",
+          "pending": "Em andamento"
+        }
+      },
+      "decade": {
+        "label": "Década",
+        "title": "Anos {start} – {end}",
+        "count": "0 obra|1 obra|{count} obras"
+      },
+      "work": {
+        "types": {
+          "posthumous": "Póstuma",
+          "thesis": "Tese"
+        },
+        "pages": "0 página|1 página|{count} páginas",
+        "reissues": "Reedições",
+        "actions": {
+          "read": "Ler",
+          "inProgress": "Transcrição em andamento",
+          "soon": "Em breve"
+        }
+      },
+      "availability": {
+        "title": "Progresso das transcrições",
+        "description": "{available} de {total} obras já transcritas, {pending} em andamento."
+      }
     },
     "features": {
       "title": "Por que Riobaldo?",

@@ -1,11 +1,8 @@
 <script setup lang="ts">
-import type { ContentNavigationItem } from '@nuxt/content'
-
 const colorMode = useColorMode()
 const { searchGroups, searchLinks, searchTerm } = useNavigation()
 const { fetchList } = useModules()
 const { t, locale, locales } = useI18n()
-const localePath = useLocalePath()
 
 const color = computed(() => colorMode.value === 'dark' ? '#020420' : 'white')
 const siteName = computed(() => t('app.siteName'))
