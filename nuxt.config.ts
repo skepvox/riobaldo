@@ -95,6 +95,9 @@ export default defineNuxtConfig({
     '/ethos/marcus-aurelius': { redirect: '/marcus-aurelius', prerender: false }
   },
   sourcemap: true,
+  experimental: {
+    payloadExtraction: false
+  },
   compatibilityDate: '2025-07-17',
   nitro: {
     preset: 'vercel',

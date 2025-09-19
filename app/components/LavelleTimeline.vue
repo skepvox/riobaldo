@@ -77,7 +77,7 @@
                 </h3>
               </div>
               <UBadge variant="subtle">
-                {{ t('home.timeline.decade.count', decade.works.length, { count: decade.works.length }) }}
+                {{ t('home.timeline.decade.count', { count: decade.works.length }) }}
               </UBadge>
             </header>
 
@@ -96,7 +96,7 @@
                       <h4 class="text-lg font-semibold text-gray-900 dark:text-gray-100">
                         {{ work.title }}
                       </h4>
-                      <UBadge :color="getCategoryColor(work.category)" size="xs">
+                      <UBadge :color="getCategoryColor(work.category) as any" size="xs">
                         {{ work.category }}
                       </UBadge>
                       <UBadge
@@ -126,7 +126,7 @@
                         <span>{{ work.publisher }}</span>
                         <template v-if="work.pages">
                           <span class="text-gray-400 dark:text-gray-500">•</span>
-                          <span>{{ t('home.timeline.work.pages', work.pages, { count: work.pages }) }}</span>
+                          <span>{{ t('home.timeline.work.pages', { count: work.pages }) }}</span>
                         </template>
                       </p>
                       <p v-if="work.description" class="italic">
@@ -245,11 +245,11 @@ interface DecadeGroup {
 
 const selectedStatus = ref<string>('all')
 
-const statusFilters = computed(() => ([
+const statusFilters = computed(() => [
   { label: t('home.timeline.filters.status.all'), value: 'all' },
   { label: t('home.timeline.filters.status.available'), value: 'available' },
   { label: t('home.timeline.filters.status.pending'), value: 'pending' }
-]))
+])
 
 const filteredWorks = computed(() => {
   if (!bibliography.value) return []
