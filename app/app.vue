@@ -9,6 +9,19 @@ const siteName = computed(() => t('app.siteName'))
 const defaultTitle = computed(() => t('app.defaultSeoTitle'))
 const defaultDescription = computed(() => t('app.defaultSeoDescription'))
 
+// Helper functions for path localization
+const isInternalPath = (path: string) => {
+  return path && (path.startsWith('/') && !path.startsWith('//'))
+}
+
+const buildLocalizedPath = (path: string, currentLocale: string) => {
+  const defaultLocale = locales.value.find(l => l.code === 'pt-BR')?.code || 'pt-BR'
+  if (currentLocale === defaultLocale) {
+    return path
+  }
+  return `/${currentLocale}${path}`
+}
+
 const [{ data: navigation }, { data: files }] = await Promise.all([
   useAsyncData('navigation', () => {
     return Promise.all([
