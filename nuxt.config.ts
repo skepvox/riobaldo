@@ -131,13 +131,13 @@ export default defineNuxtConfig({
     }
   },
   i18n: {
-    defaultLocale: 'pt-BR',
+    defaultLocale: 'pt',
     strategy: 'prefix_except_default',
     langDir: 'locales',
     locales: [
-      { code: 'pt-BR', iso: 'pt-BR', name: 'Português (Brasil)', file: 'pt-BR.json' },
-      { code: 'en', iso: 'en-US', name: 'English', file: 'en.json' },
-      { code: 'fr', iso: 'fr-FR', name: 'Français', file: 'fr.json' }
+      { code: 'pt', iso: 'pt-BR', language: 'pt-BR', name: 'Português', file: 'pt.json' },
+      { code: 'en', iso: 'en-US', language: 'en-US', name: 'English', file: 'en.json' },
+      { code: 'fr', iso: 'fr-FR', language: 'fr-FR', name: 'Français', file: 'fr.json' }
     ],
     detectBrowserLanguage: {
       useCookie: true,

@@ -20,7 +20,7 @@ export const splitLocaleFromPath = (value: string | undefined, localeList: strin
     return { basePath: value, locale: null }
   }
 
-  // Check for locale suffix pattern (e.g., .en, .fr, .pt-BR)
+  // Check for locale suffix pattern (e.g., .en, .fr, .pt)
   const match = value.match(/^(.*)\.([a-z0-9-]+)$/)
   if (match) {
     const localeSuffix = match[2].toLowerCase()
@@ -44,7 +44,7 @@ export const shouldIncludeInLocale = (
   path: string | undefined,
   currentLocale: string,
   localeList: string[],
-  defaultLocale = 'pt-br'
+  defaultLocale = 'pt'
 ): boolean => {
   if (!path) return true
 
@@ -68,7 +68,7 @@ export const filterNavigationByLocale = (
   items: ContentNavigationItem[] = [],
   currentLocale: string,
   localeList: string[],
-  defaultLocale = 'pt-BR'
+  defaultLocale = 'pt'
 ): ContentNavigationItem[] => {
   const filtered: ContentNavigationItem[] = []
   const normalizedLocaleList = localeList.map(l => normalizeLocaleCode(l))

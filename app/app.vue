@@ -15,7 +15,7 @@ const isInternalPath = (path: string) => {
 }
 
 const buildLocalizedPath = (path: string, currentLocale: string) => {
-  const defaultLocale = locales.value.find(l => l.code === 'pt-BR')?.code || 'pt-BR'
+  const defaultLocale = locales.value.find(l => l.code === 'pt')?.code || 'pt'
   if (currentLocale === defaultLocale) {
     return path
   }
@@ -111,7 +111,7 @@ const rawFiles = computed(() => files.value?.filter((file) => {
   return file.id.startsWith('/docs/') || file.id.startsWith('/blog/') || file.id.startsWith('/louis-lavelle/') || file.id.startsWith('/marcus-aurelius/')
 }) ?? [])
 
-const versionNavigation = computed(() => filterNavigationByLocale(rawNavigation.value, locale.value, knownLocales.value, 'pt-BR'))
+const versionNavigation = computed(() => filterNavigationByLocale(rawNavigation.value, locale.value, knownLocales.value, 'pt'))
 const versionFiles = computed(() => filterFilesByLocale(rawFiles.value, locale.value, knownLocales.value))
 
 provide('navigation', versionNavigation)
