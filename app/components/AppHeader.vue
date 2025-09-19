@@ -11,9 +11,9 @@ const switchLocalePath = useSwitchLocalePath()
 const localePath = useLocalePath()
 
 const flagIcons: Record<string, string> = {
-  'pt-BR': 'flag:br-4x3',
-  'en': 'flag:us-4x3',
-  'fr': 'flag:fr-4x3'
+  pt: 'flag:br-4x3',
+  en: 'flag:us-4x3',
+  fr: 'flag:fr-4x3'
 }
 
 const hasLocaleSwitcher = computed(() => locales.value.length > 1)

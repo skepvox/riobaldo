@@ -16,7 +16,7 @@ useSeoMeta({
 })
 
 // Import the bibliography data directly
-import bibliographyData from '../../content/louis-lavelle/bibliography.json'
+import bibliographyData from '../../app/data/louis-lavelle-bibliography.json'
 
 // Create a ref for the bibliography data
 const bibliography = ref(bibliographyData)

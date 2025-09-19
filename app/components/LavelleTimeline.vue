@@ -208,7 +208,7 @@
 </template>
 
 <script setup lang="ts">
-import bibliographyData from '../../content/louis-lavelle/bibliography.json'
+import bibliographyData from '../../app/data/louis-lavelle-bibliography.json'
 
 const { t, locale } = useI18n()
 
