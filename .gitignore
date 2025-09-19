@@ -27,12 +27,5 @@ logs
 # VSC
 .history
 
-# Project goals documentation
-math-book-goals.md
-philosophy-books-goals.md
-
 # Reference projects
 .reference/
-
-# Vercel build error logs
-vercel-build-error.md
