@@ -26,7 +26,6 @@
     "@vueuse/nuxt": "^13.5.0",
     "better-sqlite3": "^12.2.0",
     "date-fns": "^4.1.0",
-    "yaml": "^2.5.1",
     "nuxt": "^4.0.3",
     "nuxt-og-image": "^5.1.9"
   },
