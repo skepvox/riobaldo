@@ -1,4 +1,14 @@
 export default defineAppConfig({
+  global: {
+    available: true,
+    meetingLink: undefined,
+    email: 'skepvox@gmail.com',
+    picture: {
+      dark: 'https://github.com/skepvox.png?size=512',
+      light: 'https://github.com/skepvox.png?size=512',
+      alt: 'Retrato de Thiago Oliveira'
+    }
+  },
   ui: {
     colors: {
       primary: 'indigo', // Deep wisdom, knowledge

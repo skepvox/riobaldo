@@ -75,7 +75,6 @@ export default defineNuxtConfig({
     '/docs/guide/best-practices': { redirect: '/docs/guide/best-practices/performance', prerender: false },
     '/docs/guide/going-further/custom-routing': { redirect: '/docs/guide/recipes/custom-routing', prerender: false },
     // Louis Lavelle redirects
-    '/louis-lavelle': { redirect: '/louis-lavelle/manual-de-metodologia-dialetica/livro-01/reflexao-e-metodo', prerender: false },
     '/louis-lavelle/manual-de-metodologia-dialetica': { redirect: '/louis-lavelle/manual-de-metodologia-dialetica/livro-01/reflexao-e-metodo', prerender: false },
     '/louis-lavelle/manual-de-metodologia-dialetica/livro-01': { redirect: '/louis-lavelle/manual-de-metodologia-dialetica/livro-01/reflexao-e-metodo', prerender: false },
     '/louis-lavelle/manual-de-metodologia-dialetica/livro-02': { redirect: '/louis-lavelle/manual-de-metodologia-dialetica/livro-02/a-dialetica-da-consciencia', prerender: false },
@@ -87,7 +86,7 @@ export default defineNuxtConfig({
     // Marcus Aurelius redirects
     // Legacy ethos redirects
     '/ethos': { redirect: '/louis-lavelle', prerender: false },
-    '/ethos/louis-lavelle': { redirect: '/louis-lavelle', prerender: false },
+    '/ethos/louis-lavelle': { redirect: '/louis-lavelle', prerender: false }
   },
   sourcemap: true,
   experimental: {
@@ -138,7 +137,14 @@ export default defineNuxtConfig({
   },
   image: {
     format: ['webp', 'jpeg', 'jpg', 'png', 'svg'],
-    provider: 'vercel'
+    provider: 'vercel',
+    screens: {
+      'avatar': 40,
+      'avatar2x': 80,
+      'lg': 1024,
+      'xl': 1280,
+      '2xl': 1536
+    }
   },
   llms: {
     domain: 'https://riobaldo.com',

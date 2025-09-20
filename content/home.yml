@@ -1,0 +1,119 @@
+seo:
+  title: "Riobaldo — Sertão Digital"
+  description: |
+    Um caderno vivo onde filosofia, matemática e tecnologia se encontram para investigar o sertão digital.
+title: "Thiago Oliveira"
+description: |
+  Interesses e reflexões que procuram chão no sertão digital.
+hero:
+  greeting: "Olá, eu sou"
+  title: "Thiago Oliveira"
+  description: |
+    Pesquisador do cruzamento entre filosofia, matemática e tecnologia. Aqui compartilho notas de estudo, traduções e projetos que aproximam o pensamento da prática.
+  links:
+    - label: "Explorar Louis Lavelle"
+      to: "/louis-lavelle"
+      color: "primary"
+      size: "lg"
+    - label: "Ler o blog"
+      to: "/blog"
+      variant: "ghost"
+      color: "neutral"
+      size: "lg"
+      trailingIcon: "i-lucide-arrow-right"
+  images:
+    - src: marquee/01-guimaraes-rosa.webp
+      alt: Guimarães Rosa e o sertão
+      width: 234
+      height: 234
+    - src: marquee/02-thiago.webp
+      alt: Retrato de Thiago
+      width: 234
+      height: 234
+    - src: marquee/05-thiago.webp
+      alt: Escrita manual
+      width: 234
+      height: 234
+    - src: marquee/09-italia.webp
+      alt: Estudos na Itália
+      width: 234
+      height: 234
+    - src: marquee/12-universidade-outono.webp
+      alt: Universidade no outono
+      width: 234
+      height: 234
+about:
+  title: "Projeto pessoal"
+  description: |
+    Riobaldo nasce como espaço de reflexão e escrita lenta, onde o pensamento pode seguir seu próprio ritmo, longe da urgência das redes. Aqui documento pesquisas sobre Louis Lavelle, percursos de álgebra e experimentos de design de produto orientados por filosofia.
+experience:
+  title: "Trajetória"
+  items:
+    - date: "2024 — Presente"
+      position: "Estratégia e Inovação"
+      company:
+        name: "Vallourec"
+        url: "https://www.vallourec.com"
+        icon: "i-lucide-sparkles"
+        color: "#0C64B4"
+    - date: "2022 — 2023"
+      position: "Mestrado em Filosofia"
+      company:
+        name: "Catholic University of Milan"
+        url: "https://www.unicatt.eu"
+        icon: "i-lucide-graduation-cap"
+        color: "#003A63"
+    - date: "2012 — 2021"
+      position: "Engenharia Industrial"
+      company:
+        name: "Vallourec"
+        url: "https://www.vallourec.com"
+        icon: "i-lucide-briefcase"
+        color: "#0C64B4"
+    - date: "2007 — 2011"
+      position: "Engenharia Metalúrgica"
+      company:
+        name: "UFMG"
+        url: "https://ufmg.br"
+        icon: "i-lucide-flame"
+        color: "#C8102E"
+quotes:
+  title: "Caderno de citações"
+  items:
+    - quote: |
+        "O sertão é do tamanho do mundo."
+      author:
+        name: "João Guimarães Rosa"
+        description: "Grande Sertão: Veredas"
+        avatar:
+          src: /quotes/joao-guimaraes-rosa.webp
+          srcset: /quotes/joao-guimaraes-rosa.webp
+          alt: "João Guimarães Rosa"
+          width: 80
+          height: 80
+    - quote: |
+        "A filosofia vale como experiência direta do absoluto, e não como simples exercício intelectual."
+      author:
+        name: "Louis Lavelle"
+        description: "Traité des Valeurs"
+        avatar:
+          src: /quotes/louis-lavelle.webp
+          srcset: /quotes/louis-lavelle.webp
+          alt: "Louis Lavelle"
+          width: 80
+          height: 80
+    - quote: |
+        "Existe algo de lindo na ansiedade, de tal forma que devemos vivê-la, mas sem deixar que ela nos devore."
+      author:
+        name: "Rainer Maria Rilke"
+        description: "Cartas a um Jovem Poeta"
+        avatar:
+          src: /quotes/rainer-maria-rilke.webp
+          srcset: /quotes/rainer-maria-rilke.webp
+          alt: "Rainer Maria Rilke"
+          width: 80
+          height: 80
+blog:
+  title: "Caderno de campo"
+  description: |
+    Ensaios, traduções e estudos que atravessam filosofia, matemática e design no sertão digital.

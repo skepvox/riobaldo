@@ -59,6 +59,5 @@ onMounted(() => {
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
-
   </UApp>
 </template>

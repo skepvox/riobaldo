@@ -59,6 +59,32 @@ const Testimonial = z.object({
   author: Author
 })
 
+const QuoteAuthorAvatar = z.object({
+  src: z.string(),
+  srcset: z.string().optional(),
+  alt: z.string().optional()
+}).optional()
+
+const Quote = z.object({
+  quote: z.string(),
+  author: z.object({
+    name: z.string(),
+    description: z.string().optional(),
+    avatar: QuoteAuthorAvatar
+  })
+})
+
+const ExperienceItem = z.object({
+  date: z.string(),
+  position: z.string(),
+  company: z.object({
+    name: z.string(),
+    url: z.string().url(),
+    icon: z.string().editor({ input: 'icon' }),
+    color: z.string()
+  })
+})
+
 const PageFeature = z.object({
   title: z.string(),
   description: z.string(),
@@ -122,6 +148,33 @@ const ShowcaseItem = z.object({
 
 export default defineContentConfig({
   collections: {
+    home: defineCollection({
+      type: 'page',
+      source: 'home.yml',
+      schema: z.object({
+        seo: z.object({
+          title: z.string(),
+          description: z.string()
+        }).optional(),
+        title: z.string(),
+        description: z.string(),
+        hero: z.object({
+          greeting: z.string().optional(),
+          title: z.string(),
+          description: z.string(),
+          links: z.array(Button).optional(),
+          images: z.array(Image).optional()
+        }),
+        about: BaseSection,
+        experience: BaseSection.extend({
+          items: z.array(ExperienceItem)
+        }),
+        quotes: BaseSection.extend({
+          items: z.array(Quote)
+        }),
+        blog: BaseSection
+      })
+    }),
     index: defineCollection({
       type: 'data',
       source: 'index.yml',

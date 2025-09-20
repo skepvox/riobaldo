@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { kebabCase } from 'scule'
+import type { Ref } from 'vue'
 import type { ContentNavigationItem } from '@nuxt/content'
 import { findPageBreadcrumb } from '@nuxt/content/utils'
 import { mapContentNavigation } from '#ui-pro/utils'
 
 definePageMeta({
+  layout: 'author',
   heroBackground: 'opacity-30',
   key: 'louis-lavelle'
 })
@@ -15,15 +17,6 @@ const route = useRoute()
 const nuxtApp = useNuxtApp()
 
 const path = computed(() => route.path.replace(/\/$/, ''))
-
-// Get Louis Lavelle navigation
-const asideNavigation = computed(() => {
-  return navPageFromPath(louisLavelleRoot.value, navigation.value)?.children || []
-})
-
-const { headerLinks } = useHeaderLinks()
-const louisLavelleRoot = computed(() => '/louis-lavelle')
-const links = computed(() => headerLinks.value.find(link => link.to === louisLavelleRoot.value)?.children ?? [])
 
 function paintResponse() {
   if (import.meta.server) {
@@ -69,18 +62,6 @@ const breadcrumb = computed(() => {
 
 const editLink = computed(() => page.value?.path ? `https://github.com/skepvox/riobaldo/edit/main/content${page.value.path}.md` : '#')
 
-const communityLinks = [{
-  icon: 'i-lucide-heart',
-  label: 'Become a Sponsor',
-  to: 'https://go.nuxt.com/sponsor',
-  target: '_blank'
-}, {
-  icon: 'i-lucide-book-open',
-  label: 'Explore More',
-  to: '/louis-lavelle',
-  target: '_self'
-}]
-
 const title = computed(() => page.value?.seo?.title || page.value?.title)
 const titleTemplate = computed(() => page.value?.titleTemplate || '%s · Louis Lavelle')
 
@@ -108,19 +89,6 @@ if (import.meta.server) {
 <template>
   <UContainer v-if="page">
     <UPage>
-      <template #left>
-        <UPageAside>
-          <UPageAnchors :links="links" />
-          <USeparator type="dashed" class="my-6" />
-          <UContentNavigation
-            :navigation="asideNavigation"
-            default-open
-            trailing-icon="i-lucide-chevron-right"
-            :ui="{ linkTrailingIcon: 'group-data-[state=open]:rotate-90' }"
-            highlight
-          />
-        </UPageAside>
-      </template>
       <UPage>
         <UPageHeader v-bind="page">
           <template #headline>
@@ -163,15 +131,11 @@ if (import.meta.server) {
         </UPageBody>
 
         <template #right>
-          <UContentToc :links="page.body?.toc?.links" highlight class="lg:backdrop-blur-none">
-            <template #bottom>
-              <USeparator v-if="page.body?.toc?.links?.length" type="dashed" />
-              <UPageLinks title="Community" :links="communityLinks" />
-              <USeparator type="dashed" />
-              <SocialLinks />
-              <Ads />
-            </template>
-          </UContentToc>
+          <aside class="hidden lg:block lg:sticky lg:top-32 lg:w-[18rem]">
+            <div class="rounded-2xl border border-default/60 bg-elevated/60 backdrop-blur p-4">
+              <UContentToc :links="page.body?.toc?.links" highlight />
+            </div>
+          </aside>
         </template>
       </UPage>
     </UPage>
