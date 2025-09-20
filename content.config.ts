@@ -329,17 +329,6 @@ export default defineContentConfig({
         tags: z.array(z.string()).optional()
       })
     }),
-    marcusAurelius: defineCollection({
-      type: 'page',
-      source: 'marcus-aurelius/**/*',
-      schema: z.object({
-        title: z.string(),
-        description: z.string().optional(),
-        author: z.string().optional(),
-        date: z.string().date().optional(),
-        tags: z.array(z.string()).optional()
-      })
-    }),
     agencies: defineCollection({
       type: 'page',
       source: 'enterprise/agencies/*.md',

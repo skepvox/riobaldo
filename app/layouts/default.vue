@@ -2,7 +2,6 @@
 const route = useRoute()
 const heroBackgroundClass = computed(() => route.meta?.heroBackground || '')
 const { isLoading } = useLoadingIndicator()
-const { t } = useI18n()
 
 const appear = ref(false)
 const appeared = ref(false)
@@ -20,14 +19,14 @@ onMounted(() => {
   <div>
     <UBanner
       id="mastering-nuxt-v4"
-      :title="t('layout.banner.title')"
+      title="Faça o curso oficial de Nuxt 4 e economize US$ 50 com o código NUXT4RDY"
       icon="i-lucide-book-open"
       to="https://masteringnuxt.com/?utm_source=nuxt&utm_medium=banner&utm_campaign=nuxt4&friend=nuxt"
       target="_blank"
       close
       :actions="[
         {
-          label: t('layout.banner.cta'),
+          label: 'Resgatar desconto',
           color: 'neutral',
           variant: 'outline',
           trailingIcon: 'i-lucide-arrow-right',

@@ -1,15 +1,18 @@
 <script setup lang="ts">
 const { footerLinks } = useFooterLinks()
-const { t } = useI18n()
 
-const siteName = computed(() => t('app.siteName'))
-const currentYear = computed(() => new Date().getFullYear())
-const copyrightLabel = computed(() => t('footer.copyright', {
-  start: 2024,
-  year: currentYear.value,
-  site: siteName.value
-}))
-const licenseLabel = computed(() => t('footer.license'))
+const siteName = 'Riobaldo'
+const currentYear = new Date().getFullYear()
+const copyrightLabel = `Direitos autorais © 2024-${currentYear} ${siteName}`
+const licenseLabel = 'Licença MIT'
+const socialLabels = {
+  instagram: 'Skepvox no Instagram',
+  x: 'Skepvox no X',
+  bluesky: 'Skepvox no BlueSky',
+  linkedin: 'Skepvox no LinkedIn',
+  discord: 'Skepvox no Discord',
+  github: 'Skepvox no GitHub'
+}
 </script>
 
 <template>
@@ -42,7 +45,7 @@ const licenseLabel = computed(() => t('footer.license'))
         target="_blank"
         icon="i-simple-icons-instagram"
       >
-        <span class="sr-only">{{ t('footer.social.instagram') }}</span>
+        <span class="sr-only">{{ socialLabels.instagram }}</span>
       </UButton>
       <UButton
         color="neutral"
@@ -51,7 +54,7 @@ const licenseLabel = computed(() => t('footer.license'))
         target="_blank"
         icon="i-simple-icons-x"
       >
-        <span class="sr-only">{{ t('footer.social.x') }}</span>
+        <span class="sr-only">{{ socialLabels.x }}</span>
       </UButton>
       <UButton
         color="neutral"
@@ -60,7 +63,7 @@ const licenseLabel = computed(() => t('footer.license'))
         target="_blank"
         icon="i-simple-icons-bluesky"
       >
-        <span class="sr-only">{{ t('footer.social.bluesky') }}</span>
+        <span class="sr-only">{{ socialLabels.bluesky }}</span>
       </UButton>
       <UButton
         color="neutral"
@@ -69,7 +72,7 @@ const licenseLabel = computed(() => t('footer.license'))
         target="_blank"
         icon="i-simple-icons-linkedin"
       >
-        <span class="sr-only">{{ t('footer.social.linkedin') }}</span>
+        <span class="sr-only">{{ socialLabels.linkedin }}</span>
       </UButton>
       <UButton
         color="neutral"
@@ -78,7 +81,7 @@ const licenseLabel = computed(() => t('footer.license'))
         target="_blank"
         icon="i-simple-icons-discord"
       >
-        <span class="sr-only">{{ t('footer.social.discord') }}</span>
+        <span class="sr-only">{{ socialLabels.discord }}</span>
       </UButton>
       <UButton
         color="neutral"
@@ -87,7 +90,7 @@ const licenseLabel = computed(() => t('footer.license'))
         target="_blank"
         icon="i-simple-icons-github"
       >
-        <span class="sr-only">{{ t('footer.social.github') }}</span>
+        <span class="sr-only">{{ socialLabels.github }}</span>
       </UButton>
     </template>
   </UFooter>

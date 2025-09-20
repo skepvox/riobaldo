@@ -38,7 +38,6 @@
       "type": "book",
       "category": "Métaphysique",
       "status": "available",
-      "path": "/louis-lavelle/de-l-etre",
       "reissues": [
         {
           "year": 1947,
@@ -74,8 +73,7 @@
       "pages": 222,
       "type": "book",
       "category": "Métaphysique",
-      "status": "available",
-      "path": "/louis-lavelle/la-presence-totale"
+      "status": "available"
     },
     {
       "id": "de-acte",
@@ -86,7 +84,6 @@
       "type": "book",
       "category": "Métaphysique",
       "status": "available",
-      "path": "/louis-lavelle/de-l-acte",
       "reissues": [
         {
           "year": 1947,
@@ -173,8 +170,7 @@
       "pages": 470,
       "type": "book",
       "category": "Métaphysique",
-      "status": "available",
-      "path": "/louis-lavelle/du-temps-et-de-l-eternite"
+      "status": "available"
     },
     {
       "id": "introduction-ontologie",
@@ -210,8 +206,7 @@
       "pages": 576,
       "type": "book",
       "category": "Philosophie de l'esprit",
-      "status": "available",
-      "path": "/louis-lavelle/de-l-ame-humaine"
+      "status": "available"
     },
     {
       "id": "traite-valeurs-1",

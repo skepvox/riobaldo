@@ -6,22 +6,31 @@ const logo = useTemplateRef('logo')
 const route = useRoute()
 const { copy } = useClipboard()
 const { headerLinks } = useHeaderLinks()
-const { t, locale, locales } = useI18n()
-const switchLocalePath = useSwitchLocalePath()
-const localePath = useLocalePath()
 
-const flagIcons: Record<string, string> = {
-  pt: 'flag:br-4x3',
-  en: 'flag:us-4x3',
-  fr: 'flag:fr-4x3'
-}
-
-const hasLocaleSwitcher = computed(() => locales.value.length > 1)
+const copyLogoLabel = 'Copiar logo como SVG'
+const copiedTitle = 'Logotipo Riobaldo copiado como SVG'
+const copiedDescription = 'Você já pode colá-lo no seu projeto'
+const homeAriaLabel = 'Voltar para a página inicial'
 
 const mobileNavigation = computed<ContentNavigationItem[]>(() => {
   // Navigation is already filtered by locale from app.vue
   const louisLavelleLink = navigation.value.find(link => link.path?.includes('/louis-lavelle'))
-  const marcusAureliusLink = navigation.value.find(link => link.path?.includes('/marcus-aurelius'))
+    ?? (() => {
+      const headerLink = headerLinks.value.find(link => link.id === 'louis-lavelle')
+      if (!headerLink) {
+        return undefined
+      }
+      return {
+        title: headerLink.label,
+        path: typeof headerLink.to === 'string' ? headerLink.to : undefined,
+        icon: headerLink.icon,
+        children: headerLink.children?.map(child => ({
+          title: child.label,
+          path: child.to,
+          icon: child.icon
+        }))
+      } as ContentNavigationItem
+    })()
   const docsLink = navigation.value.find(link => link.path?.includes('/docs'))
 
   // Get Resources and Products from headerLinks
@@ -30,15 +39,14 @@ const mobileNavigation = computed<ContentNavigationItem[]>(() => {
 
   return [
     {
-      title: t('navigation.home.label'),
-      path: localePath('/', locale.value as any),
+      title: 'Início',
+      path: '/',
       icon: 'i-lucide-home'
     } as ContentNavigationItem,
     louisLavelleLink,
-    marcusAureliusLink,
     {
-      title: t('navigation.blog.label'),
-      path: localePath('/blog', locale.value as any),
+      title: 'Blog',
+      path: '/blog',
       icon: 'i-lucide-newspaper'
     } as ContentNavigationItem,
     docsLink,
@@ -73,13 +81,13 @@ const defaultOpen = computed(() => {
 })
 
 const logoContextMenuItems = computed(() => [[{
-  label: t('header.contextMenu.copyLogo'),
+  label: copyLogoLabel,
   icon: 'i-simple-icons-nuxtdotjs',
   onSelect() {
     if (logo.value) {
       copy(logo.value.$el.outerHTML, {
-        title: t('header.contextMenu.copiedTitle'),
-        description: t('header.contextMenu.copiedDescription'),
+        title: copiedTitle,
+        description: copiedDescription,
         icon: 'i-lucide-circle-check',
         color: 'success'
       })
@@ -92,7 +100,7 @@ const logoContextMenuItems = computed(() => [[{
   <UHeader>
     <template #left>
       <UContextMenu :items="logoContextMenuItems" size="xs">
-        <NuxtLink to="/" class="flex gap-2 items-end" :aria-label="t('header.aria.backToHome')">
+        <NuxtLink to="/" class="flex gap-2 items-end" :aria-label="homeAriaLabel">
           <RiobaldoLogo ref="logo" class="block w-auto h-6" />
         </NuxtLink>
       </UContextMenu>
@@ -101,38 +109,6 @@ const logoContextMenuItems = computed(() => [[{
     <UNavigationMenu :items="headerLinks" variant="link" :ui="{ linkLeadingIcon: 'hidden' }" />
 
     <template #right>
-      <UTooltip :text="t('header.tooltip.search')" :kbds="['meta', 'K']">
-        <UContentSearchButton />
-      </UTooltip>
-
-      <div v-if="hasLocaleSwitcher" class="flex items-center gap-1">
-        <UTooltip
-          v-for="loc in locales"
-          :key="loc.code"
-          :text="loc.name"
-        >
-          <UButton
-            :to="switchLocalePath(loc.code)"
-            size="xs"
-            color="neutral"
-            variant="ghost"
-            square
-            :aria-label="`Switch to ${loc.name}`"
-            class="!p-1"
-          >
-            <UIcon
-              :name="flagIcons[loc.code]"
-              :class="[
-                'size-5 transition-all',
-                locale === loc.code
-                  ? 'saturate-100'
-                  : 'saturate-0 hover:saturate-100 opacity-75 hover:opacity-100'
-              ]"
-            />
-          </UButton>
-        </UTooltip>
-      </div>
-
       <UColorModeButton />
     </template>
 

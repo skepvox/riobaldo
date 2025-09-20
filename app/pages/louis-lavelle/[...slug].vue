@@ -22,8 +22,7 @@ const asideNavigation = computed(() => {
 })
 
 const { headerLinks } = useHeaderLinks()
-const localePath = useLocalePath()
-const louisLavelleRoot = computed(() => localePath({ path: '/louis-lavelle' }))
+const louisLavelleRoot = computed(() => '/louis-lavelle')
 const links = computed(() => headerLinks.value.find(link => link.to === louisLavelleRoot.value)?.children ?? [])
 
 function paintResponse() {
@@ -68,7 +67,7 @@ const breadcrumb = computed(() => {
   return links
 })
 
-const editLink = computed(() => `https://github.com/nuxt/nuxt/edit/main/content${page?.value?.path}.md`)
+const editLink = computed(() => page.value?.path ? `https://github.com/skepvox/riobaldo/edit/main/content${page.value.path}.md` : '#')
 
 const communityLinks = [{
   icon: 'i-lucide-heart',

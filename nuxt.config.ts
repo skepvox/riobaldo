@@ -17,8 +17,7 @@ export default defineNuxtConfig({
     'nuxt-og-image',
     'motion-v/nuxt',
     'nuxt-llms',
-    'nuxt-charts',
-    '@nuxtjs/i18n'
+    'nuxt-charts'
   ],
   $development: {
     site: {
@@ -86,13 +85,9 @@ export default defineNuxtConfig({
     '/louis-lavelle/manuel-de-methodologie-dialectique/livre-02': { redirect: '/louis-lavelle/manuel-de-methodologie-dialectique/livre-02/la-dialectique-de-la-conscience', prerender: false },
     '/louis-lavelle/manuel-de-methodologie-dialectique/livre-03': { redirect: '/louis-lavelle/manuel-de-methodologie-dialectique/livre-03/decouverte-et-signification', prerender: false },
     // Marcus Aurelius redirects
-    '/marcus-aurelius': { redirect: '/marcus-aurelius/para-si-mesmo/livro-01', prerender: false },
-    '/marcus-aurelius/para-si-mesmo': { redirect: '/marcus-aurelius/para-si-mesmo/livro-01', prerender: false },
-    '/marcus-aurelius/ta-eis-heauton': { redirect: '/marcus-aurelius/ta-eis-heauton/biblio-alpha', prerender: false },
     // Legacy ethos redirects
     '/ethos': { redirect: '/louis-lavelle', prerender: false },
     '/ethos/louis-lavelle': { redirect: '/louis-lavelle', prerender: false },
-    '/ethos/marcus-aurelius': { redirect: '/marcus-aurelius', prerender: false }
   },
   sourcemap: true,
   experimental: {
@@ -129,26 +124,6 @@ export default defineNuxtConfig({
         commaDangle: 'never'
       }
     }
-  },
-  i18n: {
-    defaultLocale: 'pt',
-    strategy: 'prefix_except_default',
-    langDir: 'locales',
-    locales: [
-      { code: 'pt', iso: 'pt-BR', language: 'pt-BR', name: 'Português', file: 'pt.json' },
-      { code: 'en', iso: 'en-US', language: 'en-US', name: 'English', file: 'en.json' },
-      { code: 'fr', iso: 'fr-FR', language: 'fr-FR', name: 'Français', file: 'fr.json' }
-    ],
-    detectBrowserLanguage: {
-      useCookie: true,
-      cookieKey: 'i18n_redirected',
-      redirectOn: 'root',
-      alwaysRedirect: false
-    },
-    compilation: {
-      strictMessage: true
-    },
-    baseUrl: 'https://riobaldo.com'
   },
   icon: {
     customCollections: [{
