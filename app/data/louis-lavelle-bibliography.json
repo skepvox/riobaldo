@@ -37,7 +37,7 @@
       "pages": 446,
       "type": "book",
       "category": "Métaphysique",
-      "status": "available",
+      "status": "pending",
       "reissues": [
         {
           "year": 1947,
@@ -73,7 +73,7 @@
       "pages": 222,
       "type": "book",
       "category": "Métaphysique",
-      "status": "available"
+      "status": "pending"
     },
     {
       "id": "de-acte",
@@ -83,7 +83,7 @@
       "pages": 640,
       "type": "book",
       "category": "Métaphysique",
-      "status": "available",
+      "status": "pending",
       "reissues": [
         {
           "year": 1947,
@@ -170,7 +170,7 @@
       "pages": 470,
       "type": "book",
       "category": "Métaphysique",
-      "status": "available"
+      "status": "pending"
     },
     {
       "id": "introduction-ontologie",
@@ -206,7 +206,7 @@
       "pages": 576,
       "type": "book",
       "category": "Philosophie de l'esprit",
-      "status": "available"
+      "status": "pending"
     },
     {
       "id": "traite-valeurs-1",
@@ -302,7 +302,8 @@
       "pages": 224,
       "type": "book",
       "category": "Méthodologie",
-      "status": "pending"
+      "status": "available",
+      "path": "/louis-lavelle/manual-de-metodologia-dialetica"
     },
     {
       "id": "psychologie-spiritualite",

@@ -67,18 +67,10 @@
           </div>
 
           <div class="flex-1 space-y-5">
-            <header class="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
-              <div>
-                <p class="text-sm font-medium uppercase tracking-wide text-primary-600 dark:text-primary-400">
-                  {{ decadeLabel }}
-                </p>
-                <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100">
-                  {{ decadeTitle(decade.decade, decade.decade + 9) }}
-                </h3>
-              </div>
-              <UBadge variant="subtle">
-                {{ decadeCountLabel(decade.works.length) }}
-              </UBadge>
+            <header>
+              <p class="text-sm font-medium uppercase tracking-wide text-primary-600 dark:text-primary-400">
+                {{ decadeTitle(decade.decade, decade.decade + 9) }}
+              </p>
             </header>
 
             <div class="grid gap-4">
@@ -96,52 +88,18 @@
                       <h4 class="text-lg font-semibold text-gray-900 dark:text-gray-100">
                         {{ work.title }}
                       </h4>
-                      <UBadge :color="getCategoryColor(work.category) as any" size="xs">
-                        {{ work.category }}
-                      </UBadge>
-                      <UBadge
-                        v-if="work.type === 'posthumous'"
-                        color="neutral"
-                        variant="outline"
-                        size="xs"
-                      >
-                        {{ typeLabels.posthumous }}
-                      </UBadge>
-                      <UBadge
-                        v-if="work.type === 'thesis'"
-                        color="secondary"
-                        variant="outline"
-                        size="xs"
-                      >
-                        {{ typeLabels.thesis }}
-                      </UBadge>
                     </div>
 
-                    <div class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                    <div class="text-sm text-gray-600 dark:text-gray-400">
                       <p class="flex flex-wrap items-center gap-2">
                         <span class="font-medium text-gray-900 dark:text-gray-100">
                           {{ work.year }}
                         </span>
-                        <span class="text-gray-400 dark:text-gray-500">•</span>
-                        <span>{{ work.publisher }}</span>
                         <template v-if="work.pages">
                           <span class="text-gray-400 dark:text-gray-500">•</span>
                           <span>{{ pagesLabel(work.pages) }}</span>
                         </template>
                       </p>
-                      <p v-if="work.description" class="italic">
-                        {{ work.description }}
-                      </p>
-                      <div v-if="hasReissues(work)" class="pt-1">
-                        <p class="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                          {{ reissuesLabel }}
-                        </p>
-                        <ul class="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-xs text-gray-600 dark:text-gray-400">
-                          <li v-for="(reissue, reissueIndex) in work.reissues" :key="reissueIndex">
-                            {{ reissue.year }} · {{ reissue.publisher }}
-                          </li>
-                        </ul>
-                      </div>
                     </div>
                   </div>
 
@@ -240,15 +198,8 @@ interface DecadeGroup {
 const selectedStatus = ref<string>('all')
 
 const loadingText = 'Carregando bibliografia…'
-const decadeLabel = 'Década'
-const decadeTitle = (start: number, end: number) => `Anos ${start} – ${end}`
-const decadeCountLabel = (count: number) => `${count} obra${count === 1 ? '' : 's'}`
-const typeLabels: Record<string, string> = {
-  posthumous: 'Póstuma',
-  thesis: 'Tese'
-}
+const decadeTitle = (start: number, end: number) => `${start} – ${end}`
 const pagesLabel = (count: number) => `${count} página${count === 1 ? '' : 's'}`
-const reissuesLabel = 'Reedições'
 const readLabel = 'Ler'
 const inProgressLabel = 'Transcrição em andamento'
 const soonLabel = 'Em breve'
@@ -278,7 +229,8 @@ const groupedWorks = computed<DecadeGroup[]>(() => {
   const groups: Record<number, Work[]> = {}
 
   filteredWorks.value.forEach((work) => {
-    const decade = Math.floor(work.year / 10) * 10
+    // Group by decades starting at year 1 (1921-1930, 1931-1940, etc.)
+    const decade = Math.floor((work.year - 1) / 10) * 10 + 1
     if (!groups[decade]) {
       groups[decade] = []
     }
@@ -321,21 +273,6 @@ const numberFormatter = computed(() => new Intl.NumberFormat('pt-BR'))
 
 const formattedAvailabilityPercent = computed(() => numberFormatter.value.format(availabilityPercent.value))
 
-const categoryCount = computed(() => {
-  if (!bibliography.value) {
-    return 0
-  }
-
-  const data = bibliography.value as BibliographyData
-
-  if (Array.isArray(data.categories) && data.categories.length) {
-    return data.categories.length
-  }
-
-  const works = (data.works || []) as Work[]
-  return new Set(works.map(work => work.category)).size
-})
-
 const summaryStats = computed(() => {
   const stats = statistics.value
   const formatter = numberFormatter.value
@@ -354,32 +291,9 @@ const summaryStats = computed(() => {
       label: 'Em transcrição',
       value: formatter.format(stats.pending),
       hint: 'Aguardando transcrição'
-    },
-    {
-      id: 'categories',
-      icon: 'i-heroicons-sparkles',
-      label: 'Categorias',
-      value: formatter.format(categoryCount.value),
-      hint: 'Áreas temáticas distintas'
     }
   ]
 })
-
-const categoryColorMap: Record<string, string> = {
-  'Axiologie': 'amber',
-  'Écrits personnels': 'pink',
-  'Histoire de la philosophie': 'indigo',
-  'Métaphysique': 'violet',
-  'Méthodologie': 'teal',
-  'Philosophie de l\'esprit': 'blue',
-  'Philosophie du langage': 'cyan',
-  'Philosophie générale': 'primary',
-  'Philosophie morale': 'green',
-  'Psychologie': 'purple',
-  'Spiritualité': 'rose'
-}
-
-const getCategoryColor = (category: string) => categoryColorMap[category] || 'neutral'
 
 const getCardClasses = (work: Work) => {
   const base = 'transition-all duration-200'
@@ -390,8 +304,6 @@ const getCardClasses = (work: Work) => {
 
   return `${base} hover:border-primary-200/60 dark:hover:border-primary-400/40`
 }
-
-const hasReissues = (work: Work) => Array.isArray(work.reissues) && work.reissues.length > 0
 
 const axisBaseClass = 'relative isolate flex w-10 shrink-0 justify-center before:absolute before:left-1/2 before:top-3 before:h-full before:-translate-x-1/2 before:w-px before:bg-gray-200 before:content-[\'\'] dark:before:bg-gray-700 sm:before:top-5'
 </script>
