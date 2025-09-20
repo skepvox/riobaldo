@@ -4,8 +4,6 @@ import { kebabCase } from 'scule'
 definePageMeta({
   heroBackground: 'opacity-30 -z-10'
 })
-defineI18nRoute(false)
-
 const route = useRoute()
 const { copy } = useClipboard()
 
@@ -111,7 +109,7 @@ const links = [
             <span>
               {{ article.category }}
             </span>
-            <span class="text-muted">&middot;&nbsp;&nbsp;<time>{{ formatDateByLocale('en', article.date) }}</time></span>
+            <span class="text-muted">&middot;&nbsp;&nbsp;<time>{{ formatDateByLocale('pt-BR', article.date) }}</time></span>
           </div>
         </template>
 

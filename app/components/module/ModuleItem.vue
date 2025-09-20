@@ -150,7 +150,7 @@ const items = computed(() => [
               </NuxtLink>
             </UTooltip>
 
-            <UTooltip v-if="selectedSort.key === 'publishedAt'" :text="`Updated ${formatDateByLocale('en', module.stats.publishedAt)}`">
+            <UTooltip v-if="selectedSort.key === 'publishedAt'" :text="`Actualizado ${formatDateByLocale('pt-BR', module.stats.publishedAt)}`">
               <NuxtLink
                 class="flex items-center gap-1 hover:text-highlighted"
                 :to="`https://github.com/${module.repo}`"
@@ -161,7 +161,7 @@ const items = computed(() => [
               </NuxtLink>
             </UTooltip>
 
-            <UTooltip v-if="selectedSort.key === 'createdAt'" :text="`Created ${formatDateByLocale('en', module.stats.createdAt)}`">
+            <UTooltip v-if="selectedSort.key === 'createdAt'" :text="`Criado ${formatDateByLocale('pt-BR', module.stats.createdAt)}`">
               <NuxtLink
                 class="flex items-center gap-1 hover:text-highlighted"
                 :to="`https://github.com/${module.repo}`"

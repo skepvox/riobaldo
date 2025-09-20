@@ -1,16 +1,15 @@
 <script setup lang="ts">
-const { t } = useI18n()
-
-const title = computed(() => t('navigation.designKit.title', 'Design Kit'))
-const description = computed(() => t('navigation.designKit.description', 'Design resources coming soon.'))
+const title = 'Kit de Design'
+const description = 'Recursos de design para o Riobaldo estão a caminho.'
+const placeholder = 'Estamos preparando recursos de design para o Riobaldo. Volte em breve!'
 
 definePageMeta({
   layout: 'default'
 })
 
 useSeoMeta({
-  title: () => title.value,
-  description: () => description.value
+  title,
+  description
 })
 </script>
 
@@ -25,7 +24,7 @@ useSeoMeta({
               {{ description }}
             </p>
             <p>
-              {{ t('navigation.designKit.placeholder', 'We are preparing design resources for Riobaldo. Check back soon!') }}
+              {{ placeholder }}
             </p>
           </div>
         </UCard>

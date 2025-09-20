@@ -3,7 +3,7 @@
     <div v-if="!bibliography" class="flex items-center justify-center gap-3 py-12">
       <UIcon name="i-heroicons-arrow-path" class="h-8 w-8 animate-spin text-primary-500" />
       <span class="text-gray-600 dark:text-gray-400">
-        {{ t('home.timeline.loading') }}
+        {{ loadingText }}
       </span>
     </div>
 
@@ -70,14 +70,14 @@
             <header class="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
               <div>
                 <p class="text-sm font-medium uppercase tracking-wide text-primary-600 dark:text-primary-400">
-                  {{ t('home.timeline.decade.label') }}
+                  {{ decadeLabel }}
                 </p>
                 <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100">
-                  {{ t('home.timeline.decade.title', { start: decade.decade, end: decade.decade + 9 }) }}
+                  {{ decadeTitle(decade.decade, decade.decade + 9) }}
                 </h3>
               </div>
               <UBadge variant="subtle">
-                {{ t('home.timeline.decade.count', { count: decade.works.length }) }}
+                {{ decadeCountLabel(decade.works.length) }}
               </UBadge>
             </header>
 
@@ -105,7 +105,7 @@
                         variant="outline"
                         size="xs"
                       >
-                        {{ t('home.timeline.work.types.posthumous') }}
+                        {{ typeLabels.posthumous }}
                       </UBadge>
                       <UBadge
                         v-if="work.type === 'thesis'"
@@ -113,7 +113,7 @@
                         variant="outline"
                         size="xs"
                       >
-                        {{ t('home.timeline.work.types.thesis') }}
+                        {{ typeLabels.thesis }}
                       </UBadge>
                     </div>
 
@@ -126,7 +126,7 @@
                         <span>{{ work.publisher }}</span>
                         <template v-if="work.pages">
                           <span class="text-gray-400 dark:text-gray-500">•</span>
-                          <span>{{ t('home.timeline.work.pages', { count: work.pages }) }}</span>
+                          <span>{{ pagesLabel(work.pages) }}</span>
                         </template>
                       </p>
                       <p v-if="work.description" class="italic">
@@ -134,7 +134,7 @@
                       </p>
                       <div v-if="hasReissues(work)" class="pt-1">
                         <p class="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                          {{ t('home.timeline.work.reissues') }}
+                          {{ reissuesLabel }}
                         </p>
                         <ul class="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-xs text-gray-600 dark:text-gray-400">
                           <li v-for="(reissue, reissueIndex) in work.reissues" :key="reissueIndex">
@@ -154,9 +154,9 @@
                       variant="solid"
                       icon="i-heroicons-book-open"
                     >
-                      {{ t('home.timeline.work.actions.read') }}
+                      {{ readLabel }}
                     </UButton>
-                    <UTooltip v-else :text="t('home.timeline.work.actions.inProgress')">
+                    <UTooltip v-else :text="inProgressLabel">
                       <UButton
                         color="neutral"
                         variant="ghost"
@@ -164,7 +164,7 @@
                         icon="i-heroicons-clock"
                         disabled
                       >
-                        {{ t('home.timeline.work.actions.soon') }}
+                        {{ soonLabel }}
                       </UButton>
                     </UTooltip>
                   </div>
@@ -179,14 +179,10 @@
         <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div class="space-y-1">
             <p class="text-sm font-semibold uppercase tracking-wide text-primary-600 dark:text-primary-400">
-              {{ t('home.timeline.availability.title') }}
+              {{ availabilityTitle }}
             </p>
             <p class="text-sm text-gray-600 dark:text-gray-400">
-              {{ t('home.timeline.availability.description', {
-                available: statistics.available,
-                total: statistics.total,
-                pending: statistics.pending
-              }) }}
+              {{ availabilityDescription(statistics.available, statistics.total, statistics.pending) }}
             </p>
           </div>
 
@@ -209,8 +205,6 @@
 
 <script setup lang="ts">
 import bibliographyData from '../../app/data/louis-lavelle-bibliography.json'
-
-const { t, locale } = useI18n()
 
 const bibliography = ref(bibliographyData)
 
@@ -245,10 +239,26 @@ interface DecadeGroup {
 
 const selectedStatus = ref<string>('all')
 
+const loadingText = 'Carregando bibliografia…'
+const decadeLabel = 'Década'
+const decadeTitle = (start: number, end: number) => `Anos ${start} – ${end}`
+const decadeCountLabel = (count: number) => `${count} obra${count === 1 ? '' : 's'}`
+const typeLabels: Record<string, string> = {
+  posthumous: 'Póstuma',
+  thesis: 'Tese'
+}
+const pagesLabel = (count: number) => `${count} página${count === 1 ? '' : 's'}`
+const reissuesLabel = 'Reedições'
+const readLabel = 'Ler'
+const inProgressLabel = 'Transcrição em andamento'
+const soonLabel = 'Em breve'
+const availabilityTitle = 'Progresso das transcrições'
+const availabilityDescription = (available: number, total: number, pending: number) => `${available} de ${total} obras já transcritas, ${pending} em andamento.`
+
 const statusFilters = computed(() => [
-  { label: t('home.timeline.filters.status.all'), value: 'all' },
-  { label: t('home.timeline.filters.status.available'), value: 'available' },
-  { label: t('home.timeline.filters.status.pending'), value: 'pending' }
+  { label: 'Todas', value: 'all' },
+  { label: 'Disponíveis', value: 'available' },
+  { label: 'Em andamento', value: 'pending' }
 ])
 
 const filteredWorks = computed(() => {
@@ -307,7 +317,7 @@ const availabilityPercent = computed(() => {
   return Math.round((statistics.value.available / statistics.value.total) * 100)
 })
 
-const numberFormatter = computed(() => new Intl.NumberFormat(locale.value))
+const numberFormatter = computed(() => new Intl.NumberFormat('pt-BR'))
 
 const formattedAvailabilityPercent = computed(() => numberFormatter.value.format(availabilityPercent.value))
 
@@ -334,23 +344,23 @@ const summaryStats = computed(() => {
     {
       id: 'available',
       icon: 'i-heroicons-book-open',
-      label: t('home.stats.availableLabel'),
+      label: 'Disponíveis',
       value: formatter.format(stats.available),
-      hint: t('home.stats.details.available', { percent: formattedAvailabilityPercent.value })
+      hint: `Prontas para leitura (${formattedAvailabilityPercent.value}%)`
     },
     {
       id: 'pending',
       icon: 'i-heroicons-clock',
-      label: t('home.stats.pendingLabel'),
+      label: 'Em transcrição',
       value: formatter.format(stats.pending),
-      hint: t('home.stats.details.pending')
+      hint: 'Aguardando transcrição'
     },
     {
       id: 'categories',
       icon: 'i-heroicons-sparkles',
-      label: t('home.stats.categoriesLabel'),
+      label: 'Categorias',
       value: formatter.format(categoryCount.value),
-      hint: t('home.stats.details.categories')
+      hint: 'Áreas temáticas distintas'
     }
   ]
 })

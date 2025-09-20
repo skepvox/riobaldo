@@ -6,7 +6,6 @@ if (!page.value) {
 definePageMeta({
   heroBackground: 'opacity-70 -z-10'
 })
-defineI18nRoute(false)
 const { fetchList, articles } = useBlog()
 
 useHead({
@@ -78,7 +77,7 @@ await fetchList()
               height: (index === 0 ? 378 : 246),
               alt: `${article.title} image`
             }"
-            :date="formatDateByLocale('en', article.date)"
+            :date="formatDateByLocale('pt-BR', article.date)"
             :authors="article.authors.map(author => ({ ...author, avatar: { ...author.avatar, alt: `${author.name} avatar` } }))"
             :badge="{ label: article.category, color: 'primary', variant: 'subtle' }"
             :variant="index === 0 ? 'outline' : 'subtle'"

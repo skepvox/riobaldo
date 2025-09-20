@@ -3,17 +3,71 @@ definePageMeta({
   heroBackground: '-z-10'
 })
 
-const { t } = useI18n()
-
-const seoTitle = computed(() => t('home.meta.title'))
-const seoDescription = computed(() => t('home.meta.description'))
+const seoTitle = 'Riobaldo - Filosofia e Matemática'
+const seoDescription = 'Plataforma educacional para o estudo da filosofia e da matemática no ensino médio.'
 
 useSeoMeta({
-  title: () => seoTitle.value,
-  description: () => seoDescription.value,
-  ogTitle: () => seoTitle.value,
-  ogDescription: () => seoDescription.value
+  title: seoTitle,
+  description: seoDescription,
+  ogTitle: seoTitle,
+  ogDescription: seoDescription
 })
+
+const heroDescription = 'Explore as obras completas de Louis Lavelle e aprofunde seus conhecimentos em filosofia e álgebra. Uma plataforma educacional pensada para estudantes e professores do ensino médio.'
+const heroCtaLavelle = 'Explorar Lavelle'
+const heroCtaAlgebra = 'Estudar Álgebra'
+
+const bibliographySection = {
+  title: 'Bibliografia de Louis Lavelle',
+  description: 'Descubra a evolução cronológica da obra filosófica de Louis Lavelle, das primeiras teses às publicações póstumas.',
+  cta: 'Explorar todas as obras'
+}
+
+const featuredSection = {
+  title: 'Obras Disponíveis',
+  description: 'Comece sua exploração com estes textos fundamentais de Louis Lavelle, totalmente transcritos e anotados.',
+  readWork: 'Ler a obra'
+}
+
+const features = [
+  {
+    icon: 'i-heroicons-academic-cap',
+    title: 'Recursos Pedagógicos',
+    description: 'Acesso completo às obras filosóficas e exercícios de matemática alinhados ao currículo do ensino médio.'
+  },
+  {
+    icon: 'i-heroicons-book-open',
+    title: 'Textos Originais',
+    description: 'Transcrições fiéis das obras de Louis Lavelle com anotações e contextualizações.'
+  },
+  {
+    icon: 'i-heroicons-chart-bar',
+    title: 'Progressão Estruturada',
+    description: 'Percursos progressivos em álgebra com exercícios resolvidos e demonstrações.'
+  },
+  {
+    icon: 'i-heroicons-magnifying-glass',
+    title: 'Busca Avançada',
+    description: 'Encontre rapidamente conceitos filosóficos e teoremas matemáticos.'
+  },
+  {
+    icon: 'i-heroicons-users',
+    title: 'Comunidade Educativa',
+    description: 'Conecte-se com estudantes e professores apaixonados por filosofia e matemática.'
+  },
+  {
+    icon: 'i-heroicons-device-phone-mobile',
+    title: 'Acesso Mobile',
+    description: 'Consulte os recursos de qualquer dispositivo, a qualquer momento.'
+  }
+]
+
+const ctaSection = {
+  title: 'Comece sua exploração filosófica',
+  description: 'Junte-se a milhares de estudantes e professores que usam o Riobaldo para aprofundar seus estudos de filosofia e matemática.',
+  primary: 'Descobrir Lavelle',
+  secondary: 'Explorar Álgebra'
+}
 
 // Import the bibliography data directly
 import bibliographyData from '../../app/data/louis-lavelle-bibliography.json'
@@ -61,13 +115,13 @@ const featuredWorks = computed(() => {
       }"
     >
       <template #title>
-        {{ t('app.siteName') }}<br>
-        <span class="text-primary">{{ t('app.tagline') }}</span>
+        Riobaldo<br>
+        <span class="text-primary">Filosofia e Matemática</span>
       </template>
 
       <template #description>
         <p class="text-lg">
-          {{ t('home.hero.description') }}
+          {{ heroDescription }}
         </p>
       </template>
 
@@ -75,10 +129,10 @@ const featuredWorks = computed(() => {
         <div class="flex flex-col gap-4">
           <div class="flex items-center flex-wrap gap-2">
             <UButton to="/louis-lavelle" size="xl">
-              {{ t('home.hero.ctaLavelle') }}
+              {{ heroCtaLavelle }}
             </UButton>
             <UButton to="/modules" size="xl" color="neutral" variant="subtle">
-              {{ t('home.hero.ctaAlgebra') }}
+              {{ heroCtaAlgebra }}
             </UButton>
           </div>
         </div>
@@ -87,8 +141,8 @@ const featuredWorks = computed(() => {
 
     <!-- Lavelle Timeline Section -->
     <UPageSection
-      :title="t('home.bibliography.title')"
-      :description="t('home.bibliography.description')"
+      :title="bibliographySection.title"
+      :description="bibliographySection.description"
       :ui="{
         root: 'bg-gradient-to-b border-t border-default from-muted dark:from-muted/40 to-default',
         container: 'py-12 sm:py-16 lg:py-20'
@@ -103,7 +157,7 @@ const featuredWorks = computed(() => {
             size="lg"
             trailing-icon="i-heroicons-arrow-right"
           >
-            {{ t('home.bibliography.cta') }}
+            {{ bibliographySection.cta }}
           </UButton>
         </div>
       </div>
@@ -111,8 +165,8 @@ const featuredWorks = computed(() => {
 
     <!-- Featured Works -->
     <UPageSection
-      :title="t('home.featured.title')"
-      :description="t('home.featured.description')"
+      :title="featuredSection.title"
+      :description="featuredSection.description"
       :ui="{
         root: 'bg-gradient-to-b border-t border-default from-muted dark:from-muted/40 to-default'
       }"
@@ -157,7 +211,7 @@ const featuredWorks = computed(() => {
               icon="i-heroicons-book-open"
               class="w-full"
             >
-              {{ t('home.featured.readWork') }}
+              {{ featuredSection.readWork }}
             </UButton>
           </template>
         </UCard>
@@ -166,8 +220,8 @@ const featuredWorks = computed(() => {
 
     <!-- Features Section -->
     <UPageSection
-      :title="t('home.features.title')"
-      :description="t('home.features.description')"
+      title="Por que Riobaldo?"
+      description="Uma plataforma pensada para enriquecer o aprendizado de filosofia e matemática."
       :ui="{
         root: 'bg-gradient-to-b border-t border-default from-muted dark:from-muted/40 to-default',
         features: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'
@@ -175,39 +229,11 @@ const featuredWorks = computed(() => {
     >
       <template #features>
         <UPageFeature
-          icon="i-heroicons-academic-cap"
-          :title="t('home.features.items.education.title')"
-          :description="t('home.features.items.education.description')"
-          orientation="vertical"
-        />
-        <UPageFeature
-          icon="i-heroicons-book-open"
-          :title="t('home.features.items.originalTexts.title')"
-          :description="t('home.features.items.originalTexts.description')"
-          orientation="vertical"
-        />
-        <UPageFeature
-          icon="i-heroicons-chart-bar"
-          :title="t('home.features.items.structuredProgress.title')"
-          :description="t('home.features.items.structuredProgress.description')"
-          orientation="vertical"
-        />
-        <UPageFeature
-          icon="i-heroicons-magnifying-glass"
-          :title="t('home.features.items.advancedSearch.title')"
-          :description="t('home.features.items.advancedSearch.description')"
-          orientation="vertical"
-        />
-        <UPageFeature
-          icon="i-heroicons-users"
-          :title="t('home.features.items.community.title')"
-          :description="t('home.features.items.community.description')"
-          orientation="vertical"
-        />
-        <UPageFeature
-          icon="i-heroicons-device-phone-mobile"
-          :title="t('home.features.items.mobileAccess.title')"
-          :description="t('home.features.items.mobileAccess.description')"
+          v-for="feature in features"
+          :key="feature.title"
+          :icon="feature.icon"
+          :title="feature.title"
+          :description="feature.description"
           orientation="vertical"
         />
       </template>
@@ -222,17 +248,17 @@ const featuredWorks = computed(() => {
     >
       <div class="max-w-2xl mx-auto">
         <h2 class="text-3xl font-bold mb-4">
-          {{ t('home.cta.title') }}
+          {{ ctaSection.title }}
         </h2>
         <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">
-          {{ t('home.cta.description') }}
+          {{ ctaSection.description }}
         </p>
         <div class="flex justify-center gap-4">
           <UButton to="/louis-lavelle" size="lg">
-            {{ t('home.cta.primary') }}
+            {{ ctaSection.primary }}
           </UButton>
           <UButton to="/modules" size="lg" variant="outline">
-            {{ t('home.cta.secondary') }}
+            {{ ctaSection.secondary }}
           </UButton>
         </div>
       </div>
