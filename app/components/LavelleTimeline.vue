@@ -8,7 +8,7 @@
     </div>
 
     <div v-else>
-      <div class="flex flex-wrap justify-end gap-2">
+      <div class="flex flex-wrap gap-2">
         <UButtonGroup class="w-full sm:w-auto">
           <UButton
             v-for="filter in statusFilters"
@@ -66,9 +66,9 @@
             </span>
           </div>
 
-          <div class="flex-1 space-y-5">
+          <div class="flex-1 space-y-6">
             <header>
-              <p class="text-sm font-medium uppercase tracking-wide text-primary-600 dark:text-primary-400">
+              <p class="text-lg font-semibold leading-tight text-primary-600 dark:text-primary-400">
                 {{ decadeTitle(decade.decade, decade.decade + 9) }}
               </p>
             </header>

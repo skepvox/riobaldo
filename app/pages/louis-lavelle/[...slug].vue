@@ -62,6 +62,9 @@ const breadcrumb = computed(() => {
 
 const editLink = computed(() => page.value?.path ? `https://github.com/skepvox/riobaldo/edit/main/content${page.value.path}.md` : '#')
 
+const tocLinks = computed(() => page.value?.body?.toc?.links ?? [])
+provide('authorRightToc', tocLinks)
+
 const title = computed(() => page.value?.seo?.title || page.value?.title)
 const titleTemplate = computed(() => page.value?.titleTemplate || '%s · Louis Lavelle')
 
@@ -89,55 +92,45 @@ if (import.meta.server) {
 <template>
   <UContainer v-if="page">
     <UPage>
-      <UPage>
-        <UPageHeader v-bind="page">
-          <template #headline>
-            <UBreadcrumb :items="breadcrumb" />
-          </template>
-
-          <template #links>
-            <UButton
-              v-for="link in page.links?.map(link => ({ ...link, size: 'md' }))"
-              :key="link.label"
-              color="neutral"
-              variant="outline"
-              :target="link.to.startsWith('http') ? '_blank' : undefined"
-              v-bind="link"
-            >
-              <template v-if="link.avatar" #leading>
-                <UAvatar v-bind="link.avatar" size="2xs" :alt="`${link.label} avatar`" />
-              </template>
-            </UButton>
-            <PageHeaderLinks :key="page.path" />
-          </template>
-        </UPageHeader>
-
-        <UPageBody>
-          <ContentRenderer v-if="page.body" :value="page" />
-          <div>
-            <USeparator class="mt-6 mb-10">
-              <div class="flex items-center gap-2 text-sm text-muted">
-                <UButton size="sm" variant="link" color="neutral" to="https://github.com/nuxt/nuxt/issues/new/choose" target="_blank">
-                  Report an issue
-                </UButton>
-                or
-                <UButton size="sm" variant="link" color="neutral" :to="editLink" target="_blank">
-                  Edit this page on GitHub
-                </UButton>
-              </div>
-            </USeparator>
-            <UContentSurround :surround="surround" />
-          </div>
-        </UPageBody>
-
-        <template #right>
-          <aside class="hidden lg:block lg:sticky lg:top-32 lg:w-[18rem]">
-            <div class="rounded-2xl border border-default/60 bg-elevated/60 backdrop-blur p-4">
-              <UContentToc :links="page.body?.toc?.links" highlight />
-            </div>
-          </aside>
+      <UPageHeader v-bind="page">
+        <template #headline>
+          <UBreadcrumb :items="breadcrumb" />
         </template>
-      </UPage>
+
+        <template #links>
+          <UButton
+            v-for="link in page.links?.map(link => ({ ...link, size: 'md' }))"
+            :key="link.label"
+            color="neutral"
+            variant="outline"
+            :target="link.to.startsWith('http') ? '_blank' : undefined"
+            v-bind="link"
+          >
+            <template v-if="link.avatar" #leading>
+              <UAvatar v-bind="link.avatar" size="2xs" :alt="`${link.label} avatar`" />
+            </template>
+          </UButton>
+          <PageHeaderLinks :key="page.path" />
+        </template>
+      </UPageHeader>
+
+      <UPageBody>
+        <ContentRenderer v-if="page.body" :value="page" />
+        <div>
+          <USeparator class="mt-6 mb-10">
+            <div class="flex items-center gap-2 text-sm text-muted">
+              <UButton size="sm" variant="link" color="neutral" to="https://github.com/nuxt/nuxt/issues/new/choose" target="_blank">
+                Report an issue
+              </UButton>
+              or
+              <UButton size="sm" variant="link" color="neutral" :to="editLink" target="_blank">
+                Edit this page on GitHub
+              </UButton>
+            </div>
+          </USeparator>
+          <UContentSurround :surround="surround" />
+        </div>
+      </UPageBody>
     </UPage>
   </UContainer>
 </template>

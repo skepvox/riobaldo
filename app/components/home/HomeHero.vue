@@ -1,28 +1,38 @@
 <script setup lang="ts">
-import type { HomePageContent } from '~/types/home'
-
 const props = defineProps<{
-  page: HomePageContent
+  page: any
 }>()
 
 const appConfig = useAppConfig()
 const hero = computed(() => props.page.hero)
-const images = computed(() => (hero.value.images ?? []).map(image => ({
-  ...image,
-  width: image.width ?? 234,
-  height: image.height ?? 234
-})))
-const footerLinks = computed(() => {
-  const footer = appConfig as any
-  return footer?.footer?.links ?? []
-})
+const socialLinks = [
+  {
+    'icon': 'i-simple-icons-instagram',
+    'to': 'https://instagram.com/skepvox',
+    'target': '_blank',
+    'aria-label': 'Instagram'
+  },
+  {
+    'icon': 'i-simple-icons-x',
+    'to': 'https://x.com/skepvox',
+    'target': '_blank',
+    'aria-label': 'X'
+  },
+  {
+    'icon': 'i-simple-icons-github',
+    'to': 'https://github.com/skepvox',
+    'target': '_blank',
+    'aria-label': 'GitHub'
+  }
+]
 </script>
 
 <template>
   <UPageHero
     :ui="{
       headline: 'flex items-center justify-center',
-      title: 'text-shadow-md max-w-lg mx-auto',
+      title: 'text-shadow-md max-w-2xl mx-auto text-4xl/tight sm:text-5xl/tight font-semibold',
+      description: 'max-w-2xl mx-auto text-lg sm:text-xl text-muted',
       links: 'mt-4 flex-col justify-center items-center'
     }"
   >
@@ -95,29 +105,8 @@ const footerLinks = computed(() => {
     </template>
 
     <template #links>
-      <Motion
-        :initial="{
-          scale: 1.1,
-          opacity: 0,
-          filter: 'blur(20px)'
-        }"
-        :animate="{
-          scale: 1,
-          opacity: 1,
-          filter: 'blur(0px)'
-        }"
-        :transition="{
-          duration: 0.6,
-          delay: 0.5
-        }"
-      >
-        <WorkInProgress />
-      </Motion>
-
-      <div class="gap-x-4 inline-flex mt-4">
+      <div class="flex flex-col items-center gap-4">
         <Motion
-          v-for="(link, index) of footerLinks"
-          :key="index"
           :initial="{
             scale: 1.1,
             opacity: 0,
@@ -130,22 +119,46 @@ const footerLinks = computed(() => {
           }"
           :transition="{
             duration: 0.6,
-            delay: 0.5 + index * 0.1
+            delay: 0.5
           }"
         >
-          <UButton
-            v-bind="{ size: 'md', color: 'neutral', variant: 'ghost', ...link }"
-          />
+          <WorkInProgress />
         </Motion>
+
+        <div class="gap-x-4 inline-flex mt-2">
+          <Motion
+            v-for="(link, index) of socialLinks"
+            :key="index"
+            :initial="{
+              scale: 1.1,
+              opacity: 0,
+              filter: 'blur(20px)'
+            }"
+            :animate="{
+              scale: 1,
+              opacity: 1,
+              filter: 'blur(0px)'
+            }"
+            :transition="{
+              duration: 0.6,
+              delay: 0.6 + index * 0.1
+            }"
+          >
+            <UButton
+              v-bind="{ size: 'md', color: 'neutral', variant: 'ghost', ...link }"
+            />
+          </Motion>
+        </div>
       </div>
     </template>
 
     <UPageMarquee
+      v-if="hero.images?.length"
       pause-on-hover
       class="py-2 -mx-4 sm:-mx-6 lg:-mx-8 [--duration:60s]"
     >
       <Motion
-        v-for="(img, index) in images"
+        v-for="(img, index) in hero.images"
         :key="index"
         :initial="{
           scale: 1.1,
@@ -159,12 +172,12 @@ const footerLinks = computed(() => {
         }"
         :transition="{
           duration: 0.6,
-          delay: index * 0.1
+          delay: 0.7 + index * 0.1
         }"
       >
         <img
-          width="234"
-          height="234"
+          :width="img.width || 234"
+          :height="img.height || 234"
           class="rounded-lg"
           :class="index % 2 === 0 ? '-rotate-2' : 'rotate-2'"
           :src="img.src"

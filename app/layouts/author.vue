@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { ContentNavigationItem } from '@nuxt/content'
+import { useSlots } from 'vue'
 import type { Ref } from 'vue'
 import { navPageFromPath } from '~/utils/content'
 
@@ -7,6 +8,8 @@ const route = useRoute()
 const heroBackgroundClass = computed(() => route.meta?.heroBackground || '')
 const { isLoading } = useLoadingIndicator()
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation', ref([]))
+const authorRightToc = inject<Ref<any[]>>('authorRightToc', ref([]))
+const slots = useSlots()
 
 const appear = ref(false)
 const appeared = ref(false)
@@ -26,6 +29,10 @@ const authorRootPath = computed(() => {
 
 const authorNode = computed(() => navPageFromPath(authorRootPath.value, navigation.value))
 const authorChildren = computed(() => authorNode.value?.children ?? [])
+const isRootPage = computed(() => route.path === authorRootPath.value)
+const hasRightSlot = computed(() => Boolean(slots.right))
+const hasToc = computed(() => (authorRightToc.value?.length ?? 0) > 0)
+const shouldShowRightAside = computed(() => !isRootPage.value && (hasRightSlot.value || hasToc.value))
 
 const bookLinks = computed(() => authorChildren.value.map(child => ({
   title: child.title,
@@ -97,56 +104,100 @@ watch(
         ]"
       />
 
-      <div class="px-4 sm:px-6 lg:px-8 py-8">
-        <div v-if="mobileNavigation.length" class="mb-8 lg:hidden">
-          <UContentNavigation :navigation="mobileNavigation" highlight :default-open="route.path !== authorRootPath" />
+      <UContainer class="py-8 space-y-10">
+        <div v-if="mobileNavigation.length && !isRootPage" class="mb-8 lg:hidden">
+          <UContentNavigation
+            :navigation="mobileNavigation"
+            highlight
+            :default-open="route.path !== authorRootPath"
+            :ui="{
+              link: 'text-sm font-medium text-muted hover:text-primary'
+            }"
+          />
         </div>
 
-        <div class="lg:grid lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-10">
-          <aside v-if="authorChildren.length" class="hidden lg:flex lg:flex-col lg:gap-6 lg:sticky lg:top-32 lg:w-[18rem]">
-            <div class="rounded-2xl border border-default/60 bg-elevated/60 backdrop-blur p-4">
-              <div class="flex items-center justify-between gap-3">
-                <span class="text-xs font-semibold uppercase tracking-wide text-muted">
-                  {{ authorNode?.title || 'Coleção' }}
-                </span>
-                <UButton
-                  icon="i-lucide-chevron-down"
-                  size="xs"
-                  color="neutral"
-                  variant="ghost"
-                  :class="booksOpen ? 'rotate-180 transition-transform' : 'transition-transform'"
-                  @click="booksOpen = !booksOpen"
-                />
+        <UPage
+          v-if="isRootPage"
+          :ui="{ root: 'gap-0' }"
+          class="max-w-5xl mx-auto"
+        >
+          <UPageBody class="space-y-12 sm:space-y-16">
+            <NuxtPage />
+          </UPageBody>
+        </UPage>
+
+        <UPage
+          v-else
+          :ui="{ root: 'items-start gap-10' }"
+          class="mx-auto max-w-6xl"
+        >
+          <template #left>
+            <UPageAside v-if="authorChildren.length" class="hidden lg:block">
+              <div class="sticky top-32 space-y-6">
+                <div class="rounded-2xl border border-default/60 bg-elevated/60 backdrop-blur p-4">
+                  <div class="flex items-center justify-between gap-3">
+                    <span class="text-sm font-semibold uppercase tracking-wide text-muted">
+                      {{ authorNode?.title || 'Coleção' }}
+                    </span>
+                    <UButton
+                      icon="i-lucide-chevron-down"
+                      size="xs"
+                      color="neutral"
+                      variant="ghost"
+                      :class="booksOpen ? 'rotate-180 transition-transform' : 'transition-transform'"
+                      @click="booksOpen = !booksOpen"
+                    />
+                  </div>
+
+                  <UCollapse :model-value="booksOpen">
+                    <nav class="mt-4 space-y-1">
+                      <NuxtLink
+                        v-for="book in bookLinks"
+                        :key="book.path"
+                        :to="book.path"
+                        class="flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium transition-colors"
+                        :class="book.active ? 'bg-primary/10 text-primary' : 'text-muted hover:bg-default/60'"
+                      >
+                        <UIcon v-if="book.icon" :name="book.icon" class="size-4" />
+                        <span>{{ book.title }}</span>
+                      </NuxtLink>
+                    </nav>
+                  </UCollapse>
+                </div>
+
+                <div v-if="chaptersNavigation.length" class="rounded-2xl border border-default/60 bg-elevated/60 backdrop-blur p-3">
+                  <UContentNavigation
+                    :navigation="chaptersNavigation"
+                    highlight
+                    :ui="{
+                      link: 'text-sm font-medium text-muted hover:text-primary'
+                    }"
+                  />
+                </div>
               </div>
+            </UPageAside>
+          </template>
 
-              <UCollapse :model-value="booksOpen">
-                <nav class="mt-4 space-y-1">
-                  <NuxtLink
-                    v-for="book in bookLinks"
-                    :key="book.path"
-                    :to="book.path"
-                    class="flex items-center gap-2 rounded-xl px-3 py-2 text-sm transition-colors"
-                    :class="book.active ? 'bg-primary/10 text-primary font-semibold' : 'text-muted hover:bg-default/60'"
-                  >
-                    <UIcon v-if="book.icon" :name="book.icon" class="size-4" />
-                    <span>{{ book.title }}</span>
-                  </NuxtLink>
-                </nav>
-              </UCollapse>
-            </div>
-
-            <div v-if="chaptersNavigation.length" class="rounded-2xl border border-default/60 bg-elevated/60 backdrop-blur p-3">
-              <UContentNavigation :navigation="chaptersNavigation" highlight />
-            </div>
-          </aside>
-
-          <div class="min-w-0">
+          <div class="min-w-0 space-y-12 sm:space-y-16">
             <NuxtPage />
           </div>
 
-          <slot name="right" />
-        </div>
-      </div>
+          <template #right>
+            <UPageAside v-if="shouldShowRightAside" class="hidden lg:block">
+              <div class="sticky top-32 space-y-4">
+                <slot name="right" />
+                <UCard
+                  v-if="hasToc"
+                  class="border border-default/60 bg-elevated/60 backdrop-blur"
+                  :ui="{ body: 'p-4 space-y-2 text-sm text-muted' }"
+                >
+                  <UContentToc :links="authorRightToc" highlight />
+                </UCard>
+              </div>
+            </UPageAside>
+          </template>
+        </UPage>
+      </UContainer>
     </UMain>
 
     <AppFooter />

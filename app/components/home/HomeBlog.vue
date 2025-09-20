@@ -1,49 +1,33 @@
 <script setup lang="ts">
 import { formatDateByLocale } from '~/utils'
-import type { HomeSection } from '~/types/home'
 
-const props = defineProps<{
-  section: HomeSection
+defineProps<{
+  section: any
 }>()
 
 const { data: posts } = await useAsyncData('index-blogs', () =>
   queryCollection('blog').order('date', 'DESC').limit(3).all()
 )
-if (!posts.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Posts do blog não encontrados', fatal: true })
-}
-
-const blogPosts = computed(() => (posts.value ?? []).map((post, index) => ({
-  ...post,
-  image: post.image
-    ? {
-        src: post.image,
-        width: index === 0 ? 672 : 437,
-        height: index === 0 ? 378 : 246,
-        alt: `${post.title} image`
-      }
-    : undefined
-})))
 </script>
 
 <template>
   <UPageSection
-    :title="props.section.title"
+    :title="section.title"
     :ui="{
-      container: 'px-4 sm:px-6 lg:px-8 !pt-0 sm:gap-6 lg:gap-8',
-      title: 'text-left text-xl sm:text-xl lg:text-2xl font-medium',
-      description: 'text-left mt-2 text-sm sm:text-md lg:text-sm text-muted'
+      container: 'sm:gap-6 lg:gap-8',
+      title: 'text-left text-2xl/tight sm:text-3xl/tight font-semibold',
+      description: 'text-left mt-3 text-base sm:text-lg text-muted'
     }"
   >
-    <template #description>
-      <WorkInProgress />
+    <template v-if="section.description" #description>
+      <p>{{ section.description }}</p>
     </template>
     <UBlogPosts
       orientation="vertical"
       class="gap-4 lg:gap-y-4"
     >
       <UBlogPost
-        v-for="(post, index) in blogPosts"
+        v-for="(post, index) in posts"
         :key="post.path ?? index"
         orientation="horizontal"
         variant="naked"

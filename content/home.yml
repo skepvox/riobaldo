@@ -47,41 +47,40 @@ about:
   description: |
     Riobaldo nasce como espaço de reflexão e escrita lenta, onde o pensamento pode seguir seu próprio ritmo, longe da urgência das redes. Aqui documento pesquisas sobre Louis Lavelle, percursos de álgebra e experimentos de design de produto orientados por filosofia.
 experience:
-  title: "Trajetória"
+  title: "Trajetória Profissional"
   items:
-    - date: "2024 — Presente"
-      position: "Estratégia e Inovação"
+    - date: "2024 - Presente Momento"
+      position: ""
       company:
         name: "Vallourec"
-        url: "https://www.vallourec.com"
+        url: "https://vallourec.com"
         icon: "i-lucide-sparkles"
-        color: "#0C64B4"
-    - date: "2022 — 2023"
-      position: "Mestrado em Filosofia"
+        color: "#0c64b4"
+    - date: "2022 - 2023"
+      position: "Mestrado"
       company:
-        name: "Catholic University of Milan"
-        url: "https://www.unicatt.eu"
-        icon: "i-lucide-graduation-cap"
-        color: "#003A63"
-    - date: "2012 — 2021"
-      position: "Engenharia Industrial"
+        name: "CMU"
+        url: "https://cmu.edu"
+        icon: "i-lucide-telescope"
+        color: "#EF3A47"
+    - date: "2012 - 2021"
+      position: ""
       company:
         name: "Vallourec"
-        url: "https://www.vallourec.com"
-        icon: "i-lucide-briefcase"
-        color: "#0C64B4"
-    - date: "2007 — 2011"
-      position: "Engenharia Metalúrgica"
+        url: "https://vallourec.com"
+        icon: "i-lucide-sparkle"
+        color: "#0c64b4"
+    - date: "2007 - 2011"
+      position: "Engenharia"
       company:
         name: "UFMG"
         url: "https://ufmg.br"
-        icon: "i-lucide-flame"
+        icon: "i-lucide-sprout"
         color: "#C8102E"
 quotes:
   title: "Caderno de citações"
   items:
-    - quote: |
-        "O sertão é do tamanho do mundo."
+    - quote: "O correr da vida embrulha tudo, a vida é assim: esquenta e esfria, aperta e daí afrouxa, sossega e depois desinquieta. O que ela quer da gente é coragem. O que Deus quer é ver a gente aprendendo a ser capaz de ficar alegre a mais, no meio da alegria, e inda mais alegre ainda no meio da tristeza! Só assim de repente, na horinha em que se quer, de propósito — por coragem."
       author:
         name: "João Guimarães Rosa"
         description: "Grande Sertão: Veredas"
@@ -91,19 +90,17 @@ quotes:
           alt: "João Guimarães Rosa"
           width: 80
           height: 80
-    - quote: |
-        "A filosofia vale como experiência direta do absoluto, e não como simples exercício intelectual."
+    - quote: "A sabedoria reside inteira numa certa proporção que somos capazes de encontrar entre aquilo que queremos e aquilo que nos acontece, sem que possamos dizer se é aquilo que nos acontece que assume a forma daquilo que queremos ou aquilo que queremos que assume a forma daquilo que nos acontece."
       author:
         name: "Louis Lavelle"
-        description: "Traité des Valeurs"
+        description: "O Erro de Narciso"
         avatar:
           src: /quotes/louis-lavelle.webp
           srcset: /quotes/louis-lavelle.webp
           alt: "Louis Lavelle"
           width: 80
           height: 80
-    - quote: |
-        "Existe algo de lindo na ansiedade, de tal forma que devemos vivê-la, mas sem deixar que ela nos devore."
+    - quote: "Existe algo de lindo na ansiedade, de tal forma que devemos vivê-la, mas sem deixar que ela nos devore. Devemos viver a dúvida que nós mesmos nos colocamos hoje, com a paciência e confiança de que a resposta virá no momento em que seremos capazes de recebê-la e vivê-la."
       author:
         name: "Rainer Maria Rilke"
         description: "Cartas a um Jovem Poeta"

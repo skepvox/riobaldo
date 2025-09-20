@@ -1,21 +1,16 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import type { HomeExperienceSection } from '~/types/home'
-
-const props = defineProps<{
-  section: HomeExperienceSection
+defineProps<{
+  section: any
 }>()
-
-const section = computed(() => props.section)
 </script>
 
 <template>
   <UPageSection
     :title="section.title"
     :ui="{
-      container: 'px-4 sm:px-6 lg:px-8 gap-4 sm:gap-4',
-      title: 'text-left text-xl sm:text-xl lg:text-2xl font-medium',
-      description: 'mt-2'
+      container: '!p-0 gap-4 sm:gap-4',
+      title: 'text-left text-2xl/tight sm:text-3xl/tight font-semibold',
+      description: 'mt-2 text-base sm:text-lg text-muted'
     }"
   >
     <template #description>
@@ -29,7 +24,7 @@ const section = computed(() => props.section)
           :in-view-options="{ once: true }"
           class="text-muted flex items-center text-nowrap gap-2"
         >
-          <p class="text-sm">
+          <p class="text-sm text-muted">
             {{ experience.date }}
           </p>
           <USeparator />
@@ -38,7 +33,7 @@ const section = computed(() => props.section)
             :to="experience.company.url"
             target="_blank"
           >
-            <span class="text-sm">
+            <span class="text-sm text-muted">
               {{ experience.position }}
             </span>
             <div
@@ -46,7 +41,7 @@ const section = computed(() => props.section)
               :style="{ color: experience.company.color }"
             >
               <span class="font-medium">{{ experience.company.name }}</span>
-              <UIcon :name="experience.company.icon" />
+              <UIcon v-if="experience.company.icon" :name="experience.company.icon" />
             </div>
           </ULink>
         </Motion>
