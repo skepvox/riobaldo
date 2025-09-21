@@ -117,17 +117,7 @@ if (import.meta.server) {
       <UPageBody>
         <ContentRenderer v-if="page.body" :value="page" />
         <div>
-          <USeparator class="mt-6 mb-10">
-            <div class="flex items-center gap-2 text-sm text-muted">
-              <UButton size="sm" variant="link" color="neutral" to="https://github.com/nuxt/nuxt/issues/new/choose" target="_blank">
-                Report an issue
-              </UButton>
-              or
-              <UButton size="sm" variant="link" color="neutral" :to="editLink" target="_blank">
-                Edit this page on GitHub
-              </UButton>
-            </div>
-          </USeparator>
+          <USeparator icon="i-lucide-shell" class="mt-6 mb-10" />
           <UContentSurround :surround="surround" />
         </div>
       </UPageBody>

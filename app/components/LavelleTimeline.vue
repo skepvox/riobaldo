@@ -15,6 +15,7 @@
             :key="filter.value"
             :color="selectedStatus === filter.value ? 'primary' : 'neutral'"
             :variant="selectedStatus === filter.value ? 'solid' : 'ghost'"
+            size="md"
             class="flex-1 sm:flex-none"
             @click="selectedStatus = filter.value"
           >
@@ -23,26 +24,20 @@
         </UButtonGroup>
       </div>
 
-      <div class="mt-6 grid gap-3 sm:grid-cols-3">
+      <div class="mt-6 grid gap-3 sm:grid-cols-2">
         <div
           v-for="item in summaryStats"
           :key="item.id"
-          class="flex items-start gap-3 rounded-xl border border-default/40 bg-white/60 px-4 py-3 text-sm text-gray-600 shadow-sm backdrop-blur-sm transition-colors duration-200 hover:border-primary-200/60 dark:border-white/10 dark:bg-white/5 dark:text-gray-400 dark:hover:border-primary-400/40"
+          class="flex items-center gap-3 rounded-xl border border-default/40 bg-white/60 px-2 py-2 text-xs text-gray-600 shadow-sm backdrop-blur-sm transition-colors duration-200 hover:border-primary-200/60 dark:border-white/10 dark:bg-white/5 dark:text-gray-400 dark:hover:border-primary-400/40"
         >
-          <span class="mt-1 inline-flex h-7 w-7 items-center justify-center rounded-full bg-primary-500/10 text-primary-600 dark:text-primary-300">
-            <UIcon :name="item.icon" class="h-4 w-4" aria-hidden="true" />
-          </span>
-          <div class="space-y-1">
-            <p class="font-medium text-gray-800 dark:text-gray-200">
-              {{ item.value }}
-              <span class="ml-1 text-xs font-semibold uppercase tracking-wide text-primary-600 dark:text-primary-300">
-                {{ item.label }}
-              </span>
-            </p>
-            <p class="text-xs text-gray-500 dark:text-gray-400">
-              {{ item.hint }}
-            </p>
+          <div class="relative isolate flex w-10 shrink-0 justify-center">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary-500/10 text-primary-600 dark:text-primary-300">
+              <UIcon :name="item.icon" class="h-4 w-4" aria-hidden="true" />
+            </span>
           </div>
+          <span class="text-xs font-semibold uppercase tracking-wide text-primary-600 dark:text-primary-300">
+            {{ item.value }} {{ item.label }}
+          </span>
         </div>
       </div>
 
@@ -106,9 +101,9 @@
                   <div class="flex items-start justify-end">
                     <UButton
                       v-if="work.status === 'available'"
-                      :to="work.path"
+                      to="/louis-lavelle/manuel-de-methodologie-dialectique/livre-01/reflexion-et-methode"
                       size="sm"
-                      color="primary"
+                      color="success"
                       variant="solid"
                       icon="i-heroicons-book-open"
                     >
@@ -116,14 +111,12 @@
                     </UButton>
                     <UTooltip v-else :text="inProgressLabel">
                       <UButton
-                        color="neutral"
-                        variant="ghost"
+                        color="warning"
+                        variant="subtle"
                         size="sm"
                         icon="i-heroicons-clock"
                         disabled
-                      >
-                        {{ soonLabel }}
-                      </UButton>
+                      />
                     </UTooltip>
                   </div>
                 </div>
@@ -135,12 +128,9 @@
 
       <div class="mt-14 rounded-2xl border border-default/60 bg-white/80 p-6 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-white/5">
         <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div class="space-y-1">
+          <div>
             <p class="text-sm font-semibold uppercase tracking-wide text-primary-600 dark:text-primary-400">
               {{ availabilityTitle }}
-            </p>
-            <p class="text-sm text-gray-600 dark:text-gray-400">
-              {{ availabilityDescription(statistics.available, statistics.total, statistics.pending) }}
             </p>
           </div>
 
@@ -202,9 +192,7 @@ const decadeTitle = (start: number, end: number) => `${start} – ${end}`
 const pagesLabel = (count: number) => `${count} página${count === 1 ? '' : 's'}`
 const readLabel = 'Ler'
 const inProgressLabel = 'Transcrição em andamento'
-const soonLabel = 'Em breve'
 const availabilityTitle = 'Progresso das transcrições'
-const availabilityDescription = (available: number, total: number, pending: number) => `${available} de ${total} obras já transcritas, ${pending} em andamento.`
 
 const statusFilters = computed(() => [
   { label: 'Todas', value: 'all' },
@@ -271,8 +259,6 @@ const availabilityPercent = computed(() => {
 
 const numberFormatter = computed(() => new Intl.NumberFormat('pt-BR'))
 
-const formattedAvailabilityPercent = computed(() => numberFormatter.value.format(availabilityPercent.value))
-
 const summaryStats = computed(() => {
   const stats = statistics.value
   const formatter = numberFormatter.value
@@ -281,16 +267,14 @@ const summaryStats = computed(() => {
     {
       id: 'available',
       icon: 'i-heroicons-book-open',
-      label: 'Disponíveis',
-      value: formatter.format(stats.available),
-      hint: `Prontas para leitura (${formattedAvailabilityPercent.value}%)`
+      label: stats.available === 1 ? 'Disponível' : 'Disponíveis',
+      value: formatter.format(stats.available)
     },
     {
       id: 'pending',
       icon: 'i-heroicons-clock',
       label: 'Em transcrição',
-      value: formatter.format(stats.pending),
-      hint: 'Aguardando transcrição'
+      value: formatter.format(stats.pending)
     }
   ]
 })

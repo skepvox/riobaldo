@@ -16,7 +16,14 @@ if (!page.value) {
 const hero = {
   title: page.value.title,
   highlight: (page.value as any).highlight || 'Filosofia do Espírito e da Presença',
-  description: page.value.description
+  description: page.value.description,
+  links: [{
+    label: 'Iniciar Leitura',
+    to: '/louis-lavelle/manual-de-metodologia-dialetica/livro-01/reflexao-e-metodo',
+    color: 'success' as const,
+    size: 'md' as const,
+    trailingIcon: 'i-lucide-arrow-right'
+  }]
 }
 
 const site = useSiteConfig()
@@ -37,6 +44,7 @@ useSeoMeta({
     <UPageHero
       :title="hero.title"
       :description="hero.description"
+      :links="hero.links"
       orientation="horizontal"
     >
       <template #title>
@@ -44,6 +52,8 @@ useSeoMeta({
         <span class="text-primary">{{ hero.highlight }}</span>
       </template>
     </UPageHero>
+
+    <USeparator icon="i-lucide-shell" class="h-px mt-8" />
 
     <UPageBody>
       <UContainer>

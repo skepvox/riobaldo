@@ -9,33 +9,39 @@ const mdPath = computed(() => `${site.url}/raw${route.path}.md`)
 
 const items = [
   {
-    label: 'Copy Markdown link',
+    label: 'WhatsApp',
+    icon: 'i-simple-icons-whatsapp',
+    target: '_blank',
+    to: `https://wa.me/?text=${encodeURIComponent(`${site.url}${route.path}`)}`
+  },
+  {
+    label: 'ChatGPT',
+    icon: 'i-simple-icons:openai',
+    target: '_blank',
+    to: `https://chatgpt.com/?hints=search&q=${encodeURIComponent(`Leia ${mdPath.value} para que eu possa lhe fazer perguntas.`)}`
+  },
+  {
+    label: 'Claude',
+    icon: 'i-simple-icons:anthropic',
+    target: '_blank',
+    to: `https://claude.ai/new?q=${encodeURIComponent(`Leia ${mdPath.value} para que eu possa lhe fazer perguntas.`)}`
+  },
+  {
+    label: 'Gemini',
+    icon: 'i-simple-icons-google',
+    target: '_blank',
+    to: `https://gemini.google.com/app?q=${encodeURIComponent(`Leia ${mdPath.value} para que eu possa lhe fazer perguntas.`)}`
+  },
+  {
+    label: 'Link',
     icon: 'i-lucide-link',
     onSelect() {
-      copy(mdPath.value)
+      copy(`${site.url}${route.path}`)
       toast.add({
-        title: 'Copied to clipboard',
+        title: 'Link copiado',
         icon: 'i-lucide-check-circle'
       })
     }
-  },
-  {
-    label: 'View as Markdown',
-    icon: 'i-simple-icons:markdown',
-    target: '_blank',
-    to: `/raw${route.path}.md`
-  },
-  {
-    label: 'Open in ChatGPT',
-    icon: 'i-simple-icons:openai',
-    target: '_blank',
-    to: `https://chatgpt.com/?hints=search&q=${encodeURIComponent(`Read ${mdPath.value} so I can ask questions about it.`)}`
-  },
-  {
-    label: 'Open in Claude',
-    icon: 'i-simple-icons:anthropic',
-    target: '_blank',
-    to: `https://claude.ai/new?q=${encodeURIComponent(`Read ${mdPath.value} so I can ask questions about it.`)}`
   }
 ]
 
@@ -47,35 +53,22 @@ async function copyPage() {
 </script>
 
 <template>
-  <UButtonGroup>
+  <UDropdownMenu
+    :items="items"
+    :content="{
+      align: 'end',
+      side: 'bottom',
+      sideOffset: 8
+    }"
+    :ui="{
+      content: 'w-48'
+    }"
+  >
     <UButton
-      label="Copy page"
-      :icon="copied ? 'i-lucide-copy-check' : 'i-lucide-copy'"
-      color="neutral"
+      label="Compartilhar"
+      icon="i-lucide-share-2"
+      color="primary"
       variant="outline"
-      :loading="isCopying"
-      :ui="{
-        leadingIcon: [copied ? 'text-primary' : 'text-neutral', 'size-3.5']
-      }"
-      @click="copyPage"
     />
-    <UDropdownMenu
-      :items="items"
-      :content="{
-        align: 'end',
-        side: 'bottom',
-        sideOffset: 8
-      }"
-      :ui="{
-        content: 'w-48'
-      }"
-    >
-      <UButton
-        icon="i-lucide-chevron-down"
-        size="sm"
-        color="neutral"
-        variant="outline"
-      />
-    </UDropdownMenu>
-  </UButtonGroup>
+  </UDropdownMenu>
 </template>
