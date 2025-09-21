@@ -41,36 +41,14 @@ if (article.value.image) {
   })
 }
 
-function formatSocialIntentQueryText(handle: string | undefined): string {
-  const credit = handle ? ` by @${handle}` : ''
-  const body = article.value.title + credit
-  const link = `https://riobaldo.com${article.value.path}`
-  return encodeURIComponent(`${body}\n\n${link}`)
-}
-
-const authorHandles: { twitter?: string, bluesky?: string } = {
-  twitter: article.value.authors?.[0]?.twitter,
-  bluesky: article.value.authors?.[0]?.bluesky
-}
-
 const socialLinks = computed(() =>
   !article.value
     ? []
     : [
         {
-          label: 'LinkedIn',
-          icon: 'i-simple-icons-linkedin',
-          to: `https://www.linkedin.com/sharing/share-offsite/?url=https://riobaldo.com${article.value.path}`
-        },
-        {
-          label: 'Bluesky',
-          icon: 'i-simple-icons-bluesky',
-          to: `https://bsky.app/intent/compose?text=${formatSocialIntentQueryText(authorHandles.bluesky)}`
-        },
-        {
-          label: 'X',
-          icon: 'i-simple-icons-x',
-          to: `https://x.com/intent/tweet?text=${formatSocialIntentQueryText(authorHandles.twitter)}`
+          label: 'WhatsApp',
+          icon: 'i-simple-icons-whatsapp',
+          to: `https://wa.me/?text=${encodeURIComponent(article.value.title + '\n\n' + 'https://riobaldo.com' + article.value.path)}`
         }
       ]
 )
@@ -84,16 +62,6 @@ const links = [
     icon: 'i-lucide-pen',
     label: 'Edit this article',
     to: `https://github.com/riobaldo/riobaldo.com/edit/main/content/${article.value.stem}.md`,
-    target: '_blank'
-  }, {
-    icon: 'i-lucide-star',
-    label: 'Star on GitHub',
-    to: 'https://go.nuxt.com/github',
-    target: '_blank'
-  }, {
-    icon: 'i-lucide-hand-heart',
-    label: 'Become a Sponsor',
-    to: 'https://go.nuxt.com/sponsor',
     target: '_blank'
   }
 ]
@@ -124,12 +92,12 @@ const links = [
 
           <div class="flex items-center justify-between mt-12 not-prose">
             <ULink to="/blog" class="text-primary">
-              ← Back to blog
+              ← Retornar
             </ULink>
             <div class="flex justify-end items-center gap-1.5">
               <UButton icon="i-lucide-link" variant="ghost" color="neutral" @click="copyLink">
-                <span class="sr-only">Copy URL</span>
-                Copy URL
+                <span class="sr-only">Copiar Link</span>
+                Copiar Link
               </UButton>
               <UButton
                 v-for="(link, index) in socialLinks"
@@ -150,7 +118,7 @@ const links = [
         </UPageBody>
 
         <template #right>
-          <UContentToc v-if="article.body && article.body.toc" :links="article.body.toc.links" title="Table of Contents" highlight>
+          <UContentToc v-if="article.body && article.body.toc" :links="article.body.toc.links" title="Sumário" highlight>
             <template #bottom>
               <div class="hidden lg:block space-y-6">
                 <UPageLinks title="Links" :links="links" />

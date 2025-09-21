@@ -1,16 +1,12 @@
 <script setup lang="ts">
-const { footerLinks } = useFooterLinks()
-
 const siteName = 'Riobaldo'
 const currentYear = new Date().getFullYear()
-const copyrightLabel = `Direitos autorais © 2024-${currentYear} ${siteName}`
-const licenseLabel = 'Licença MIT'
+const copyrightLabel = `Copyright © ${currentYear} ${siteName}`
 const socialLabels = {
   instagram: 'Skepvox no Instagram',
   x: 'Skepvox no X',
   bluesky: 'Skepvox no BlueSky',
   linkedin: 'Skepvox no LinkedIn',
-  discord: 'Skepvox no Discord',
   github: 'Skepvox no GitHub'
 }
 </script>
@@ -18,22 +14,10 @@ const socialLabels = {
 <template>
   <USeparator icon="i-lucide-infinity" class="h-px" />
 
-  <UFooter :ui="{ top: 'border-b border-default' }">
-    <template #top>
-      <UContainer>
-        <UFooterColumns :columns="footerLinks">
-          <template #right>
-            <NewsletterForm />
-          </template>
-        </UFooterColumns>
-      </UContainer>
-    </template>
-
+  <UFooter>
     <template #left>
       <p class="text-muted text-sm">
-        {{ copyrightLabel }} - <NuxtLink class="hover:underline" to="https://github.com/skepvox/riobaldo/blob/main/LICENSE" target="_blank">
-          {{ licenseLabel }}
-        </NuxtLink>
+        {{ copyrightLabel }}
       </p>
     </template>
 
@@ -73,15 +57,6 @@ const socialLabels = {
         icon="i-simple-icons-linkedin"
       >
         <span class="sr-only">{{ socialLabels.linkedin }}</span>
-      </UButton>
-      <UButton
-        color="neutral"
-        variant="ghost"
-        to="https://discord.gg/skepvox"
-        target="_blank"
-        icon="i-simple-icons-discord"
-      >
-        <span class="sr-only">{{ socialLabels.discord }}</span>
       </UButton>
       <UButton
         color="neutral"

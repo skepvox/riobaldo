@@ -3,28 +3,7 @@ const props = defineProps<{
   page: any
 }>()
 
-const appConfig = useAppConfig()
 const hero = computed(() => props.page.hero)
-const socialLinks = [
-  {
-    'icon': 'i-simple-icons-instagram',
-    'to': 'https://instagram.com/skepvox',
-    'target': '_blank',
-    'aria-label': 'Instagram'
-  },
-  {
-    'icon': 'i-simple-icons-x',
-    'to': 'https://x.com/skepvox',
-    'target': '_blank',
-    'aria-label': 'X'
-  },
-  {
-    'icon': 'i-simple-icons-github',
-    'to': 'https://github.com/skepvox',
-    'target': '_blank',
-    'aria-label': 'GitHub'
-  }
-]
 </script>
 
 <template>
@@ -36,32 +15,6 @@ const socialLinks = [
       links: 'mt-4 flex-col justify-center items-center'
     }"
   >
-    <template #headline>
-      <Motion
-        :initial="{
-          scale: 1.1,
-          opacity: 0,
-          filter: 'blur(20px)'
-        }"
-        :animate="{
-          scale: 1,
-          opacity: 1,
-          filter: 'blur(0px)'
-        }"
-        :transition="{
-          duration: 0.6,
-          delay: 0.1
-        }"
-      >
-        <UColorModeAvatar
-          class="size-18 ring ring-default ring-offset-3 ring-offset-(--ui-bg)"
-          :light="appConfig.global?.picture?.light!"
-          :dark="appConfig.global?.picture?.dark!"
-          :alt="appConfig.global?.picture?.alt!"
-        />
-      </Motion>
-    </template>
-
     <template #title>
       <Motion
         :initial="{
@@ -102,54 +55,6 @@ const socialLinks = [
       >
         {{ props.page.description }}
       </Motion>
-    </template>
-
-    <template #links>
-      <div class="flex flex-col items-center gap-4">
-        <Motion
-          :initial="{
-            scale: 1.1,
-            opacity: 0,
-            filter: 'blur(20px)'
-          }"
-          :animate="{
-            scale: 1,
-            opacity: 1,
-            filter: 'blur(0px)'
-          }"
-          :transition="{
-            duration: 0.6,
-            delay: 0.5
-          }"
-        >
-          <WorkInProgress />
-        </Motion>
-
-        <div class="gap-x-4 inline-flex mt-2">
-          <Motion
-            v-for="(link, index) of socialLinks"
-            :key="index"
-            :initial="{
-              scale: 1.1,
-              opacity: 0,
-              filter: 'blur(20px)'
-            }"
-            :animate="{
-              scale: 1,
-              opacity: 1,
-              filter: 'blur(0px)'
-            }"
-            :transition="{
-              duration: 0.6,
-              delay: 0.6 + index * 0.1
-            }"
-          >
-            <UButton
-              v-bind="{ size: 'md', color: 'neutral', variant: 'ghost', ...link }"
-            />
-          </Motion>
-        </div>
-      </div>
     </template>
 
     <UPageMarquee

@@ -2,59 +2,53 @@
 import { joinURL } from 'ufo'
 
 definePageMeta({
-  layout: 'author',
-  heroBackground: 'opacity-30'
+  heroBackground: 'opacity-70 -z-10'
 })
 
-const hero = {
-  title: 'Louis Lavelle',
-  highlight: 'Filosofia do Espírito e da Presença',
-  description: 'Coleção dedicada às obras de Louis Lavelle, com textos originais em domínio público, transcrições e traduções.'
+const { data: page } = await useAsyncData('louis-lavelle-landing', () =>
+  queryCollection('landing').path('/louis-lavelle').first()
+)
+
+if (!page.value) {
+  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
-const seoTitle = 'Louis Lavelle — Biblioteca Digital'
-const seoDescription = 'Coleção dedicada às obras de Louis Lavelle, com textos originais em domínio público, transcrições e traduções.'
+const hero = {
+  title: page.value.title,
+  highlight: (page.value as any).highlight || 'Filosofia do Espírito e da Presença',
+  description: page.value.description
+}
+
 const site = useSiteConfig()
 
 useSeoMeta({
-  title: seoTitle,
-  description: seoDescription,
-  ogTitle: seoTitle,
-  ogDescription: seoDescription,
+  title: page.value?.seo?.title || page.value?.title,
+  description: page.value?.seo?.description || page.value?.description,
+  ogTitle: page.value?.seo?.title || page.value?.title,
+  ogDescription: page.value?.seo?.description || page.value?.description,
   ogImage: joinURL(site.url, '/riobaldo-banner.webp'),
-  twitterTitle: seoTitle,
-  twitterDescription: seoDescription
+  twitterTitle: page.value?.seo?.title || page.value?.title,
+  twitterDescription: page.value?.seo?.description || page.value?.description
 })
 </script>
 
 <template>
-  <UPage>
+  <UContainer v-if="page">
     <UPageHero
-      class="relative"
+      :title="hero.title"
+      :description="hero.description"
       orientation="horizontal"
-      :ui="{
-        container: '!pb-16 py-20 sm:py-28 lg:py-32',
-        title: 'text-4xl sm:text-6xl font-semibold',
-        description: 'max-w-2xl text-lg text-muted'
-      }"
     >
       <template #title>
         {{ hero.title }}<br>
         <span class="text-primary">{{ hero.highlight }}</span>
       </template>
-      <template #description>
-        {{ hero.description }}
-      </template>
     </UPageHero>
 
-    <UPageSection
-      id="bibliografia"
-      :ui="{
-        root: 'border-t border-default/70',
-        container: 'py-14 sm:py-16 lg:py-20'
-      }"
-    >
-      <LavelleTimeline />
-    </UPageSection>
-  </UPage>
+    <UPageBody>
+      <UContainer>
+        <LavelleTimeline />
+      </UContainer>
+    </UPageBody>
+  </UContainer>
 </template>

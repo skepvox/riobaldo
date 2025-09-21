@@ -1,6 +1,6 @@
 <script setup lang="ts">
 definePageMeta({
-  heroBackground: 'opacity-40'
+  heroBackground: 'opacity-70 -z-10'
 })
 
 const { data: page } = await useAsyncData('home-page', () =>

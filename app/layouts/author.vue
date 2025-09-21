@@ -104,7 +104,7 @@ watch(
         ]"
       />
 
-      <UContainer class="py-8 space-y-10">
+      <UContainer :class="isRootPage ? '' : 'py-8 space-y-10'">
         <div v-if="mobileNavigation.length && !isRootPage" class="mb-8 lg:hidden">
           <UContentNavigation
             :navigation="mobileNavigation"
@@ -116,15 +116,9 @@ watch(
           />
         </div>
 
-        <UPage
-          v-if="isRootPage"
-          :ui="{ root: 'gap-0' }"
-          class="max-w-5xl mx-auto"
-        >
-          <UPageBody class="space-y-12 sm:space-y-16">
-            <NuxtPage />
-          </UPageBody>
-        </UPage>
+        <div v-if="isRootPage">
+          <NuxtPage />
+        </div>
 
         <UPage
           v-else

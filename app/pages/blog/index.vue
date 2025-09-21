@@ -8,16 +8,13 @@ definePageMeta({
 })
 const { fetchList, articles } = useBlog()
 
-useHead({
-  link: [
-    {
-      rel: 'alternate',
-      type: 'application/atom+xml',
-      title: 'Nuxt Blog RSS',
-      href: 'https://nuxt.com/blog/rss.xml'
-    }
-  ]
-})
+const hero = {
+  title: 'Blog',
+  highlight: page.value.title || 'Sertão Digital',
+  description: page.value.description
+}
+
+useHead({})
 useSeoMeta({
   titleTemplate: '%s',
   title: page.value.title,
@@ -37,28 +34,13 @@ await fetchList()
 <template>
   <UContainer v-if="page">
     <UPageHero
-      :title="page.title"
-      :description="page.description"
+      :title="hero.title"
+      :description="hero.description"
       orientation="horizontal"
     >
-      <template #links>
-        <NewsletterForm class="flex-1 max-w-xs" :description="undefined" />
-      </template>
-
-      <template #description>
-        {{ page.description }}
-
-        <UButton
-          to="/blog/rss.xml"
-          color="neutral"
-          external
-          icon="i-lucide-rss"
-          variant="subtle"
-          size="xs"
-          target="_blank"
-        >
-          RSS
-        </UButton>
+      <template #title>
+        {{ hero.title }}<br>
+        <span class="text-primary">{{ hero.highlight }}</span>
       </template>
     </UPageHero>
 

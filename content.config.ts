@@ -251,6 +251,7 @@ export default defineContentConfig({
       source: [
         { include: 'index.md' },
         { include: 'blog.yml' },
+        { include: 'louis-lavelle.yml' },
         { include: 'modules.yml' },
         { include: 'deploy.yml' },
         { include: 'templates.yml' },

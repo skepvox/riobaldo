@@ -158,32 +158,7 @@ function _useHeaderLinks() {
 export const useHeaderLinks = import.meta.client ? createSharedComposable(_useHeaderLinks) : _useHeaderLinks
 
 function _useFooterLinks() {
-  const footerLinks = computed(() => [{
-    label: 'Comunidade',
-    children: [{
-      label: 'Nuxters',
-      to: 'https://nuxters.nuxt.com',
-      target: '_blank'
-    }, {
-      label: 'Design Kit',
-      to: '/design-kit'
-    }]
-  }, {
-    label: 'Produtos',
-    children: [{
-      label: 'Nuxt UI Pro',
-      to: 'https://ui.nuxt.com/pro?utm_source=nuxt-website&utm_medium=footer',
-      target: '_blank'
-    }, {
-      label: 'Nuxt Studio',
-      to: 'https://content.nuxt.com/studio/?utm_source=nuxt-website&utm_medium=footer',
-      target: '_blank'
-    }, {
-      label: 'NuxtHub',
-      to: 'https://hub.nuxt.com/?utm_source=nuxt-website&utm_medium=footer',
-      target: '_blank'
-    }]
-  }])
+  const footerLinks = computed(() => [])
 
   return { footerLinks }
 }
