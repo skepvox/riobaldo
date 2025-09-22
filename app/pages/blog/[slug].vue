@@ -114,7 +114,11 @@ const links = [
 
           <USeparator v-if="surround?.length" />
 
-          <UContentSurround :surround="surround" />
+          <UContentSurround
+            prev-icon="i-lucide-chevron-left"
+            next-icon="i-lucide-chevron-right"
+            :surround="surround"
+          />
         </UPageBody>
 
         <template #right>

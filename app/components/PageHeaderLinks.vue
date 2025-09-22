@@ -1,9 +1,8 @@
 <script setup lang="ts">
 const route = useRoute()
 const toast = useToast()
-const { copy, copied } = useClipboard()
+const { copy } = useClipboard()
 const site = useSiteConfig()
-const isCopying = ref(false)
 
 const mdPath = computed(() => `${site.url}/raw${route.path}.md`)
 
@@ -44,12 +43,6 @@ const items = [
     }
   }
 ]
-
-async function copyPage() {
-  isCopying.value = true
-  copy(await $fetch<string>(`/raw${route.path}.md`))
-  isCopying.value = false
-}
 </script>
 
 <template>

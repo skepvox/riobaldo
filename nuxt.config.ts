@@ -82,11 +82,8 @@ export default defineNuxtConfig({
     '/louis-lavelle/manuel-de-methodologie-dialectique': { redirect: '/louis-lavelle/manuel-de-methodologie-dialectique/livre-01/reflexion-et-methode', prerender: false },
     '/louis-lavelle/manuel-de-methodologie-dialectique/livre-01': { redirect: '/louis-lavelle/manuel-de-methodologie-dialectique/livre-01/reflexion-et-methode', prerender: false },
     '/louis-lavelle/manuel-de-methodologie-dialectique/livre-02': { redirect: '/louis-lavelle/manuel-de-methodologie-dialectique/livre-02/la-dialectique-de-la-conscience', prerender: false },
-    '/louis-lavelle/manuel-de-methodologie-dialectique/livre-03': { redirect: '/louis-lavelle/manuel-de-methodologie-dialectique/livre-03/decouverte-et-signification', prerender: false },
+    '/louis-lavelle/manuel-de-methodologie-dialectique/livre-03': { redirect: '/louis-lavelle/manuel-de-methodologie-dialectique/livre-03/decouverte-et-signification', prerender: false }
     // Marcus Aurelius redirects
-    // Legacy ethos redirects
-    '/ethos': { redirect: '/louis-lavelle', prerender: false },
-    '/ethos/louis-lavelle': { redirect: '/louis-lavelle', prerender: false }
   },
   sourcemap: true,
   experimental: {

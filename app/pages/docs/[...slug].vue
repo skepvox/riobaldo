@@ -170,7 +170,11 @@ if (import.meta.server) {
                 </UButton>
               </div>
             </USeparator>
-            <UContentSurround :surround="surround" />
+            <UContentSurround
+              prev-icon="i-lucide-chevron-left"
+              next-icon="i-lucide-chevron-right"
+              :surround="surround"
+            />
           </div>
         </UPageBody>
 

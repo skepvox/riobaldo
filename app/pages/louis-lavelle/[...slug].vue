@@ -60,8 +60,6 @@ const breadcrumb = computed(() => {
   return links
 })
 
-const editLink = computed(() => page.value?.path ? `https://github.com/skepvox/riobaldo/edit/main/content${page.value.path}.md` : '#')
-
 const tocLinks = computed(() => page.value?.body?.toc?.links ?? [])
 provide('authorRightToc', tocLinks)
 
@@ -118,7 +116,11 @@ if (import.meta.server) {
         <ContentRenderer v-if="page.body" :value="page" />
         <div>
           <USeparator icon="i-lucide-shell" class="mt-6 mb-10" />
-          <UContentSurround :surround="surround" />
+          <UContentSurround
+            prev-icon="i-lucide-chevron-left"
+            next-icon="i-lucide-chevron-right"
+            :surround="surround"
+          />
         </div>
       </UPageBody>
     </UPage>
