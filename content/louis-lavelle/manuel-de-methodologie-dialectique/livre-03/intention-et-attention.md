@@ -2,6 +2,9 @@
 title: Intention
 description: Chapitre III - Intention et Attention
 navigation.icon: i-lucide-focus
+order: 11
+navigation:
+  order: 11
 ---
 
 ## 50. Intentionnalité

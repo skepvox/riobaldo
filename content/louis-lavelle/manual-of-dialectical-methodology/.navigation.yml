@@ -1,4 +1,11 @@
 title: Dialectique
 # icon: i-circle-flags-fr
 navigation:
-  order: 1
+  order: 3
+  meta:
+    language:
+      code: en
+      label: English
+      shortLabel: EN
+    edition: translation
+    editionLabel: Translations

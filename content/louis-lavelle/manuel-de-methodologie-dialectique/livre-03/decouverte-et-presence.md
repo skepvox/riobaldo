@@ -2,6 +2,9 @@
 title: Présence
 description: Chapitre II - Découverte et présence
 navigation.icon: i-lucide-scan-eye
+order: 10
+navigation:
+  order: 10
 ---
 
 ## 22. Description

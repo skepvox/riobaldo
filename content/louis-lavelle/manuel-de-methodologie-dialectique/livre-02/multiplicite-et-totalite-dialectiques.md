@@ -2,6 +2,9 @@
 title: Multiplicité
 description: Chapitre IV - Multiplicité et totalité dialectiques
 navigation.icon: i-lucide-network
+order: 8
+navigation:
+  order: 8
 ---
 
 ## 72. Dialectique

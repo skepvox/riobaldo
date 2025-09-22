@@ -2,6 +2,9 @@
 title: Réflexion
 description: Chapitre I - Réflexion et Méthode
 navigation.icon: i-lucide-brain
+order: 1
+navigation:
+  order: 1
 ---
 
 ## 1. Unité

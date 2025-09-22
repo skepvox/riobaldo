@@ -2,6 +2,9 @@
 title: Créatrice
 description: Chapitre III - Dialectique comme analyse créatrice
 navigation.icon: i-lucide-lightbulb
+order: 7
+navigation:
+  order: 7
 ---
 
 ## 42. Intérêt

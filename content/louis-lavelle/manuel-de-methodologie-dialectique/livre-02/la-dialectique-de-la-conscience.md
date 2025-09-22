@@ -2,6 +2,9 @@
 title: Conscience
 description: Chapitre I - Dialectique de la conscience
 navigation.icon: i-lucide-eye
+order: 5
+navigation:
+  order: 5
 ---
 
 ## 1. Relation

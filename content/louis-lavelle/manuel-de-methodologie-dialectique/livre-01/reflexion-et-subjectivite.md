@@ -2,6 +2,9 @@
 title: Subjectivité
 description: Chapitre III - Subjectivité
 navigation.icon: i-lucide-user
+order: 3
+navigation:
+  order: 3
 ---
 
 ## 42. Liberté

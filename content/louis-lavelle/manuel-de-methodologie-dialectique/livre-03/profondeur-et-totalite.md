@@ -2,6 +2,9 @@
 title: Profondeur
 description: Chapitre IV - Profondeur et Totalité
 navigation.icon: i-lucide-layers
+order: 12
+navigation:
+  order: 12
 ---
 
 ## 64. Niveaux

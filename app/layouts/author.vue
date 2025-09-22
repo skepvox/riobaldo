@@ -1,13 +1,11 @@
 <script setup lang="ts">
-import type { ContentNavigationItem } from '@nuxt/content'
 import { useSlots } from 'vue'
 import type { Ref } from 'vue'
-import { navPageFromPath } from '~/utils/content'
+import { useAuthorNavigation } from '~/composables/useAuthorNavigation'
 
 const route = useRoute()
 const heroBackgroundClass = computed(() => route.meta?.heroBackground || '')
 const { isLoading } = useLoadingIndicator()
-const navigation = inject<Ref<ContentNavigationItem[]>>('navigation', ref([]))
 const authorRightToc = inject<Ref<any[]>>('authorRightToc', ref([]))
 const slots = useSlots()
 
@@ -22,55 +20,18 @@ onMounted(() => {
   }, 0)
 })
 
-const authorRootPath = computed(() => {
-  const segments = route.path.split('/').filter(Boolean)
-  return segments.length ? `/${segments[0]}` : '/'
-})
-
-const authorNode = computed(() => navPageFromPath(authorRootPath.value, navigation.value))
-const authorChildren = computed(() => authorNode.value?.children ?? [])
-const isRootPage = computed(() => route.path === authorRootPath.value)
+const {
+  isRootPage,
+  hasNavigation,
+  editionItems,
+  languageItems,
+  editionModel,
+  languageModel,
+  displayNavigation
+} = useAuthorNavigation()
 const hasRightSlot = computed(() => Boolean(slots.right))
 const hasToc = computed(() => (authorRightToc.value?.length ?? 0) > 0)
 const shouldShowRightAside = computed(() => !isRootPage.value && (hasRightSlot.value || hasToc.value))
-
-const bookLinks = computed(() => authorChildren.value.map(child => ({
-  title: child.title,
-  path: child.path ?? '/',
-  icon: child.icon as string,
-  active: route.path.startsWith(child.path ?? '')
-})))
-
-const mobileNavigation = computed<ContentNavigationItem[]>(() => {
-  const root = authorNode.value
-  if (!root) {
-    return []
-  }
-  return [{
-    title: root.title || 'Coleção',
-    path: authorRootPath.value,
-    icon: root.icon as string,
-    children: authorChildren.value
-  }]
-})
-
-const chaptersNavigation = computed(() => {
-  const root = authorNode.value
-  if (!root) {
-    return []
-  }
-  const activeBook = root.children?.find(child => route.path.startsWith(child.path ?? ''))
-  return activeBook?.children ?? []
-})
-
-const booksOpen = ref(false)
-watch(
-  [() => route.path, authorRootPath],
-  ([currentPath, rootPath]) => {
-    booksOpen.value = currentPath !== rootPath
-  },
-  { immediate: true }
-)
 </script>
 
 <template>
@@ -104,16 +65,48 @@ watch(
         ]"
       />
 
-      <UContainer :class="isRootPage ? '' : 'py-8 space-y-10'">
-        <div v-if="mobileNavigation.length && !isRootPage" class="mb-8 lg:hidden">
+      <UContainer class="py-8">
+        <div v-if="hasNavigation" class="mb-8 lg:hidden">
+          <div class="flex flex-col gap-2 w-[calc(100%+1.25rem)] mb-5.5 -mx-2.5">
+            <UTabs
+              v-if="editionItems.length"
+              v-model="editionModel"
+              :items="editionItems"
+              :content="false"
+              color="neutral"
+              size="xs"
+              :ui="{
+                indicator: 'bg-default',
+                trigger: 'px-1 data-[state=active]:text-highlighted w-full'
+              }"
+            />
+
+            <UTabs
+              v-if="languageItems.length"
+              v-model="languageModel"
+              :items="languageItems"
+              :content="false"
+              color="neutral"
+              size="xs"
+              :ui="{
+                indicator: 'bg-default',
+                trigger: 'px-1 data-[state=active]:text-highlighted w-full'
+              }"
+            />
+          </div>
+
           <UContentNavigation
-            :navigation="mobileNavigation"
+            :navigation="displayNavigation"
             highlight
-            :default-open="route.path !== authorRootPath"
-            :ui="{
-              link: 'text-sm font-medium text-muted hover:text-primary'
-            }"
-          />
+            default-open
+            :ui="{ linkTrailingBadge: 'font-semibold uppercase' }"
+          >
+            <template #link-title="{ link }">
+              <span class="inline-flex items-center gap-0.5">
+                {{ link.title }}
+              </span>
+            </template>
+          </UContentNavigation>
         </div>
 
         <div v-if="isRootPage">
@@ -122,59 +115,55 @@ watch(
 
         <UPage
           v-else
-          :ui="{ root: 'items-start gap-10' }"
-          class="mx-auto max-w-6xl"
         >
           <template #left>
-            <UPageAside v-if="authorChildren.length" class="hidden lg:block">
-              <div class="sticky top-32 space-y-6">
-                <div class="rounded-2xl border border-default/60 bg-elevated/60 backdrop-blur p-4">
-                  <div class="flex items-center justify-between gap-3">
-                    <span class="text-sm font-semibold uppercase tracking-wide text-muted">
-                      {{ authorNode?.title || 'Coleção' }}
-                    </span>
-                    <UButton
-                      icon="i-lucide-chevron-down"
-                      size="xs"
-                      color="neutral"
-                      variant="ghost"
-                      :class="booksOpen ? 'rotate-180 transition-transform' : 'transition-transform'"
-                      @click="booksOpen = !booksOpen"
-                    />
-                  </div>
-
-                  <UCollapse :model-value="booksOpen">
-                    <nav class="mt-4 space-y-1">
-                      <NuxtLink
-                        v-for="book in bookLinks"
-                        :key="book.path"
-                        :to="book.path"
-                        class="flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium transition-colors"
-                        :class="book.active ? 'bg-primary/10 text-primary' : 'text-muted hover:bg-default/60'"
-                      >
-                        <UIcon v-if="book.icon" :name="book.icon" class="size-4" />
-                        <span>{{ book.title }}</span>
-                      </NuxtLink>
-                    </nav>
-                  </UCollapse>
-                </div>
-
-                <div v-if="chaptersNavigation.length" class="rounded-2xl border border-default/60 bg-elevated/60 backdrop-blur p-3">
-                  <UContentNavigation
-                    :navigation="chaptersNavigation"
-                    highlight
+            <UPageAside v-if="hasNavigation" :ui="{ top: '' }" class="hidden lg:block">
+              <template #top>
+                <div class="flex flex-col gap-2 w-[calc(100%+1.25rem)] -mx-2.5">
+                  <UTabs
+                    v-if="editionItems.length"
+                    v-model="editionModel"
+                    :items="editionItems"
+                    :content="false"
+                    color="neutral"
+                    size="xs"
                     :ui="{
-                      link: 'text-sm font-medium text-muted hover:text-primary'
+                      indicator: 'bg-default',
+                      trigger: 'px-1 data-[state=active]:text-highlighted w-full'
+                    }"
+                  />
+
+                  <UTabs
+                    v-if="languageItems.length"
+                    v-model="languageModel"
+                    :items="languageItems"
+                    :content="false"
+                    color="neutral"
+                    size="xs"
+                    :ui="{
+                      indicator: 'bg-default',
+                      trigger: 'px-1 data-[state=active]:text-highlighted w-full'
                     }"
                   />
                 </div>
-              </div>
+              </template>
+
+              <UContentNavigation
+                :navigation="displayNavigation"
+                highlight
+                default-open
+                :ui="{ linkTrailingBadge: 'font-semibold uppercase' }"
+              >
+                <template #link-title="{ link }">
+                  <span class="inline-flex items-center gap-0.5">
+                    {{ link.title }}
+                  </span>
+                </template>
+              </UContentNavigation>
             </UPageAside>
           </template>
 
-          <div class="min-w-0 space-y-12 sm:space-y-16">
-            <NuxtPage />
-          </div>
+          <NuxtPage />
 
           <template #right>
             <UPageAside v-if="shouldShowRightAside" class="hidden lg:block">

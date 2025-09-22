@@ -2,6 +2,9 @@
 title: Conclusion
 description: Conclusion
 navigation.icon: i-lucide-check-circle
+order: 13
+navigation:
+  order: 13
 ---
 
 ## 1. Pénétration Intellectuelle

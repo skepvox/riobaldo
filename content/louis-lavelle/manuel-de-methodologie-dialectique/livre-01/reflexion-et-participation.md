@@ -2,6 +2,9 @@
 title: Participation
 description: Chapitre IV - Participation
 navigation.icon: i-lucide-share-2
+order: 4
+navigation:
+  order: 4
 ---
 
 ## 83. Réception

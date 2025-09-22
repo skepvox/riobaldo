@@ -2,6 +2,9 @@
 title: Méthodes
 description: Chapitre II - Méthodes classiques et dialectique
 navigation.icon: i-lucide-compass
+order: 6
+navigation:
+  order: 6
 ---
 
 ## 26. Poursuite

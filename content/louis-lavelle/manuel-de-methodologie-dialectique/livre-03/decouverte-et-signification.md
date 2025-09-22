@@ -2,6 +2,9 @@
 title: Signification
 description: Chapitre I - Découverte et Signification
 navigation.icon: i-lucide-search
+order: 9
+navigation:
+  order: 9
 ---
 
 ## 1. Signification

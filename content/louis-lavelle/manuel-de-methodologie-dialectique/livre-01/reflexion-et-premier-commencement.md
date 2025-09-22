@@ -2,6 +2,9 @@
 title: Commencement
 description: Chapitre II - Premier Commencement
 navigation.icon: i-lucide-sparkles
+order: 2
+navigation:
+  order: 2
 ---
 
 ## 21. Circularité
