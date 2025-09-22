@@ -30,3 +30,6 @@ logs
 # Reference projects
 .reference/
 ref-thiago-oliveira/
+
+# Local documentation
+CODE_CATALOG.md

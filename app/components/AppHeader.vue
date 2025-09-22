@@ -72,7 +72,7 @@ const logoContextMenuItems = computed(() => [[{
     <UNavigationMenu :items="headerLinks" variant="link" :ui="{ linkLeadingIcon: 'hidden' }" />
 
     <template #right>
-      <UColorModeButton />
+      <UColorModeSwitch />
     </template>
 
     <template #body>
