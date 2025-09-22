@@ -4,7 +4,7 @@ seo:
     Um caderno vivo onde filosofia, matemática e tecnologia se encontram para investigar o sertão digital.
 title: "Thiago Oliveira"
 description: |
-  Interesses e reflexões que procuram chão no sertão digital.
+
 hero:
   greeting: "Olá, eu sou"
   title: "Thiago Oliveira"
@@ -45,7 +45,7 @@ hero:
 about:
   title: "Projeto pessoal"
   description: |
-    Riobaldo nasce como espaço de reflexão e escrita lenta, onde o pensamento pode seguir seu próprio ritmo, longe da urgência das redes. Aqui documento pesquisas sobre Louis Lavelle, percursos de álgebra e experimentos de design de produto orientados por filosofia.
+    Riobaldo nasce como espaço de reflexão e escrita lenta, onde o pensamento pode seguir seu próprio ritmo, longe da urgência das redes e mais perto daquilo que importa: a tentativa sempre renovada de compreender.
 experience:
   title: "Trajetória Profissional"
   items:
@@ -78,7 +78,7 @@ experience:
         icon: "i-lucide-sprout"
         color: "#C8102E"
 quotes:
-  title: "Caderno de citações"
+  title: "Caderno de Citações"
   items:
     - quote: "O correr da vida embrulha tudo, a vida é assim: esquenta e esfria, aperta e daí afrouxa, sossega e depois desinquieta. O que ela quer da gente é coragem. O que Deus quer é ver a gente aprendendo a ser capaz de ficar alegre a mais, no meio da alegria, e inda mais alegre ainda no meio da tristeza! Só assim de repente, na horinha em que se quer, de propósito — por coragem."
       author:
@@ -111,6 +111,6 @@ quotes:
           width: 80
           height: 80
 blog:
-  title: "Caderno de campo"
+  title: "Blog"
   description: |
-    Ensaios, traduções e estudos que atravessam filosofia, matemática e design no sertão digital.
+    Sertão Digital

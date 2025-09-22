@@ -315,8 +315,8 @@ features:
       description: Write type-safe code with automatically generated types and tsconfig.json.
   cta:
     title: 'Deep dive into Riobaldo now'
-    label: Start reading docs
-    to: /docs
+    label: Conhecer o blog
+    to: /blog
     icon: i-lucide-arrow-right
 foundation:
   title: Built on a solid foundation
@@ -367,15 +367,6 @@ foundation:
       link:
         label: nitro.build
         to: https://nitro.build
-modules:
-  title: Extend Riobaldo with plug & play modules
-  description: Riobaldo has a rich module ecosystem, with both official and community-driven modules. This accelerates learning by providing ready-to-use educational solutions.
-  links:
-    - label: Explore all modules
-      to: /modules
-      icon: i-lucide-arrow-right
-      color: neutral
-      trailing: true
 testimonial:
   quote: "Riobaldo offers a compelling solution and a great ecosystem to help you deliver comprehensive educational content that is accessible and engaging. The flexibility to explore philosophy and algebra together is icing on the cake."
   author:
@@ -391,7 +382,7 @@ deploy:
   description: One-command deployments and zero-configuration options make it easy to get your Riobaldo platform live. Choose your platform, and let Riobaldo handle the rest, allowing you to focus on creating great educational content rather than managing complex deployments.
   links:
     - label: Learn how to deploy now
-      to: /docs/getting-started/installation
+      to: https://nuxt.com/docs/getting-started/deployment
       icon: i-lucide-arrow-right
       color: neutral
       trailing: true

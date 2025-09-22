@@ -1,11 +1,5 @@
 import { defineContentConfig, defineCollection, z } from '@nuxt/content'
 
-// Simplified docs source - using local content only
-const docsSource = {
-  include: 'docs/**/*',
-  exclude: ['docs/**/*.json']
-}
-
 const Image = z.object({
   src: z.string(),
   alt: z.string(),
@@ -121,31 +115,6 @@ const PageHero = BaseSection.extend({
   cta: Link.optional()
 })
 
-const Template = z.object({
-  name: z.string(),
-  slug: z.string(),
-  description: z.string(),
-  repo: z.string().optional(),
-  demo: z.string().url(),
-  purchase: z.string().url().optional(),
-  featured: z.boolean().optional(),
-  badge: z.enum(['Premium', 'Freemium', 'Free']).optional(),
-  screenshotUrl: z.string().url().optional(),
-  screenshotOptions: z.object({
-    delay: z.number()
-  }).optional()
-})
-
-const ShowcaseItem = z.object({
-  name: z.string().optional(),
-  url: z.string().optional(),
-  hostname: z.string().optional(),
-  screenshotUrl: z.string().optional(),
-  screenshotOptions: z.object({
-    delay: z.number()
-  }).optional()
-})
-
 export default defineContentConfig({
   collections: {
     home: defineCollection({
@@ -207,7 +176,6 @@ export default defineContentConfig({
             link: Link
           }))
         }),
-        modules: PageSection,
         testimonial: Testimonial,
         deploy: PageSection,
         stats: PageSection.extend({
@@ -222,16 +190,6 @@ export default defineContentConfig({
         sponsors: PageSection.extend({
           cta: Button
         })
-      })
-    }),
-    docs: defineCollection({
-      type: 'page',
-      source: docsSource,
-      schema: z.object({
-        titleTemplate: z.string().optional(),
-        links: z.array(Button).optional(),
-        title: z.string(),
-        description: z.string().optional()
       })
     }),
     blog: defineCollection({
@@ -249,128 +207,10 @@ export default defineContentConfig({
     landing: defineCollection({
       type: 'page',
       source: [
-        { include: 'index.md' },
         { include: 'blog.yml' },
-        { include: 'louis-lavelle.yml' },
-        { include: 'modules.yml' },
-        { include: 'deploy.yml' },
-        { include: 'templates.yml' },
-        { include: 'video-courses.yml' },
-        { include: 'enterprise/sponsors.yml' },
-        { include: 'enterprise/agencies.yml' },
-        { include: 'newsletter.yml' },
-        { include: 'enterprise/jobs.yml' }
+        { include: 'louis-lavelle.yml' }
       ],
       schema: PageHero
-    }),
-    deploy: defineCollection({
-      type: 'page',
-      source: 'deploy/*',
-      schema: z.object({
-        title: z.string(),
-        description: z.string(),
-        componentImg: z.string(),
-        logoSrc: z.string(),
-        featured: z.boolean(),
-        logoIcon: z.string(),
-        category: z.string(),
-        nitroPreset: z.string(),
-        website: z.string().url()
-      })
-    }),
-    manualSponsors: defineCollection({
-      type: 'data',
-      source: 'enterprise/manual-sponsors.yml',
-      schema: z.object({
-        sponsors: z.array(z.object({
-          sponsorName: z.string(),
-          sponsorLogo: z.string(),
-          sponsorUrl: z.string(),
-          tier: z.enum(['diamond', 'platinum', 'gold', 'silver', 'bronze', 'backers'])
-        })).optional()
-      })
-    }),
-    support: defineCollection({
-      type: 'data',
-      source: 'enterprise/support.yml',
-      schema: z.object({
-        title: z.string(),
-        description: z.string(),
-        hero: z.object({
-          links: z.array(Button)
-        }),
-        logos: z.array(
-          DualModeImage.extend({
-            alt: z.string()
-          }).omit({ width: true, height: true }).extend({
-            width: z.string(),
-            height: z.string()
-          })
-        ),
-        service: BaseSection.extend({
-          services: z.array(
-            BaseSection.extend({
-              icon: z.string()
-            })
-          )
-        }),
-        expertise: BaseSection.extend({
-          logos: z.array(
-            Image.extend({
-              color: z.string()
-            })
-          )
-        }),
-        testimonials: BaseSection.extend({
-          items: z.array(
-            z.object({
-              quote: z.string(),
-              author: z.string(),
-              job: z.string(),
-              logo: DualModeImage,
-              achievements: z.array(
-                z.object({
-                  label: z.string(),
-                  color: z.enum(['success', 'warning', 'error', 'info', 'neutral', 'important'])
-                })
-              ),
-              width: z.number(),
-              height: z.number()
-            })
-          )
-        }),
-        project: BaseSection.extend({
-          steps: z.array(
-            BaseSection.extend({
-              number: z.number()
-            })
-          )
-        }),
-        form: BaseSection.extend({
-          name: z.object({
-            label: z.string(),
-            placeholder: z.string()
-          }),
-          email: z.object({
-            label: z.string(),
-            placeholder: z.string()
-          }),
-          company: z.object({
-            label: z.string(),
-            placeholder: z.string()
-          }),
-          link: z.object({
-            label: z.string(),
-            placeholder: z.string()
-          }),
-          body: z.object({
-            label: z.string(),
-            placeholder: z.string()
-          }),
-          info: z.string(),
-          button: Button
-        })
-      })
     }),
     louisLavelle: defineCollection({
       type: 'page',
@@ -381,61 +221,6 @@ export default defineContentConfig({
         author: z.string().optional(),
         date: z.string().date().optional(),
         tags: z.array(z.string()).optional()
-      })
-    }),
-    agencies: defineCollection({
-      type: 'page',
-      source: 'enterprise/agencies/*.md',
-      schema: z.object({
-        title: z.string(),
-        description: z.string(),
-        logo: DualModeImage,
-        logoFull: z.string().optional(),
-        link: z.string().url(),
-        services: z.array(z.string()),
-        resources: z.array(Link).optional(),
-        emailAddress: z.string().email().optional(),
-        phoneNumber: z.string().nullable().optional(),
-        x: z.string().optional(),
-        github: z.string().optional(),
-        linkedin: z.string().optional(),
-        instagram: z.string().optional(),
-        color: z.array(z.string()).optional(),
-        regions: z.array(z.string()),
-        location: z.string()
-      })
-    }),
-    templates: defineCollection({
-      type: 'data',
-      source: 'templates/*',
-      schema: Template
-    }),
-    showcase: defineCollection({
-      type: 'data',
-      source: 'showcase.yml',
-      schema: BaseSection.extend({
-        head: z.object({
-          title: z.string().optional(),
-          description: z.string().optional()
-        }).optional(),
-        websites: z.array(ShowcaseItem)
-      })
-    }),
-    videoCourses: defineCollection({
-      type: 'data',
-      source: 'video-courses/*',
-      schema: z.object({
-        name: z.string(),
-        slug: z.string(),
-        description: z.string(),
-        url: z.string().url(),
-        badge: z.enum(['Premium', 'Free']).optional(),
-        screenshotUrl: z.string().url().optional(),
-        screenshotOptions: z.object({
-          delay: z.number(),
-          removeElements: z.array(z.string()).optional()
-        }).optional(),
-        sponsor: z.boolean().optional()
       })
     })
   }

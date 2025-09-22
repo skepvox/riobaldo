@@ -63,17 +63,6 @@ export default defineNuxtConfig({
     '/': { prerender: true }, // Enable prerender for homepage
     // '/blog/rss.xml': { prerender: true }, // Commented out - route doesn't exist
     '/404.html': { prerender: true },
-    '/docs/getting-started/introduction': { prerender: true },
-    // Redirects
-    '/docs': { redirect: '/docs/getting-started/introduction', prerender: false },
-    '/docs/getting-started': { redirect: '/docs/getting-started/introduction', prerender: false },
-    '/docs/guide/concepts': { redirect: '/docs/guide/concepts/auto-imports', prerender: false },
-    '/docs/guide/directory-structure': { redirect: '/docs/guide/directory-structure/app', prerender: false },
-    '/docs/guide/going-further': { redirect: '/docs/guide/going-further/experimental-features', prerender: false },
-    '/docs/guide/going-further/edge-release-channel': { redirect: '/docs/guide/going-further/nightly-release-channel', prerender: false },
-    '/docs/guide/recipes': { redirect: '/docs/guide/recipes/custom-routing', prerender: false },
-    '/docs/guide/best-practices': { redirect: '/docs/guide/best-practices/performance', prerender: false },
-    '/docs/guide/going-further/custom-routing': { redirect: '/docs/guide/recipes/custom-routing', prerender: false },
     // Louis Lavelle redirects
     '/louis-lavelle/manual-de-metodologia-dialetica': { redirect: '/louis-lavelle/manual-de-metodologia-dialetica/livro-01/reflexao-e-metodo', prerender: false },
     '/louis-lavelle/manual-de-metodologia-dialetica/livro-01': { redirect: '/louis-lavelle/manual-de-metodologia-dialetica/livro-01/reflexao-e-metodo', prerender: false },

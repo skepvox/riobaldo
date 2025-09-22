@@ -10,7 +10,6 @@ defineProps<{ error: NuxtError }>()
 
 const { data: navigation } = await useAsyncData('navigation-error', () => {
   return Promise.all([
-    queryCollectionNavigation('docs'),
     queryCollectionNavigation('blog'),
     queryCollectionNavigation('louisLavelle')
   ]).then(data => data.flat())

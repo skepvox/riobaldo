@@ -9,7 +9,6 @@ const defaultDescription = 'Explore filosofia e álgebra com Riobaldo, a platafo
 // Helper functions for path localization
 const { data: navigation } = await useAsyncData('navigation', () => {
   return Promise.all([
-    queryCollectionNavigation('docs'),
     queryCollectionNavigation('blog'),
     queryCollectionNavigation('louisLavelle')
   ]).then(data => data.flat())
