@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { Analytics } from '@vercel/analytics/vue'
+import { SpeedInsights } from '@vercel/speed-insights/vue'
+
 const colorMode = useColorMode()
 
 const color = computed(() => colorMode.value === 'dark' ? '#020420' : 'white')
@@ -58,5 +61,8 @@ onMounted(() => {
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
+
+    <Analytics />
+    <SpeedInsights />
   </UApp>
 </template>
