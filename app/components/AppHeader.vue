@@ -33,14 +33,44 @@ const logoContextMenuItems = computed(() => [[{
   }
 }]])
 
-const mobileLinks = computed(() => headerLinks.value.map((link) => {
+const closeMenu = () => {
+  if (menuOpen.value) {
+    menuOpen.value = false
+  }
+}
+
+const enhanceLink = (link: Record<string, any>) => {
+  const hasChildren = Array.isArray(link.children) && link.children.length > 0
   const to = typeof link.to === 'string' ? link.to : undefined
 
-  return {
+  const enhanced: Record<string, any> = {
     ...link,
-    defaultOpen: Boolean(link.children?.length && to && route.path.startsWith(to))
+    defaultOpen: Boolean(hasChildren && to && route.path.startsWith(to))
   }
-}))
+
+  if (hasChildren) {
+    enhanced.children = link.children.map((child: Record<string, any>) => ({
+      ...child,
+      onSelect: () => {
+        if (typeof child.onSelect === 'function') {
+          child.onSelect()
+        }
+        closeMenu()
+      }
+    }))
+  } else {
+    enhanced.onSelect = () => {
+      if (typeof link.onSelect === 'function') {
+        link.onSelect()
+      }
+      closeMenu()
+    }
+  }
+
+  return enhanced
+}
+
+const mobileLinks = computed(() => headerLinks.value.map(link => enhanceLink(link as Record<string, any>)))
 
 const headerMenu = { shouldScaleBackground: true }
 </script>
@@ -98,7 +128,6 @@ const headerMenu = { shouldScaleBackground: true }
         v-if="hasAuthorNavigation"
         :navigation="displayNavigation"
         highlight
-        default-open
         :ui="{ linkTrailingBadge: 'font-semibold uppercase' }"
       >
         <template #link-title="{ link }">

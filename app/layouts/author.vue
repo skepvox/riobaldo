@@ -48,49 +48,6 @@ const shouldShowRightAside = computed(() => !isRootPage.value && (hasRightSlot.v
       />
 
       <UContainer class="py-8">
-        <div v-if="hasNavigation" class="mb-8 lg:hidden">
-          <div class="flex flex-col gap-2 w-[calc(100%+1.25rem)] mb-5.5 -mx-2.5">
-            <UTabs
-              v-if="editionItems.length"
-              v-model="editionModel"
-              :items="editionItems"
-              :content="false"
-              color="neutral"
-              size="xs"
-              :ui="{
-                indicator: 'bg-default',
-                trigger: 'px-1 data-[state=active]:text-highlighted w-full'
-              }"
-            />
-
-            <UTabs
-              v-if="languageItems.length"
-              v-model="languageModel"
-              :items="languageItems"
-              :content="false"
-              color="neutral"
-              size="xs"
-              :ui="{
-                indicator: 'bg-default',
-                trigger: 'px-1 data-[state=active]:text-highlighted w-full'
-              }"
-            />
-          </div>
-
-          <UContentNavigation
-            :navigation="displayNavigation"
-            highlight
-            default-open
-            :ui="{ linkTrailingBadge: 'font-semibold uppercase' }"
-          >
-            <template #link-title="{ link }">
-              <span class="inline-flex items-center gap-0.5">
-                {{ link.title }}
-              </span>
-            </template>
-          </UContentNavigation>
-        </div>
-
         <div v-if="isRootPage">
           <NuxtPage />
         </div>
@@ -133,7 +90,6 @@ const shouldShowRightAside = computed(() => !isRootPage.value && (hasRightSlot.v
               <UContentNavigation
                 :navigation="displayNavigation"
                 highlight
-                default-open
                 :ui="{ linkTrailingBadge: 'font-semibold uppercase' }"
               >
                 <template #link-title="{ link }">
