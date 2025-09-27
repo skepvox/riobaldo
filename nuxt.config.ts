@@ -3,7 +3,7 @@ import { parseMdc } from './helpers/mdc-parser.mjs'
 
 const { resolve } = createResolver(import.meta.url)
 
-// Riobaldo configuration
+// Skepvox configuration
 export default defineNuxtConfig({
   modules: [
     '@nuxt/ui-pro',
@@ -133,11 +133,11 @@ export default defineNuxtConfig({
     }
   },
   llms: {
-    domain: 'https://riobaldo.com',
-    title: 'Riobaldo',
-    description: 'Riobaldo is a platform for philosophical and algebraic studies, offering comprehensive educational content and resources for advanced learning.',
+    domain: 'https://skepvox.com',
+    title: 'Skepvox',
+    description: 'Skepvox is a platform for philosophical and algebraic studies, offering comprehensive educational content and resources for advanced learning.',
     full: {
-      title: 'Riobaldo',
+      title: 'Skepvox',
       description: 'Platform for philosophical and algebraic studies with complete documentation and educational content.'
     }
   },

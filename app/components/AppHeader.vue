@@ -14,7 +14,7 @@ const {
 } = useAuthorNavigation()
 
 const copyLogoLabel = 'Copiar logo como SVG'
-const copiedTitle = 'Logotipo Riobaldo copiado como SVG'
+const copiedTitle = 'Logotipo Skepvox copiado como SVG'
 const copiedDescription = 'Você já pode colá-lo no seu projeto'
 const homeAriaLabel = 'Voltar para a página inicial'
 
@@ -34,9 +34,28 @@ const logoContextMenuItems = computed(() => [[{
 }]])
 
 const closeMenu = () => {
-  if (menuOpen.value) {
-    menuOpen.value = false
+  if (!menuOpen.value) {
+    return
   }
+
+  menuOpen.value = false
+}
+
+const closeMenuAfterNavigation = () => {
+  if (!menuOpen.value) {
+    return
+  }
+
+  if (!import.meta.client) {
+    closeMenu()
+    return
+  }
+
+  requestAnimationFrame(() => {
+    window.setTimeout(() => {
+      closeMenu()
+    }, 150)
+  })
 }
 
 const enhanceLink = (link: Record<string, any>) => {
@@ -55,7 +74,7 @@ const enhanceLink = (link: Record<string, any>) => {
         if (typeof child.onSelect === 'function') {
           child.onSelect()
         }
-        closeMenu()
+        closeMenuAfterNavigation()
       }
     }))
   } else {
@@ -63,7 +82,7 @@ const enhanceLink = (link: Record<string, any>) => {
       if (typeof link.onSelect === 'function') {
         link.onSelect()
       }
-      closeMenu()
+      closeMenuAfterNavigation()
     }
   }
 
@@ -80,7 +99,7 @@ const headerMenu = { shouldScaleBackground: true }
     <template #left>
       <UContextMenu :items="logoContextMenuItems" size="xs">
         <NuxtLink to="/" class="flex gap-2 items-end" :aria-label="homeAriaLabel">
-          <RiobaldoLogo ref="logo" class="block w-auto h-6" />
+          <SkepvoxLogo ref="logo" class="block w-auto h-6" />
         </NuxtLink>
       </UContextMenu>
     </template>

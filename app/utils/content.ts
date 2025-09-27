@@ -23,7 +23,7 @@ export function navPageFromPath(path: string, tree: ContentNavigationItem[]): Co
 
 export function findTitleTemplate(page: Ref<DocumentPage>, navigation: Ref<ContentNavigationItem[]>): string {
   if (!page.value?.path) {
-    return '%s · Riobaldo'
+    return '%s · Skepvox'
   }
 
   if (page.value.titleTemplate) {
@@ -44,5 +44,5 @@ export function findTitleTemplate(page: Ref<DocumentPage>, navigation: Ref<Conte
     items.unshift(node)
   }
 
-  return items.find(item => typeof item.titleTemplate === 'string')?.titleTemplate || '%s · Riobaldo'
+  return items.find(item => typeof item.titleTemplate === 'string')?.titleTemplate || '%s · Skepvox'
 }

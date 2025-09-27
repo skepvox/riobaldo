@@ -5,9 +5,9 @@ import { SpeedInsights } from '@vercel/speed-insights/vue'
 const colorMode = useColorMode()
 
 const color = computed(() => colorMode.value === 'dark' ? '#020420' : 'white')
-const siteName = 'Riobaldo'
-const defaultTitle = 'Riobaldo: Plataforma para Estudos Filosóficos e Algébricos'
-const defaultDescription = 'Explore filosofia e álgebra com Riobaldo, a plataforma educacional completa para estudantes e educadores do ensino médio.'
+const siteName = 'Skepvox'
+const defaultTitle = 'Skepvox: Plataforma para Estudos Filosóficos e Algébricos'
+const defaultDescription = 'Explore filosofia e álgebra com Skepvox, a plataforma educacional completa para estudantes e educadores do ensino médio.'
 
 // Helper functions for path localization
 const { data: navigation } = await useAsyncData('navigation', () => {

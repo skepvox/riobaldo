@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const siteName = 'Riobaldo'
+const siteName = 'Skepvox'
 const currentYear = new Date().getFullYear()
 const copyrightLabel = `Copyright © ${currentYear} ${siteName}`
 const socialLabels = {
