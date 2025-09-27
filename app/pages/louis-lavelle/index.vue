@@ -20,9 +20,8 @@ const hero = {
   links: [{
     label: 'Iniciar Leitura',
     to: '/louis-lavelle/manual-de-metodologia-dialetica/livro-01/reflexao-e-metodo',
-    color: 'success' as const,
-    size: 'md' as const,
-    trailingIcon: 'i-lucide-arrow-right'
+    color: 'primary' as const,
+    size: 'md' as const
   }]
 }
 
@@ -33,7 +32,7 @@ useSeoMeta({
   description: page.value?.seo?.description || page.value?.description,
   ogTitle: page.value?.seo?.title || page.value?.title,
   ogDescription: page.value?.seo?.description || page.value?.description,
-  ogImage: joinURL(site.url, '/riobaldo-banner.webp'),
+  ogImage: joinURL(site.url, '/skepvox-banner.webp'),
   twitterTitle: page.value?.seo?.title || page.value?.title,
   twitterDescription: page.value?.seo?.description || page.value?.description
 })

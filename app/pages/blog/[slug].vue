@@ -5,7 +5,6 @@ definePageMeta({
   heroBackground: 'opacity-30 -z-10'
 })
 const route = useRoute()
-const { copy } = useClipboard()
 
 const [{ data: article }, { data: surround }] = await Promise.all([
   useAsyncData(kebabCase(route.path), () => queryCollection('blog').path(route.path).first()),
@@ -24,11 +23,11 @@ const title = article.value.seo?.title || article.value.title
 const description = article.value.seo?.description || article.value.description
 
 useSeoMeta({
-  titleTemplate: '%s · Riobaldo Blog',
+  titleTemplate: '%s · Skepvox Blog',
   title,
   description,
   ogDescription: description,
-  ogTitle: `${title} · Riobaldo Blog`
+  ogTitle: `${title} · Skepvox Blog`
 })
 
 if (article.value.image) {
@@ -41,27 +40,11 @@ if (article.value.image) {
   })
 }
 
-const socialLinks = computed(() =>
-  !article.value
-    ? []
-    : [
-        {
-          label: 'WhatsApp',
-          icon: 'i-simple-icons-whatsapp',
-          to: `https://wa.me/?text=${encodeURIComponent(article.value.title + '\n\n' + 'https://riobaldo.com' + article.value.path)}`
-        }
-      ]
-)
-
-function copyLink() {
-  copy(`https://riobaldo.com${article.value?.path || '/'}`, { title: 'Link copied to clipboard', icon: 'i-lucide-copy-check' })
-}
-
 const links = [
   {
     icon: 'i-lucide-pen',
     label: 'Edit this article',
-    to: `https://github.com/riobaldo/riobaldo.com/edit/main/content/${article.value.stem}.md`,
+    to: `https://github.com/skepvox/skepvox.com/edit/main/content/${article.value.stem}.md`,
     target: '_blank'
   }
 ]
@@ -94,22 +77,7 @@ const links = [
             <ULink to="/blog" class="text-primary">
               ← Retornar
             </ULink>
-            <div class="flex justify-end items-center gap-1.5">
-              <UButton icon="i-lucide-link" variant="ghost" color="neutral" @click="copyLink">
-                <span class="sr-only">Copiar Link</span>
-                Copiar Link
-              </UButton>
-              <UButton
-                v-for="(link, index) in socialLinks"
-                :key="index"
-                v-bind="link"
-                variant="ghost"
-                color="neutral"
-                target="_blank"
-              >
-                <span class="sr-only">Nuxt on {{ link.label }}</span>
-              </UButton>
-            </div>
+            <PageHeaderLinks :key="article.path" />
           </div>
 
           <USeparator v-if="surround?.length" />

@@ -11,7 +11,7 @@ date: 2025-08-13
 category: Reflexões
 ---
 
-Começo este espaço com palavras de Riobaldo, o narrador-protagonista de Grande Sertão: Veredas, porque é dele que empresto não apenas o nome, mas a coragem de narrar. Em tempos de feeds infinitos e notificações incessantes, criar um site pessoal em 2025 pode parecer um gesto anacrônico, como quem insiste em escrever cartas quando todos mandam áudios. Mas é justamente neste aparente contrassenso que reside o sentido.
+Começo este espaço com palavras de Riobaldo, o narrador-protagonista de Grande Sertão: Veredas, porque foi dele que emprestei, um dia, o nome e a coragem de narrar. Hoje, rebatizado como Skepvox, o projeto preserva essa mesma coragem de contar. Em tempos de feeds infinitos e notificações incessantes, criar um site pessoal em 2025 pode parecer um gesto anacrônico, como quem insiste em escrever cartas quando todos mandam áudios. Mas é justamente neste aparente contrassenso que reside o sentido.
 
 ## Um Site em 2025?
 
