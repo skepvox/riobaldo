@@ -1,6 +1,6 @@
 hero:
   title: 'The Progressive Web Framework'
-  description: Explore advanced philosophical concepts and algebraic studies with Riobaldo, the comprehensive educational platform for high school students and educators.
+  description: Explore advanced philosophical concepts and algebraic studies with Skepvox, the comprehensive educational platform for high school students and educators.
   tabs:
     - title: Minimal
       icon: i-lucide-leaf
@@ -278,11 +278,11 @@ logos:
       width: 51
 features:
   title: Enable features as you grow
-  description: Riobaldo grows and adapts with your educational needs while providing an exceptional learning experience. Explore topics from fundamental philosophy to advanced algebraic concepts that scale for classrooms of any size. We've designed Riobaldo to be approachable for students and educators of all skill levels.
+  description: Skepvox grows and adapts with your educational needs while providing an exceptional learning experience. Explore topics from fundamental philosophy to advanced algebraic concepts that scale for classrooms of any size. We've designed Skepvox to be approachable for students and educators of all skill levels.
   features:
     - icon: i-lucide-sparkles
       title: Zero Configuration
-      description: Start exploring philosophical and mathematical concepts immediately — Riobaldo handles all the organization for you.
+      description: Start exploring philosophical and mathematical concepts immediately — Skepvox handles all the organization for you.
     - icon: i-lucide-file-code-2
       title: Rendering Modes
       description: Server-side rendering, client-side rendering, static-site generation, you decide, up to the page level.
@@ -291,7 +291,7 @@ features:
       description: Use our file-based routing system to build complex url-based views while reusing components for performance.
     - icon: i-lucide-unplug
       title: Data Fetching
-      description: Access educational content seamlessly. Riobaldo provides powerful tools for comprehensive learning experiences.
+      description: Access educational content seamlessly. Skepvox provides powerful tools for comprehensive learning experiences.
     - icon: i-lucide-bug
       title: Error Handling
       description: Catch errors in your application with our built-in handlers and custom error pages.
@@ -306,7 +306,7 @@ features:
       description: Create production-ready applications that are fully indexable by search engines.
     - icon: i-lucide-puzzle
       title: Modular
-      description: Extend Riobaldo features with educational modules to enhance your learning experience.
+      description: Extend Skepvox features with educational modules to enhance your learning experience.
     - icon: i-lucide-shield-check
       title: Middleware
       description: Protect or add custom logic (localization, A/B testing) before rendering pages.
@@ -314,17 +314,17 @@ features:
       title: Type-safe with TypeScript
       description: Write type-safe code with automatically generated types and tsconfig.json.
   cta:
-    title: 'Deep dive into Riobaldo now'
+    title: 'Deep dive into Skepvox now'
     label: Conhecer o blog
     to: /blog
     icon: i-lucide-arrow-right
 foundation:
   title: Built on a solid foundation
-  description: Riobaldo is built on top of bulletproof open source technologies, with versatility to deliver exceptional educational content.
+  description: Skepvox is built on top of bulletproof open source technologies, with versatility to deliver exceptional educational content.
   items:
     - id: vue
       title: Frontend with Vue.js
-      description: Riobaldo is built on top of Vue.js, leveraging its reactive, component-based architecture to create powerful, scalable, and seamless educational experiences.
+      description: Skepvox is built on top of Vue.js, leveraging its reactive, component-based architecture to create powerful, scalable, and seamless educational experiences.
       logo: i-custom-vue
       color: '#42B883'
       gradient: 'bg-gradient-to-br from-[#42B883]/10 from-5% via-transparent via-50% to-transparent'
@@ -333,7 +333,7 @@ foundation:
         to: https://vuejs.org
     - id: bundler
       title: Bundler with Vite
-      description: Riobaldo leverages Vite's frontend build capabilities, powering rapid content delivery with instant updates for the best learning experience.
+      description: Skepvox leverages Vite's frontend build capabilities, powering rapid content delivery with instant updates for the best learning experience.
       logo: i-custom-vite
       color: '#A156FE'
       gradient: 'bg-gradient-to-br from-[#A156FE]/10 from-5% via-transparent via-50% to-transparent'
@@ -342,7 +342,7 @@ foundation:
         to: https://vite.dev
     - id: bundler
       title: Bundler with Webpack
-      description: Riobaldo harnesses Webpack's robust bundling and optimization capabilities, ensuring a stable and scalable educational platform.
+      description: Skepvox harnesses Webpack's robust bundling and optimization capabilities, ensuring a stable and scalable educational platform.
       logo: i-custom-webpack
       color: '#8ED6FB'
       gradient: 'bg-gradient-to-br from-[#8ED6FB]/10 from-5% via-transparent via-50% to-transparent'
@@ -351,7 +351,7 @@ foundation:
         to: https://webpack.js.org
     - id: bundler
       title: Bundler with Rspack
-      description: Riobaldo integrates Rspack's high-performance bundling, accelerating content delivery for a seamless learning experience at scale.
+      description: Skepvox integrates Rspack's high-performance bundling, accelerating content delivery for a seamless learning experience at scale.
       logo: i-custom-rspack
       color: '#F93920'
       gradient: 'bg-gradient-to-br from-[#F93920]/10 from-5% via-transparent via-50% to-transparent'
@@ -360,7 +360,7 @@ foundation:
         to: https://rspack.dev
     - id: nitro
       title: Server with Nitro
-      description: Riobaldo uses Nitro as server engine to build versatile full-stack educational applications, ready for deployment on any platform.
+      description: Skepvox uses Nitro as server engine to build versatile full-stack educational applications, ready for deployment on any platform.
       logo: i-custom-nitro
       color: '#FB848E'
       gradient: 'bg-gradient-to-br from-[#FB848E]/10 from-5% via-transparent via-50% to-transparent'
@@ -368,7 +368,7 @@ foundation:
         label: nitro.build
         to: https://nitro.build
 testimonial:
-  quote: "Riobaldo offers a compelling solution and a great ecosystem to help you deliver comprehensive educational content that is accessible and engaging. The flexibility to explore philosophy and algebra together is icing on the cake."
+  quote: "Skepvox offers a compelling solution and a great ecosystem to help you deliver comprehensive educational content that is accessible and engaging. The flexibility to explore philosophy and algebra together is icing on the cake."
   author:
     name: 'Evan You'
     description: 'Creator of Vue.js and Vite'
@@ -379,7 +379,7 @@ testimonial:
       provider: 'vercel'
 deploy:
   title: Deploy your app anywhere
-  description: One-command deployments and zero-configuration options make it easy to get your Riobaldo platform live. Choose your platform, and let Riobaldo handle the rest, allowing you to focus on creating great educational content rather than managing complex deployments.
+  description: One-command deployments and zero-configuration options make it easy to get your Skepvox platform live. Choose your platform, and let Skepvox handle the rest, allowing you to focus on creating great educational content rather than managing complex deployments.
   links:
     - label: Learn how to deploy now
       to: https://nuxt.com/docs/getting-started/deployment
@@ -389,11 +389,11 @@ deploy:
 stats:
   title: The developer's choice for simple and powerful web apps
   description: |
-    Riobaldo was born from educators' need to enhance learning experiences and student engagement.
+    Skepvox was born from educators' need to enhance learning experiences and student engagement.
     What began as a Vue-based solution for delivering educational content is now trusted by schools and educational institutions all around the world.
   community:
     title: Open source
-    description: Riobaldo is 100% powered by our passionate open source community. Every line of Riobaldo is written by passionate developers and educators like you.
+    description: Skepvox is 100% powered by our passionate open source community. Every line of Skepvox is written by passionate developers and educators like you.
   x: 98.7k
   discord: 28k
   cta:
@@ -404,22 +404,22 @@ stats:
     icon: i-simple-icons-github
     trailing: true
 support:
-  title: Riobaldo Enterprise Support
+  title: Skepvox Enterprise Support
   description: |
-    To ensure your Riobaldo projects reach their full potential, our Riobaldo Experts team, featuring :icon{name=i-custom-vue .align-middle} Vue, :icon{name=i-custom-nuxt .align-middle} Riobaldo and :icon{name=i-custom-vite .align-middle} Vite, core contributors — offers a complete suite of services.
+    To ensure your Skepvox projects reach their full potential, our Skepvox Experts team, featuring :icon{name=i-custom-vue .align-middle} Vue, :icon{name=i-custom-nuxt .align-middle} Skepvox and :icon{name=i-custom-vite .align-middle} Vite, core contributors — offers a complete suite of services.
   features:
     - title: Performance optimization
-      description: Boost Riobaldo performance and reliability with our expert optimizations.
+      description: Boost Skepvox performance and reliability with our expert optimizations.
       icon: i-lucide-rocket
-    - title: Migration to Riobaldo
+    - title: Migration to Skepvox
       description: Ensure successful, painless migrations from start to deployment.
       icon: i-lucide-circle-arrow-up
-    - title: Riobaldo Workshop
+    - title: Skepvox Workshop
       description: Develop expert teams through training and support.
       icon: i-lucide-school
 sponsors:
   title: Sponsors
-  description: Riobaldo is and will always remain free and open source under the MIT License, thanks to our contributors and sponsors.
+  description: Skepvox is and will always remain free and open source under the MIT License, thanks to our contributors and sponsors.
   links:
     - label: Become a sponsor
       to: 'https://github.com/sponsors/nuxt'

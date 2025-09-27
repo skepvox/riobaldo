@@ -18,7 +18,7 @@
 
           <template #title="{ item }">
             <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-              <p class="text-lg font-semibold text-gray-900 dark:text-gray-100">
+              <p class="font-semibold text-gray-900 dark:text-gray-100">
                 {{ item.title }}
               </p>
             </div>

@@ -18,7 +18,7 @@ function _useHeaderLinks() {
 
   const headerLinks = computed(() => [{
     id: 'home',
-    label: 'Início',
+    label: 'Home',
     icon: 'i-lucide-home',
     to: '/',
     search: false,
@@ -34,7 +34,7 @@ function _useHeaderLinks() {
       id: 'louis-lavelle-manuel',
       label: 'Manuel de Méthodologie Dialectique',
       description: 'Obra filosófica em francês',
-      icon: 'i-lucide-book-marked',
+      icon: 'i-lucide-book-open',
       to: normalizePath('/louis-lavelle/manuel-de-methodologie-dialectique/livre-01/reflexion-et-methode'),
       active: route.path.includes('/manuel-de-methodologie-dialectique')
     }, {
@@ -48,7 +48,7 @@ function _useHeaderLinks() {
       id: 'louis-lavelle-manual-en',
       label: 'Manual of Dialectical Methodology',
       description: 'Tradução para o inglês',
-      icon: 'i-lucide-book',
+      icon: 'i-lucide-book-open',
       to: normalizePath('/louis-lavelle/manual-of-dialectical-methodology/book-01/reflection-and-method'),
       active: route.path.includes('/manual-of-dialectical-methodology')
     }]

@@ -9,11 +9,18 @@ export const searchTextRegExp = function (query = '') {
 }
 
 export const formatDateByLocale = (locale: string, d: string | number | Date) => {
-  return new Date(d).toLocaleDateString(locale, {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  })
+  const date = new Date(d)
+  if (Number.isNaN(date.getTime())) {
+    return ''
+  }
+
+  const day = new Intl.DateTimeFormat(locale, { day: '2-digit' }).format(date)
+  const monthRaw = new Intl.DateTimeFormat(locale, { month: 'short' }).format(date)
+  const year = new Intl.DateTimeFormat(locale, { year: 'numeric' }).format(date)
+
+  const month = upperFirst(monthRaw.replace(/\.$/, ''))
+
+  return `${day} ${month} ${year}`.trim()
 }
 
 export const toRelativeDate = (date: string | number | Date) => {
