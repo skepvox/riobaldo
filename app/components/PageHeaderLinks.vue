@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import { joinURL } from 'ufo'
+
 const route = useRoute()
 const toast = useToast()
 const { copy } = useClipboard()
 const site = useSiteConfig()
 
-const pageUrl = computed(() => `${site.url}${route.path}`)
+const pageUrl = computed(() => joinURL(site.url || '', route.path))
 const sharePrompt = computed(() => `Leia ${pageUrl.value} para que eu possa lhe fazer perguntas.`)
 
 const items = [
@@ -19,18 +21,6 @@ const items = [
     icon: 'i-simple-icons:openai',
     target: '_blank',
     to: `https://chatgpt.com/?model=gpt-4o-mini&q=${encodeURIComponent(sharePrompt.value)}`
-  },
-  {
-    label: 'Claude',
-    icon: 'i-simple-icons:anthropic',
-    target: '_blank',
-    to: `https://claude.ai/new?q=${encodeURIComponent(sharePrompt.value)}`
-  },
-  {
-    label: 'Gemini',
-    icon: 'i-simple-icons-google',
-    target: '_blank',
-    to: `https://gemini.google.com/app?q=${encodeURIComponent(sharePrompt.value)}`
   },
   {
     label: 'Link',

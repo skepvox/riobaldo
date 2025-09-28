@@ -46,3 +46,37 @@ export function findTitleTemplate(page: Ref<DocumentPage>, navigation: Ref<Conte
 
   return items.find(item => typeof item.titleTemplate === 'string')?.titleTemplate || '%s · Skepvox'
 }
+
+export function getNavigationOrder(item: ContentNavigationItem): number {
+  const nav = (item as any).navigation
+  const navOrder = typeof nav?.order === 'number' ? nav.order : undefined
+  const frontmatterOrder = typeof (item as any).order === 'number' ? (item as any).order : undefined
+  return navOrder ?? frontmatterOrder ?? Number.MAX_SAFE_INTEGER
+}
+
+export function sortNavigation(items: ContentNavigationItem[] = []): ContentNavigationItem[] {
+  return [...items]
+    .map(item => ({
+      ...item,
+      children: item.children ? sortNavigation(item.children as ContentNavigationItem[]) : item.children
+    }))
+    .sort((a, b) => {
+      const aOrder = getNavigationOrder(a)
+      const bOrder = getNavigationOrder(b)
+      if (aOrder !== bOrder) {
+        return aOrder - bOrder
+      }
+      return String(a.title || '').localeCompare(String(b.title || ''))
+    })
+}
+
+export function flattenNavigation(items: ContentNavigationItem[] = []): ContentNavigationItem[] {
+  return sortNavigation(items).flatMap((item) => {
+    const children = Array.isArray(item.children) ? flattenNavigation(item.children as ContentNavigationItem[]) : []
+    if ((item as any).page === false || (children.length && children.some(child => child.path === item.path))) {
+      return children
+    }
+    const { children: _children, ...rest } = item as ContentNavigationItem & { children?: ContentNavigationItem[] }
+    return [{ ...rest }, ...children]
+  })
+}

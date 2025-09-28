@@ -2,7 +2,7 @@ import type { ContentNavigationItem } from '@nuxt/content'
 import type { TabsItem } from '@nuxt/ui'
 import type { Ref } from 'vue'
 import { useBreakpoints } from '@vueuse/core'
-import { navPageFromPath } from '~/utils/content'
+import { navPageFromPath, sortNavigation, getNavigationOrder } from '~/utils/content'
 
 type Edition = string
 
@@ -41,29 +41,6 @@ function findFirstNavigablePath(item?: ContentNavigationItem): string | undefine
   }
 
   return item.path
-}
-
-function getNavigationOrder(item: ContentNavigationItem) {
-  const nav = (item as any).navigation
-  const navOrder = typeof nav?.order === 'number' ? nav.order : undefined
-  const frontmatterOrder = typeof (item as any).order === 'number' ? (item as any).order : undefined
-  return navOrder ?? frontmatterOrder ?? Number.MAX_SAFE_INTEGER
-}
-
-function sortNavigation(items: ContentNavigationItem[] = []): ContentNavigationItem[] {
-  return [...items]
-    .map(item => ({
-      ...item,
-      children: item.children ? sortNavigation(item.children as ContentNavigationItem[]) : item.children
-    }))
-    .sort((a, b) => {
-      const aOrder = getNavigationOrder(a)
-      const bOrder = getNavigationOrder(b)
-      if (aOrder !== bOrder) {
-        return aOrder - bOrder
-      }
-      return String(a.title || '').localeCompare(String(b.title || ''))
-    })
 }
 
 function normalizeLanguage(item: ContentNavigationItem): LanguageOption | null {
@@ -115,7 +92,7 @@ function formatEditionLabel(edition: Edition) {
     return 'Original'
   }
   if (normalized === 'translation' || normalized === 'translations') {
-    return 'Traduções'
+    return 'Tradução'
   }
   return normalized
     .split(/[-_\s]+/g)
@@ -310,10 +287,17 @@ export function useAuthorNavigation() {
     }
   })
 
+  const flagIconMap: Record<string, string> = {
+    fr: 'i-flagpack-fr',
+    pt: 'i-flagpack-br',
+    en: 'i-flagpack-us'
+  }
+
   const languageItems = computed<TabsItem[]>(() =>
     languagesForSelectedEdition.value.map(language => ({
       label: language.label,
-      value: language.slug
+      value: language.slug,
+      icon: language.code ? flagIconMap[language.code.toLowerCase()] : undefined
     }))
   )
 

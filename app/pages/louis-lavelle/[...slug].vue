@@ -4,6 +4,7 @@ import type { Ref } from 'vue'
 import type { ContentNavigationItem } from '@nuxt/content'
 import { findPageBreadcrumb } from '@nuxt/content/utils'
 import { mapContentNavigation } from '#ui-pro/utils'
+import { flattenNavigation, navPageFromPath } from '~/utils/content'
 
 definePageMeta({
   layout: 'author',
@@ -27,15 +28,42 @@ function paintResponse() {
     requestAnimationFrame(() => setTimeout(resolve, 0))
   })
 }
+type SurroundLink = (ContentNavigationItem & { description?: string }) | null
 
-const [{ data: page, status }, { data: surround }] = await Promise.all([
-  useAsyncData(kebabCase(path.value), () => paintResponse().then(() => nuxtApp.static[kebabCase(path.value)] ?? queryCollection('louisLavelle').path(path.value).first()), {
-    watch: [path]
-  }),
-  useAsyncData(`${kebabCase(path.value)}-surround`, () => paintResponse().then(() => nuxtApp.static[`${kebabCase(path.value)}-surround`] ?? queryCollectionItemSurroundings('louisLavelle', path.value, {
-    fields: ['description']
-  })), { watch: [path] })
-])
+function resolveLanguageBasePath(targetPath?: string) {
+  if (!targetPath) {
+    return undefined
+  }
+  const segments = targetPath.split('/').filter(Boolean)
+  if (segments.length < 2) {
+    return undefined
+  }
+  const [collection, language] = segments
+  if (collection !== 'louis-lavelle') {
+    return undefined
+  }
+  return `/${collection}/${language}`
+}
+
+function toSurroundLink(item?: ContentNavigationItem | null): SurroundLink {
+  if (!item?.path) {
+    return null
+  }
+  const description = typeof (item as any).description === 'string'
+    ? (item as any).description
+    : typeof (item as any).meta?.description === 'string'
+      ? (item as any).meta.description
+      : undefined
+
+  return {
+    ...item,
+    description
+  }
+}
+
+const { data: page, status } = await useAsyncData(kebabCase(path.value), () => paintResponse().then(() => nuxtApp.static[kebabCase(path.value)] ?? queryCollection('louisLavelle').path(path.value).first()), {
+  watch: [path]
+})
 
 watch(status, (status) => {
   if (status === 'pending') {
@@ -62,6 +90,39 @@ const breadcrumb = computed(() => {
 
 const tocLinks = computed(() => page.value?.body?.toc?.links ?? [])
 provide('authorRightToc', tocLinks)
+
+const surround = computed<SurroundLink[]>(() => {
+  const currentPath = page.value?.path || path.value
+  if (!currentPath) {
+    return []
+  }
+
+  const languageBasePath = resolveLanguageBasePath(currentPath)
+  const tree = navigation.value as ContentNavigationItem[]
+  const baseNodes = languageBasePath
+    ? (() => {
+        const node = navPageFromPath(languageBasePath, tree)
+        return node ? [node] : tree
+      })()
+    : tree
+
+  const flattened = flattenNavigation(baseNodes)
+    .filter(item => item.path && (!languageBasePath || item.path.startsWith(languageBasePath)))
+
+  const currentIndex = flattened.findIndex(item => item.path === currentPath)
+  if (currentIndex === -1) {
+    return []
+  }
+
+  const prevLink = toSurroundLink(flattened[currentIndex - 1])
+  const nextLink = toSurroundLink(flattened[currentIndex + 1])
+
+  if (!prevLink && !nextLink) {
+    return []
+  }
+
+  return [prevLink, nextLink]
+})
 
 const title = computed(() => page.value?.seo?.title || page.value?.title)
 const titleTemplate = computed(() => page.value?.titleTemplate || '%s · Louis Lavelle')
