@@ -53,7 +53,14 @@ const links = [
 <template>
   <UContainer>
     <UPage v-if="article">
-      <UPageHeader :title="article.title" :description="article.description" :ui="{ headline: 'flex flex-col gap-y-8 items-start' }">
+      <UPageHeader
+        :title="article.title"
+        :description="article.description"
+        :ui="{
+          headline: 'flex flex-col gap-y-8 items-start',
+          description: 'text-pretty text-muted'
+        }"
+      >
         <template #headline>
           <UBreadcrumb :items="[{ label: 'Blog', icon: 'i-lucide-newspaper', to: '/blog' }, { label: article.title }]" class="max-w-full" />
           <div class="flex items-center space-x-2">

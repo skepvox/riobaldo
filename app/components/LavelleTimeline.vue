@@ -17,10 +17,21 @@
           </template>
 
           <template #title="{ item }">
-            <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+            <div class="flex flex-col gap-3">
               <p class="font-semibold text-gray-900 dark:text-gray-100">
                 {{ item.title }}
               </p>
+
+              <UButton
+                v-if="item.cta"
+                :to="item.cta.to"
+                color="primary"
+                variant="solid"
+                size="xs"
+                class="w-fit"
+              >
+                {{ item.cta.label || 'Ler' }}
+              </UButton>
             </div>
           </template>
 
@@ -73,6 +84,10 @@ interface WorkTimelineItem extends TimelineItem {
   status: WorkStatus
   path?: string
   description?: string
+  cta?: {
+    label?: string
+    to: string
+  }
 }
 
 const bibliography = ref(bibliographySource as BibliographyData | null)
@@ -92,16 +107,27 @@ const works = computed(() => {
   return [...bibliography.value.works].sort((a, b) => a.year - b.year)
 })
 
-const timelineItems = computed<WorkTimelineItem[]>(() => works.value.map(work => ({
-  value: work.id,
-  date: String(work.year),
-  title: work.title,
-  status: work.status,
-  path: work.path,
-  description: work.description,
-  icon: statusIcons[work.status],
-  ui: work.status === 'available'
-    ? { indicator: 'text-success-500 dark:text-success-400' }
-    : undefined
-})))
+const timelineItems = computed<WorkTimelineItem[]>(() => works.value.map((work) => {
+  const isCompletedBook = work.id === 'manuel-methodologie'
+
+  const indicatorClass = isCompletedBook
+    ? 'group-data-[state=completed]:text-success-500 group-data-[state=active]:text-success-500 text-success-500 dark:text-success-400'
+    : 'group-data-[state=completed]:text-muted group-data-[state=active]:text-muted text-muted'
+
+  return {
+    value: work.id,
+    date: String(work.year),
+    title: work.title,
+    status: work.status,
+    path: work.path,
+    description: work.description,
+    icon: statusIcons[work.status],
+    ui: { indicator: indicatorClass },
+    cta: isCompletedBook
+      ? {
+          to: '/louis-lavelle/manuel-de-methodologie-dialectique/livre-01/reflexion-et-methode'
+        }
+      : undefined
+  }
+}))
 </script>
