@@ -5,6 +5,7 @@ import type { ContentNavigationItem } from '@nuxt/content'
 import { findPageBreadcrumb } from '@nuxt/content/utils'
 import { mapContentNavigation } from '#ui-pro/utils'
 import { flattenNavigation, navPageFromPath } from '~/utils/content'
+import { authorTocUi } from '~/utils/toc'
 
 definePageMeta({
   layout: 'author',
@@ -16,6 +17,7 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation', ref([]))
 
 const route = useRoute()
 const nuxtApp = useNuxtApp()
+const appHeaderHeight = useState<number>('app-header-height', () => 0)
 
 const path = computed(() => route.path.replace(/\/$/, ''))
 
@@ -89,7 +91,38 @@ const breadcrumb = computed(() => {
 })
 
 const tocLinks = computed(() => page.value?.body?.toc?.links ?? [])
-provide('authorRightToc', tocLinks)
+
+function normalizeTocLinks(links?: any[], basePath?: string) {
+  if (!Array.isArray(links) || !basePath) {
+    return []
+  }
+
+  return links.map((link) => {
+    const children = normalizeTocLinks(link.children, basePath)
+
+    return {
+      ...link,
+      to: `${basePath}#${link.id}`,
+      ...(children.length ? { children } : {})
+    }
+  })
+}
+
+const normalizedToc = computed(() => normalizeTocLinks(tocLinks.value, page.value?.path || path.value))
+const authorRightToc = useState<any[]>('author-right-toc', () => [])
+const tocStickyOffset = computed(() => {
+  const base = appHeaderHeight.value || 0
+  const desiredGap = 8
+  return `${Math.max(Math.round(base + desiredGap), 0)}px`
+})
+
+watch(normalizedToc, (links) => {
+  authorRightToc.value = links
+}, { immediate: true })
+
+onBeforeUnmount(() => {
+  authorRightToc.value = []
+})
 
 const surround = computed<SurroundLink[]>(() => {
   const currentPath = page.value?.path || path.value
@@ -174,6 +207,14 @@ if (import.meta.server) {
       </UPageHeader>
 
       <UPageBody>
+        <div
+          v-if="normalizedToc.length"
+          class="lg:hidden mt-6 sticky z-20"
+          :style="{ top: tocStickyOffset }"
+        >
+          <UContentToc :links="normalizedToc" :ui="authorTocUi" title="Sumário" highlight />
+        </div>
+
         <ContentRenderer v-if="page.body" :value="page" />
         <div>
           <USeparator icon="i-lucide-shell" class="mt-6 mb-10" />
