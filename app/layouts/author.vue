@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { useSlots } from 'vue'
-import type { Ref } from 'vue'
 import { useAuthorNavigation } from '~/composables/useAuthorNavigation'
+import { authorTocUi } from '~/utils/toc'
 
 const route = useRoute()
 const heroBackgroundClass = computed(() => route.meta?.heroBackground || '')
 const { isLoading } = useLoadingIndicator()
-const authorRightToc = inject<Ref<any[]>>('authorRightToc', ref([]))
+const authorRightToc = useState<any[]>('author-right-toc', () => [])
 const slots = useSlots()
 
 const appear = ref(false)
@@ -107,13 +107,7 @@ const shouldShowRightAside = computed(() => !isRootPage.value && (hasRightSlot.v
             <UPageAside v-if="shouldShowRightAside" class="hidden lg:block">
               <div class="sticky top-32 space-y-4">
                 <slot name="right" />
-                <UCard
-                  v-if="hasToc"
-                  class="border border-default/60 bg-elevated/60 backdrop-blur"
-                  :ui="{ body: 'p-4 space-y-2 text-sm text-muted' }"
-                >
-                  <UContentToc :links="authorRightToc" highlight />
-                </UCard>
+                <UContentToc v-if="hasToc" :links="authorRightToc" :ui="authorTocUi" title="Sumário" highlight />
               </div>
             </UPageAside>
           </template>
