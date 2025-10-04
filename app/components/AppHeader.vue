@@ -1,9 +1,31 @@
 <script setup lang="ts">
+import type { ComponentPublicInstance } from 'vue'
+
 const logo = useTemplateRef('logo')
+const headerRoot = useTemplateRef<ComponentPublicInstance | HTMLElement | null>('header')
+const headerElement = computed<HTMLElement | null>(() => {
+  const target = headerRoot.value
+  if (!target) {
+    return null
+  }
+  if (target instanceof HTMLElement) {
+    return target
+  }
+  if ('$el' in target && target.$el instanceof HTMLElement) {
+    return target.$el
+  }
+  return null
+})
 const { copy } = useClipboard()
 const { headerLinks } = useHeaderLinks()
 const route = useRoute()
 const menuOpen = useState<boolean>('app-header-menu-open', () => false)
+const appHeaderHeight = useState<number>('app-header-height', () => 0)
+const { height: headerHeight } = useElementSize(headerElement)
+
+watchEffect(() => {
+  appHeaderHeight.value = headerHeight.value || 0
+})
 const {
   hasNavigation: hasAuthorNavigation,
   editionItems,
@@ -95,7 +117,7 @@ const headerMenu = { shouldScaleBackground: true }
 </script>
 
 <template>
-  <UHeader v-model:open="menuOpen" :ui="{ left: 'min-w-0' }" :menu="headerMenu">
+  <UHeader ref="header" v-model:open="menuOpen" :ui="{ left: 'min-w-0' }" :menu="headerMenu">
     <template #left>
       <UContextMenu :items="logoContextMenuItems" size="xs">
         <NuxtLink to="/" class="flex gap-2 items-end" :aria-label="homeAriaLabel">
