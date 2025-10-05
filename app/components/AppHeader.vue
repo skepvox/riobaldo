@@ -36,7 +36,7 @@ const {
 } = useAuthorNavigation()
 
 const copyLogoLabel = 'Copiar logo como SVG'
-const copiedTitle = 'Logotipo Skepvox copiado como SVG'
+const copiedTitle = 'Logotipo SkepVox copiado como SVG'
 const copiedDescription = 'Você já pode colá-lo no seu projeto'
 const homeAriaLabel = 'Voltar para a página inicial'
 

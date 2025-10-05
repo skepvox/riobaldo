@@ -5,7 +5,6 @@ import type { ContentNavigationItem } from '@nuxt/content'
 import { findPageBreadcrumb } from '@nuxt/content/utils'
 import { mapContentNavigation } from '#ui-pro/utils'
 import { flattenNavigation, navPageFromPath } from '~/utils/content'
-import { authorTocUi } from '~/utils/toc'
 
 definePageMeta({
   layout: 'author',
@@ -17,7 +16,6 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation', ref([]))
 
 const route = useRoute()
 const nuxtApp = useNuxtApp()
-const appHeaderHeight = useState<number>('app-header-height', () => 0)
 
 const path = computed(() => route.path.replace(/\/$/, ''))
 
@@ -90,38 +88,18 @@ const breadcrumb = computed(() => {
   return links
 })
 
-const tocLinks = computed(() => page.value?.body?.toc?.links ?? [])
-
-function normalizeTocLinks(links?: any[], basePath?: string) {
-  if (!Array.isArray(links) || !basePath) {
+const links = computed(() => {
+  const chapterPath = page.value?.path
+  if (!chapterPath) {
     return []
   }
 
-  return links.map((link) => {
-    const children = normalizeTocLinks(link.children, basePath)
-
-    return {
-      ...link,
-      to: `${basePath}#${link.id}`,
-      ...(children.length ? { children } : {})
-    }
-  })
-}
-
-const normalizedToc = computed(() => normalizeTocLinks(tocLinks.value, page.value?.path || path.value))
-const authorRightToc = useState<any[]>('author-right-toc', () => [])
-const tocStickyOffset = computed(() => {
-  const base = appHeaderHeight.value || 0
-  const desiredGap = 8
-  return `${Math.max(Math.round(base + desiredGap), 0)}px`
-})
-
-watch(normalizedToc, (links) => {
-  authorRightToc.value = links
-}, { immediate: true })
-
-onBeforeUnmount(() => {
-  authorRightToc.value = []
+  return [{
+    icon: 'i-lucide-pen',
+    label: 'Edit this chapter',
+    to: `https://github.com/skepvox/riobaldo/edit/main/content${chapterPath}.md`,
+    target: '_blank'
+  }]
 })
 
 const surround = computed<SurroundLink[]>(() => {
@@ -182,49 +160,56 @@ if (import.meta.server) {
 </script>
 
 <template>
-  <UContainer v-if="page">
-    <UPage>
-      <UPageHeader v-bind="page">
-        <template #headline>
-          <UBreadcrumb :items="breadcrumb" />
-        </template>
+  <UPage v-if="page">
+    <UPageHeader v-bind="page">
+      <template #headline>
+        <UBreadcrumb :items="breadcrumb" />
+      </template>
 
-        <template #links>
-          <UButton
-            v-for="link in page.links?.map(link => ({ ...link, size: 'md' }))"
-            :key="link.label"
-            color="neutral"
-            variant="outline"
-            :target="link.to.startsWith('http') ? '_blank' : undefined"
-            v-bind="link"
-          >
-            <template v-if="link.avatar" #leading>
-              <UAvatar v-bind="link.avatar" size="2xs" :alt="`${link.label} avatar`" />
-            </template>
-          </UButton>
-          <PageHeaderLinks :key="page.path" />
-        </template>
-      </UPageHeader>
-
-      <UPageBody>
-        <div
-          v-if="normalizedToc.length"
-          class="lg:hidden mt-6 sticky z-20"
-          :style="{ top: tocStickyOffset }"
+      <template #links>
+        <UButton
+          v-for="link in page.links?.map(link => ({ ...link, size: 'md' }))"
+          :key="link.label"
+          color="neutral"
+          variant="outline"
+          :target="link.to.startsWith('http') ? '_blank' : undefined"
+          v-bind="link"
         >
-          <UContentToc :links="normalizedToc" :ui="authorTocUi" title="Sumário" highlight />
-        </div>
+          <template v-if="link.avatar" #leading>
+            <UAvatar v-bind="link.avatar" size="2xs" :alt="`${link.label} avatar`" />
+          </template>
+        </UButton>
+      </template>
+    </UPageHeader>
 
-        <ContentRenderer v-if="page.body" :value="page" />
-        <div>
-          <USeparator icon="i-lucide-shell" class="mt-6 mb-10" />
-          <UContentSurround
-            prev-icon="i-lucide-chevron-left"
-            next-icon="i-lucide-chevron-right"
-            :surround="surround"
-          />
-        </div>
-      </UPageBody>
-    </UPage>
-  </UContainer>
+    <UPageBody>
+      <ContentRenderer v-if="page.body" :value="page" />
+      <div class="flex items-center justify-end mt-12 not-prose">
+        <PageHeaderLinks :key="page.path" />
+      </div>
+      <div>
+        <USeparator icon="i-lucide-shell" class="mt-6 mb-10" />
+        <UContentSurround
+          prev-icon="i-lucide-chevron-left"
+          next-icon="i-lucide-chevron-right"
+          :surround="surround"
+        />
+      </div>
+    </UPageBody>
+
+    <template v-if="page?.body?.toc?.links?.length" #right>
+      <UContentToc :links="page.body.toc.links" title="Sumário" class="z-[2]">
+        <template #bottom>
+          <USeparator v-if="page.body?.toc?.links?.length" type="dashed" />
+
+          <UPageLinks title="Links" :links="links" />
+
+          <USeparator type="dashed" />
+
+          <SocialLinks />
+          <Ads />
+        </template>
+      </UContentToc>
+    </template>
+  </UPage>
 </template>

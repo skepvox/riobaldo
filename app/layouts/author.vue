@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { useSlots } from 'vue'
 import { useAuthorNavigation } from '~/composables/useAuthorNavigation'
-import { authorTocUi } from '~/utils/toc'
 
 const route = useRoute()
 const heroBackgroundClass = computed(() => route.meta?.heroBackground || '')
 const { isLoading } = useLoadingIndicator()
-const authorRightToc = useState<any[]>('author-right-toc', () => [])
 const slots = useSlots()
 
 const appear = ref(false)
@@ -30,8 +28,7 @@ const {
   displayNavigation
 } = useAuthorNavigation()
 const hasRightSlot = computed(() => Boolean(slots.right))
-const hasToc = computed(() => (authorRightToc.value?.length ?? 0) > 0)
-const shouldShowRightAside = computed(() => !isRootPage.value && (hasRightSlot.value || hasToc.value))
+const shouldShowRight = computed(() => !isRootPage.value && hasRightSlot.value)
 </script>
 
 <template>
@@ -104,12 +101,7 @@ const shouldShowRightAside = computed(() => !isRootPage.value && (hasRightSlot.v
           <NuxtPage />
 
           <template #right>
-            <UPageAside v-if="shouldShowRightAside" class="hidden lg:block">
-              <div class="sticky top-32 space-y-4">
-                <slot name="right" />
-                <UContentToc v-if="hasToc" :links="authorRightToc" :ui="authorTocUi" title="Sumário" highlight />
-              </div>
-            </UPageAside>
+            <slot v-if="shouldShowRight" name="right" />
           </template>
         </UPage>
       </UContainer>

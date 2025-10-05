@@ -23,11 +23,11 @@ const title = article.value.seo?.title || article.value.title
 const description = article.value.seo?.description || article.value.description
 
 useSeoMeta({
-  titleTemplate: '%s · Skepvox Blog',
+  titleTemplate: '%s · SkepVox Blog',
   title,
   description,
   ogDescription: description,
-  ogTitle: `${title} · Skepvox Blog`
+  ogTitle: `${title} · SkepVox Blog`
 })
 
 if (article.value.image) {

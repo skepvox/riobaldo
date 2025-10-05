@@ -3,7 +3,7 @@ import { parseMdc } from './helpers/mdc-parser.mjs'
 
 const { resolve } = createResolver(import.meta.url)
 
-// Skepvox configuration
+// SkepVox configuration
 export default defineNuxtConfig({
   modules: [
     '@nuxt/ui-pro',
@@ -134,10 +134,10 @@ export default defineNuxtConfig({
   },
   llms: {
     domain: 'https://skepvox.com',
-    title: 'Skepvox',
-    description: 'Skepvox is a platform for philosophical and algebraic studies, offering comprehensive educational content and resources for advanced learning.',
+    title: 'SkepVox',
+    description: 'SkepVox is a platform for philosophical and algebraic studies, offering comprehensive educational content and resources for advanced learning.',
     full: {
-      title: 'Skepvox',
+      title: 'SkepVox',
       description: 'Platform for philosophical and algebraic studies with complete documentation and educational content.'
     }
   },
