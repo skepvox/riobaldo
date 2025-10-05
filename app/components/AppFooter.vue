@@ -1,13 +1,13 @@
 <script setup lang="ts">
-const siteName = 'Skepvox'
+const siteName = 'SkepVox'
 const currentYear = new Date().getFullYear()
 const copyrightLabel = `Copyright © ${currentYear} ${siteName}`
 const socialLabels = {
-  instagram: 'Skepvox no Instagram',
-  x: 'Skepvox no X',
-  bluesky: 'Skepvox no BlueSky',
-  linkedin: 'Skepvox no LinkedIn',
-  github: 'Skepvox no GitHub'
+  instagram: 'SkepVox no Instagram',
+  x: 'SkepVox no X',
+  bluesky: 'SkepVox no BlueSky',
+  linkedin: 'SkepVox no LinkedIn',
+  github: 'SkepVox no GitHub'
 }
 </script>
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const title = 'Kit de Design'
-const description = 'Recursos de design para o Skepvox estão a caminho.'
-const placeholder = 'Estamos preparando recursos de design para o Skepvox. Volte em breve!'
+const description = 'Recursos de design para o SkepVox estão a caminho.'
+const placeholder = 'Estamos preparando recursos de design para o SkepVox. Volte em breve!'
 
 definePageMeta({
   layout: 'default'

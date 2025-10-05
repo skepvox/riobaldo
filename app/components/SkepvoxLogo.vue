@@ -2,15 +2,15 @@
   <div class="skepvox-logo-container">
     <img
       src="/favicon/favicon.png"
-      alt="Skepvox"
+      alt="SkepVox"
       class="skepvox-logo-image"
     >
-    <span class="skepvox-logo-text">Skepvox</span>
+    <span class="skepvox-logo-text">SkepVox</span>
   </div>
 </template>
 
 <script setup lang="ts">
-// SkepvoxLogo component - displays the Skepvox platform logo with text
+// SkepVoxLogo component - displays the SkepVox platform logo with text
 </script>
 
 <style scoped>

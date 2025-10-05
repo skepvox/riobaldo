@@ -8,7 +8,7 @@
       color="neutral"
       size="xs"
     >
-      <span class="sr-only">Skepvox on Discord</span>
+      <span class="sr-only">SkepVox on Discord</span>
     </UButton>
     <UButton
       icon="i-simple-icons-bluesky"
@@ -18,7 +18,7 @@
       color="neutral"
       size="xs"
     >
-      <span class="sr-only">Skepvox on Bluesky</span>
+      <span class="sr-only">SkepVox on Bluesky</span>
     </UButton>
     <UButton
       icon="i-simple-icons-x"
@@ -28,7 +28,7 @@
       color="neutral"
       size="xs"
     >
-      <span class="sr-only">Skepvox on X</span>
+      <span class="sr-only">SkepVox on X</span>
     </UButton>
     <UButton
       icon="i-simple-icons-github"
@@ -38,7 +38,7 @@
       color="neutral"
       size="xs"
     >
-      <span class="sr-only">Skepvox on GitHub</span>
+      <span class="sr-only">SkepVox on GitHub</span>
     </UButton>
   </div>
 </template>

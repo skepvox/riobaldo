@@ -31,10 +31,10 @@ const { data: page } = await useAsyncData<HomeContent | null>('home-page', () =>
 )
 
 const fallbackContent: Required<HomeContent> = {
-  title: 'Skepvox — Um observatório em reconstrução',
-  description: 'Skepvox está passando por uma reconstrução completa. Explore os próximos passos e acompanhe a nova identidade ganhar forma.',
+  title: 'SkepVox — Um observatório em reconstrução',
+  description: 'SkepVox está passando por uma reconstrução completa. Explore os próximos passos e acompanhe a nova identidade ganhar forma.',
   hero: {
-    title: 'Skepvox',
+    title: 'SkepVox',
     highlight: 'Um observatório em reconstrução',
     description: 'Um espaço para experimentos em filosofia, matemática e tecnologia. Tudo ainda está em construção — volte em breve para ver a nova identidade ganhar forma.',
     links: [
@@ -54,8 +54,8 @@ const fallbackContent: Required<HomeContent> = {
     ]
   },
   seo: {
-    title: 'Skepvox — Um observatório em reconstrução',
-    description: 'Skepvox está passando por uma reconstrução completa. Explore os próximos passos e acompanhe a nova identidade ganhar forma.'
+    title: 'SkepVox — Um observatório em reconstrução',
+    description: 'SkepVox está passando por uma reconstrução completa. Explore os próximos passos e acompanhe a nova identidade ganhar forma.'
   }
 }
 
